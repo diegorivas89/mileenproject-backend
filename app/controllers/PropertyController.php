@@ -19,6 +19,11 @@ class PropertyController extends BaseController
 	{
 		return $this->repository->find(1);
 	}
+
+	public function create()
+	{
+		return View::make("property.new");
+	}
 }
 
 ?>
