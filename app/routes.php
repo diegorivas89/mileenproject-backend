@@ -1,5 +1,5 @@
 <?php
-
+require_once 'ioc.php';
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,3 +15,9 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::group(['before' => '', 'prefix' => 'api'], function(){
+	Route::get('/property', 'ApiController@property');
+	Route::get('/property-search', 'ApiController@propertySearch');
+});
+
