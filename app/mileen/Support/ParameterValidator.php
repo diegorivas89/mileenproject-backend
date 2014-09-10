@@ -20,7 +20,7 @@ class ParameterValidator
 	public static function integer($name, $parameters)
 	{
 		if (array_key_exists($name, $parameters)){
-			if (is_numeric($value)){
+			if (is_numeric($parameters[$name])){
 				return true;
 			}else{
 				throw new IllegalArgumentException("The parameter '".$name."' must be of type integer", 1);
@@ -42,7 +42,7 @@ class ParameterValidator
 	public static function _list($name, $parameters)
 	{
 		if (array_key_exists($name, $parameters)){
-			if (preg_match('/[0-9\,]+/si', $value)){
+			if (preg_match('/[0-9\,]+/si', $parameters[$name])){
 				return true;
 			}else{
 				throw new IllegalArgumentException("The parameter '".$name."' must be of type integer separated by commas.", 1);
@@ -64,7 +64,7 @@ class ParameterValidator
 	public static function date($name, $parameters)
 	{
 		if (array_key_exists($name, $parameters)){
-			if (preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/si', $value)){
+			if (preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/si', $parameters[$name])){
 				return true;
 			}else{
 				throw new IllegalArgumentException("The parameter '".$name."' must be of type date: YYYY-mm-dd.", 1);
