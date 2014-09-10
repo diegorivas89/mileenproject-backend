@@ -24,7 +24,7 @@ class EnvironmentRepository implements EnvironmentRepositoryInterface
 	 * @return \Environment
 	 */
 	public function find($id){
-		return $this->model->where("id", "=", $id)->first();
+		return $this->model->select('id', 'name')->where("id", "=", $id)->first();
 	}
 
 	/**
