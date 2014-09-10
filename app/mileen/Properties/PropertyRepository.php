@@ -82,10 +82,13 @@ class PropertyRepository implements PropertyRepositoryInterface
 		if (array_key_exists('order', $parameters)){
 			List($field, $criteria) = explode(",", $parameters['order']);
 			$this->model = $this->model->orderBy($field, $criteria);
+		}else{
+			$this->model = $this->model->orderBy("publication_type_id", "asc");
 		}
 
 		$fields = Array(
 			'id',
+			'title',
 			/*'main_picture',*/
 			'price',
 			'currency',
@@ -93,7 +96,7 @@ class PropertyRepository implements PropertyRepositoryInterface
 			'size',
 			'covered_size',
 			'environment_id',
-			'operation_type_id'
+			'publication_type_id'
 		);
 
 		return $this->model->select($fields)->get();
