@@ -1,11 +1,18 @@
 <?php
 namespace Mileen\Api;
+
+use Mileen\Api\Exceptions\MissingParamentersException;
+
 /**
 *
 */
 abstract class MileenApi
 {
+	protected $requiredParameters;
 
+	/**
+	 * Constructor de clase
+	 */
 	function __construct()
 	{
 		$this->requiredParameters = Array();
@@ -36,7 +43,7 @@ abstract class MileenApi
 	{
 		foreach ($this->getRequiredParameters() as $parameter) {
 			if (!array_key_exists($parameter, $parameters)){
-				throw new \Exception("required parameter: ".$parameter." missing!", 1);
+				throw new MissingParamentersException("required parameter: ".$parameter." missing!", 1);
 			}
 		}
 	}
