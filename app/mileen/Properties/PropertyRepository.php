@@ -47,32 +47,32 @@ class PropertyRepository implements PropertyRepositoryInterface
 			$this->model = $this->model->whereIn("neighborhood_id", explode(",", $parameters['neighborhoods']));
 		}
 
-		if (ParameterValidator::_list('property_types', $parameters)){
-			$this->model = $this->model->whereIn("property_type_id", explode(",",$parameters['property_types']));
+		if (ParameterValidator::_list('propertyTypes', $parameters)){
+			$this->model = $this->model->whereIn("property_type_id", explode(",",$parameters['propertyTypes']));
 		}
 
-		if (ParameterValidator::_list('operation_types', $parameters)){
-			$this->model = $this->model->whereIn("operation_type_id", explode(",", $parameters['operation_types']));
+		if (ParameterValidator::_list('operationTypes', $parameters)){
+			$this->model = $this->model->whereIn("operation_type_id", explode(",", $parameters['operationTypes']));
 		}
 
 		if (ParameterValidator::_list('environments', $parameters)){
 			$this->model = $this->model->whereIn("environment_id", explode(",", $parameters['environments']));
 		}
 
-		if (ParameterValidator::integer('min_price', $parameters) && ParameterValidator::integer('max_price', $parameters)){
-			$this->model = $this->model->whereBetween("price", [$parameters['min_price'], $parameters['max_price']]);
+		if (ParameterValidator::integer('minPrice', $parameters) && ParameterValidator::integer('maxPrice', $parameters)){
+			$this->model = $this->model->whereBetween("price", [$parameters['minPrice'], $parameters['maxPrice']]);
 		}
 
-		if (ParameterValidator::integer('min_size', $parameters)){
-			$this->model = $this->model->where("size", ">=", $parameters['min_size']);
+		if (ParameterValidator::integer('minSize', $parameters)){
+			$this->model = $this->model->where("size", ">=", $parameters['minSize']);
 		}
 
-		if (ParameterValidator::integer('min_covered_size', $parameters)){
-			$this->model = $this->model->where("covered_size", ">=", $parameters['min_covered_size']);
+		if (ParameterValidator::integer('minCoveredSize', $parameters)){
+			$this->model = $this->model->where("covered_size", ">=", $parameters['minCoveredSize']);
 		}
 
-		if (ParameterValidator::date('min_publish_date', $parameters)){
-			$this->model = $this->model->where("created_at", ">", $parameters['min_publish_date']);
+		if (ParameterValidator::date('minPublishDate', $parameters)){
+			$this->model = $this->model->where("created_at", ">", $parameters['minPublishDate']);
 		}
 
 		if (ParameterValidator::integer('amount', $parameters) && ParameterValidator::integer('offset', $parameters)){
