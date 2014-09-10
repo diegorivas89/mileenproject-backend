@@ -17,7 +17,6 @@ Route::get('/', function()
 });
 
 Route::group(['before' => '', 'prefix' => 'api'], function(){
-	Route::get('/property', 'ApiController@property');
 	Route::get('/property-search', 'ApiController@propertySearch');
 });
 

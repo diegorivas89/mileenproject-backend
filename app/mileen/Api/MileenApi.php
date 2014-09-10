@@ -3,27 +3,76 @@ namespace Mileen\Api;
 /**
 *
 */
-class MileenApi
+abstract class MileenApi
 {
-	protected $propertyRepository;
 
 	function __construct()
 	{
+		$this->requiredParameters = Array();
 	}
 
-	public function setPropertyRepository(\Mileen\Properties\PropertyRepositoryInterface $repository)
+	/**
+	 * Ejecuta el servicio y retorna el response correspondiente
+	 *
+	 * @return strin|json
+	 */
+	public abstract function execute($parameters);
+
+	/**
+	 * Retorna el listado de parametros requeridos del servicio
+	 *
+	 * @return Array
+	 */
+	public abstract function getRequiredParameters();
+
+	/**
+	 * Chequea que esten los parametros requeridos
+	 *
+	 * @param Array $parameters
+	 * @throws \Exception
+	 * @return void
+	 */
+	protected function assertParameters($parameters = Array())
 	{
-		$this->propertyRepository = $repository;
+		foreach ($this->getRequiredParameters() as $parameter) {
+			if (!array_key_exists($parameter, $parameters)){
+				throw new \Exception("required parameter: ".$parameter." missing!", 1);
+			}
+		}
 	}
 
-	public function property($parameters)
+	/**
+	 * Genera la respuesta cuando no hay errores
+	 *
+	 * @param  Array $payload
+	 * @return string
+	 */
+	public function buildResponse($payload = Array())
 	{
-		return $this->propertyRepository->find($parameters['id']);
+		$response = Array(
+			'error' => 0,
+			'message' => "ok",
+			'payload' => $payload
+		);
+
+		return json_encode($response);
 	}
 
-	public function propertySearch($parameters)
+	/**
+	 * Genera la respuesta cuando hay errores
+	 *
+	 * @param  Array $payload
+	 * @return string
+	 */
+	public function buildErrorResponse($message)
 	{
-		return $this->propertyRepository->search($parameters);
+		$response = Array(
+			'error' => 1,
+			'message' => $message,
+			'payload' => Array()
+		);
+
+		return json_encode($response);
 	}
 }
 
