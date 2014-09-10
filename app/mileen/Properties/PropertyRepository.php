@@ -66,8 +66,12 @@ class PropertyRepository implements PropertyRepositoryInterface
 			$this->model = $this->model->whereBetween("price", [$parameters['min_price'], $parameters['max_price']]);
 		}
 
-		if (array_key_exists('min_m2', $parameters)){
-			$this->model = $this->model->where("size", ">=", $parameters['min_m2']);
+		if (array_key_exists('min_size', $parameters)){
+			$this->model = $this->model->where("size", ">=", $parameters['min_size']);
+		}
+
+		if (array_key_exists('min_covered_size', $parameters)){
+			$this->model = $this->model->where("covered_size", ">=", $parameters['min_covered_size']);
 		}
 
 		if (array_key_exists('min_publish_date', $parameters)){
