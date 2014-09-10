@@ -1,7 +1,8 @@
 <?php
 namespace Mileen\Api;
 
-use Mileen\Api\Exceptions\MissingParamentersException;
+use \Mileen\Api\Exceptions\MissingParamentersException;
+use \Mileen\Support\Exceptions\IllegalArgumentException;
 use \Mileen\Properties\PropertyRepositoryInterface;
 use \Mileen\Environments\EnvironmentRepositoryInterface;
 
@@ -49,11 +50,13 @@ class PropertySearchService extends MileenApi
 	{
 		try {
 			$this->assertParameters($parameters);
+			$properties = $this->repository->search($parameters);
 		} catch (MissingParamentersException $e) {
+			return $this->buildErrorResponse($e->getMessage());
+		}  catch (IllegalArgumentException $e) {
 			return $this->buildErrorResponse($e->getMessage());
 		}
 
-		$properties = $this->repository->search($parameters);
 
 		/**
 		 * Itero cada modelo y cambio los nombres de los atributos y levanto el environment

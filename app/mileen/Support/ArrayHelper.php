@@ -6,6 +6,13 @@ namespace Mileen\Support;
 */
 class ArrayHelper
 {
+	/**
+	 * Cambia las claves de un array recursivamente de snake_case a camelCase
+	 * Utiliza la funcion de laravel camel_case() para hacerlo
+	 *
+	 * @param  array $array
+	 * @return array
+	 */
 	public static function keysToCamelCase($array)
 	{
 		$newArray = Array();

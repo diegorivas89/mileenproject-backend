@@ -1,6 +1,8 @@
 <?php
 namespace Mileen\Properties;
 
+use Mileen\Support\ParameterValidator;
+
 /**
 * Repositorio para la tabla properties
 */
@@ -41,39 +43,39 @@ class PropertyRepository implements PropertyRepositoryInterface
 	 * @return \Illuminate\Support\Collection
 	 */
 	public function search($parameters){
-		if (array_key_exists('neighborhoods', $parameters)){
+		if (ParameterValidator::_list('neighborhoods', $parameters)){
 			$this->model = $this->model->whereIn("neighborhood_id", explode(",", $parameters['neighborhoods']));
 		}
 
-		if (array_key_exists('property_types', $parameters)){
+		if (ParameterValidator::_list('property_types', $parameters)){
 			$this->model = $this->model->whereIn("property_type_id", explode(",",$parameters['property_types']));
 		}
 
-		if (array_key_exists('operation_types', $parameters)){
+		if (ParameterValidator::_list('operation_types', $parameters)){
 			$this->model = $this->model->whereIn("operation_type_id", explode(",", $parameters['operation_types']));
 		}
 
-		if (array_key_exists('environments', $parameters)){
+		if (ParameterValidator::_list('environments', $parameters)){
 			$this->model = $this->model->whereIn("environment_id", explode(",", $parameters['environments']));
 		}
 
-		if (array_key_exists('min_price', $parameters) && array_key_exists('max_price', $parameters)){
+		if (ParameterValidator::integer('min_price', $parameters) && ParameterValidator::integer('max_price', $parameters)){
 			$this->model = $this->model->whereBetween("price", [$parameters['min_price'], $parameters['max_price']]);
 		}
 
-		if (array_key_exists('min_size', $parameters)){
+		if (ParameterValidator::integer('min_size', $parameters)){
 			$this->model = $this->model->where("size", ">=", $parameters['min_size']);
 		}
 
-		if (array_key_exists('min_covered_size', $parameters)){
+		if (ParameterValidator::integer('min_covered_size', $parameters)){
 			$this->model = $this->model->where("covered_size", ">=", $parameters['min_covered_size']);
 		}
 
-		if (array_key_exists('min_publish_date', $parameters)){
+		if (ParameterValidator::date('min_publish_date', $parameters)){
 			$this->model = $this->model->where("created_at", ">", $parameters['min_publish_date']);
 		}
 
-		if (array_key_exists('amount', $parameters) && array_key_exists('offset', $parameters)){
+		if (ParameterValidator::integer('amount', $parameters) && ParameterValidator::integer('offset', $parameters)){
 			$this->model = $this->model->take($parameters['amount'])->offset($parameters['offset']);
 		}
 
