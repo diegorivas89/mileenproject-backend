@@ -147,9 +147,9 @@
 				<div class="large-12 columns  @if ($errors->has('tipodeop')) error @endif">
 					<label>Tipo de Operación
 						<select name="">
-							<option value="husker">Venta</option>
-							<option value="starbuck">Alquiler</option>
-							<option value="hotdog">Alquiler Temporal</option>
+							<option value="1">Venta</option>
+							<option value="2">Alquiler</option>
+							<option value="3">Alquiler Temporal</option>
 						</select>
 						@if ($errors->has('tipodeop')) <small class="error"> {{ $errors->first('tipodeop') }} </small> @endif
 					</label>
@@ -160,9 +160,9 @@
 
 					<label>Tipo de Propiedad
 						<select name="property_type_id" class="">
-							<option value="husker">Departamento</option>
-							<option value="starbuck">Casa</option>
-							<option value="hotdog">Oficina</option>
+							<option value="1">Departamento</option>
+							<option value="2">Casa</option>
+							<option value="3">Oficina</option>
 						</select>
 						@if ($errors->has('property_type_id')) <small class="error"> {{ $errors->first('property_type_id') }} </small> @endif
 
