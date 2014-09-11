@@ -17,7 +17,8 @@ class PropertyController extends BaseController
 
 	public function index()
 	{
-		return "adasdasd";
+		$properties = $this->repository->userProperties(User::all()->first()->id);
+    return View::make("property.index")->with('properties', $properties);
 	}
 
 	public function create()
@@ -45,12 +46,12 @@ class PropertyController extends BaseController
 			'price' => array('required','numeric' ),
 			'expenses' => array('required','numeric' ),
 			'age' => array('required','numeric' ,'min:5')
-		);	
+		);
 		$validator = Validator::make(Input::all(), $rules, $messages);
 		$niceNames = array(
 		);
 
-		$validator->setAttributeNames($niceNames); 
+		$validator->setAttributeNames($niceNames);
 		if ($validator->fails())
 		{
 			return Redirect::route('properties.create')->withErrors($validator);
@@ -61,9 +62,8 @@ class PropertyController extends BaseController
 
 			return Redirect::route('properties.index')	;
 		}
-		
+
 	}
 }
 
 ?>
-
