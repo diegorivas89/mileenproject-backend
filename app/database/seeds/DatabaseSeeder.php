@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder {
 		$this->call('PropertyTypeTableSeeder');
 		$this->call('NeighborhoodTableSeeder');
 		$this->call('PropertyTableSeeder');
+		$this->call('PublicationTypeTableSeeder');
+		$this->call('AmenitieTypeTableSeeder');
+		
 	}
 
 }

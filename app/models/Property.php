@@ -3,7 +3,7 @@
 /**
 *
 */
-class Property extends MileenModel
+class Property extends MileenModel 
 {
 
 	protected $fillable = array(

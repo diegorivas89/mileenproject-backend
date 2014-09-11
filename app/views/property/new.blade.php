@@ -131,13 +131,14 @@
 		<form  action="{{URL::action('properties.store') }}" method="post">
 			<div class="row">
 				<input type="hidden" name="user_id" value="2">
-				<div class="large-12 columns">
+				<div class="large-12 columns  @if ($errors->has('publication_type_id')) error @endif">
 					<label>Tipo de Publicación
-						<select name="">
-							<option value="husker">Free</option>
-							<option value="starbuck">Premium</option>
-							<option value="hotdog">...</option>
+						<select name="publication_type_id">
+							@foreach ($publicationTypes as $publicationType)
+							    <option value='{{$publicationType->id}}'>{{$publicationType->name}}</option>
+							@endforeach
 						</select>
+						@if ($errors->has('publication_type_id')) <small class="error"> {{ $errors->first('publication_type_id') }} </small> @endif
 					</label>
 
 				</div>
@@ -147,9 +148,9 @@
 				<div class="large-12 columns  @if ($errors->has('tipodeop')) error @endif">
 					<label>Tipo de Operación
 						<select name="">
-							<option value="1">Venta</option>
-							<option value="2">Alquiler</option>
-							<option value="3">Alquiler Temporal</option>
+							@foreach ($operationTypes as $operationType)
+							    <option value='{{$operationType->id}}'>{{$operationType->name}}</option>
+							@endforeach
 						</select>
 						@if ($errors->has('tipodeop')) <small class="error"> {{ $errors->first('tipodeop') }} </small> @endif
 					</label>
@@ -160,9 +161,9 @@
 
 					<label>Tipo de Propiedad
 						<select name="property_type_id" class="">
-							<option value="1">Departamento</option>
-							<option value="2">Casa</option>
-							<option value="3">Oficina</option>
+							@foreach ($propertyTypes as $propertyType)
+							    <option value='{{$propertyType->id}}'>{{$propertyType->name}}</option>
+							@endforeach
 						</select>
 						@if ($errors->has('property_type_id')) <small class="error"> {{ $errors->first('property_type_id') }} </small> @endif
 
@@ -195,79 +196,32 @@
 				<div class="large-12 columns">
 					<label>Amenities</label>
 					<div class="row">
+						@foreach ($amenitieTypes as $amenitieType)
 						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
+							<label for="amenitieType_{{$amenitieType->id}}"><input id="amenitieType_{{$amenitieType->id}}" name="amenitieType[]" value="{{$amenitieType->id}}" type="checkbox">{{$amenitieType->name}}</label>
 						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
-						<div class="large-3 columns">
-							<input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-						</div>
+						@endforeach
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="large-4 columns">
+				<div class="large-4 columns @if ($errors->has('barrio')) error @endif">
 					<label>Barrio
 						<select>
-							<option value="husker">Almagro</option>
-							<option value="starbuck">Palermo</option>
-							<option value="hotdog">Balvanera</option>
+							@foreach ($amenitieTypes as $neighborhood)
+							    <option value='{{$neighborhood->id}}'>{{$neighborhood->name}}</option>
+							@endforeach
 						</select>
 					</label>
+					@if ($errors->has('barrio'))<small class="error">  {{ $errors->first('barrio') }} </small> @endif
 				</div>
-				<div class="large-8 columns">
+				<div class="large-8 columns  @if ($errors->has('address')) error @endif">
 					<label>Dirección
-						<input type="text"   placeholder="" id="formatedAddress" name="address"/>
+						<input type="text"  readonly="readonly" placeholder="" id="formatedAddress" name="address"/>
 						<input type="hidden" id="latitude" value="" name="latitude"/>
 						<input type="hidden" id="longitude" value=""name="longitude"/>
 					</label>
+					@if ($errors->has('address'))<small class="error">  {{ $errors->first('address') }} </small> @endif
 				</div>
 			</div>
 			<div class="row">
@@ -280,25 +234,26 @@
 			</div>
 			<div class="row">
 				<div class="large-4 columns">
-					<div class="row collapse">
+					<div class="row collapse  @if ($errors->has('size')) error @endif">
 						<label>Tamaño</label>
 						<div class="small-9 columns">
-							<input type="text" placeholder="" />
+							<input type="text" name="size" placeholder="" />
 						</div>
 						<div class="small-3 columns">
 							<span class="postfix">m<sup>2</sup></span>
 						</div>
+						@if ($errors->has('size'))<small class="error">  {{ $errors->first('size') }} </small> @endif
 					</div>
 				</div>
 				<div class="large-4 columns">
-					<div class="row collapse">
+					<div class="row collapse  @if ($errors->has('environment_id')) error @endif">
 						<label>Ambientes</label>
-						<div class="small-12 columns  @if ($errors->has('environment_id')) error @endif">
+						<div class="small-12 columns">
+							
 							<select name="environment_id" id="">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
+							@foreach ($environments as $environment)
+							    <option value='{{$environment->id}}'>{{$environment->name}}</option>
+							@endforeach
 							</select>
 							@if ($errors->has('environment_id'))<small class="error">  {{ $errors->first('environment_id') }} </small> @endif
 						</div>
@@ -319,9 +274,9 @@
 			</div>
 			<div class="row">
 				<div class="large-4 columns">
-					<div class="row collapse">
+					<div class="row collapse  @if ($errors->has('currency')) error @endif">
 						<label>Moneda</label>
-						<div class="small-12 columns  @if ($errors->has('currency')) error @endif">
+						<div class="small-12 columns">
 							<select name="currency" id="">
 								<option value="1">$</option>
 								<option value="2">U$S</option>
@@ -331,9 +286,9 @@
 					</div>
 				</div>
 				<div class="large-4 columns">
-					<div class="row collapse">
+					<div class="row collapse  @if ($errors->has('price')) error @endif">
 						<label>Precio</label>
-						<div class="small-12 columns  @if ($errors->has('price')) error @endif">
+						<div class="small-12 columns">
 							<input type="text" name="price" placeholder="" />
 							@if ($errors->has('price'))<small class="error">  {{ $errors->first('price') }} </small> @endif
 						</div>

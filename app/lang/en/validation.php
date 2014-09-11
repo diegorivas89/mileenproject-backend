@@ -103,11 +103,11 @@ return array(
 	*/
 
 	'attributes' => array(
-		'address' => 'dirección'),
+		'address' => 'dirección',
 	    'title' => 'titulo',
 	    'description' => 'descripción',
 	    'age' => 'años',
 	    'price' => 'precio',
-	    'expenses' => 'Expensas'
+	    'expenses' => 'Expensas')
 
 );
