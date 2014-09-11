@@ -17,7 +17,8 @@ class PropertyController extends BaseController
 
 	public function index()
 	{
-		return $this->repository->find(1);
+		$properties = $this->repository->userProperties(User::all()->first()->id);
+    return View::make("property.index")->with('properties', $properties);
 	}
 
 	public function create()

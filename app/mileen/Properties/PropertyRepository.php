@@ -15,6 +15,23 @@ class PropertyRepository implements PropertyRepositoryInterface
 	}
 
 	/**
+	 * Retorna un listado de propiedades que pertencen a un usuario determinado
+	 *
+	 * @param  int $id Identificador del usuario
+	 * @return Array de propiedades
+	 */
+
+	public function userProperties($id)
+	{
+		if(!isset($id)) {
+			return NULL;
+		}
+
+		return $this->model->where("user_id", "=", $id)->get();
+	}
+
+
+	/**
 	 * Retorna una propiedad por id
 	 *
 	 * @param  int $id Identificador de la propiedad
