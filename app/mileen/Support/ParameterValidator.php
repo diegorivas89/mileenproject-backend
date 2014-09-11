@@ -19,7 +19,7 @@ class ParameterValidator
 	 */
 	public static function integer($name, $parameters)
 	{
-		if (array_key_exists($name, $parameters)){
+		if (array_key_exists($name, $parameters) && strlen($parameters[$name]) > 0){
 			if (is_numeric($parameters[$name])){
 				return true;
 			}else{
@@ -41,7 +41,7 @@ class ParameterValidator
 	 */
 	public static function _list($name, $parameters)
 	{
-		if (array_key_exists($name, $parameters)){
+		if (array_key_exists($name, $parameters) && !empty($parameters[$name])){
 			if (preg_match('/[0-9\,]+/si', $parameters[$name])){
 				return true;
 			}else{
@@ -63,7 +63,7 @@ class ParameterValidator
 	 */
 	public static function date($name, $parameters)
 	{
-		if (array_key_exists($name, $parameters)){
+		if (array_key_exists($name, $parameters) && !empty($parameters[$name])){
 			if (preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/si', $parameters[$name])){
 				return true;
 			}else{
