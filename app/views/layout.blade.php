@@ -9,8 +9,10 @@
 			<meta name="author" content="ZURB, inc. ZURB network also includes zurb.com"/>
 			<meta name="copyright" content="ZURB, inc. Copyright (c) 2014"/>
 			<link rel="stylesheet" href="../assets/libs/foundation/css/foundation.css"/>
+			<link rel="stylesheet" href="../styles/style.css"/>
 			<script src="../assets/libs/foundation/js/vendor/modernizr.js"></script>
 			<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+			<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		</head>
 		<body>
 			<div class="row">
@@ -96,5 +98,10 @@
 				var doc = document.documentElement;
 				doc.setAttribute('data-useragent', navigator.userAgent);
 			</script>
+			        <script>
+    $(document).ready(function(){
+      initialize();
+    });
+    </script>
 		</body>
 	</html>
