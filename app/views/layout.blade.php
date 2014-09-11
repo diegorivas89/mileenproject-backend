@@ -55,7 +55,7 @@
 						<div class="large-3 small-12 columns">
 							<div class="panel">
 								<ul class="side-nav">
-									<li class="active"><a href="#"><i class="fa fa-newspaper-o"></i> Mis Publicaciones</a></li>
+									<li class="active"><a href="{{ URL::action('properties.index') }}"><i class="fa fa-newspaper-o"></i> Mis Publicaciones</a></li>
 									<li><a href="form.html"><i class="fa fa-home"></i> Nueva Publicación</a></li>
 									<li class="divider"></li>
 									<li><a href="#"><i class="fa fa-cog"></i> Mi Perfil</a></li>
