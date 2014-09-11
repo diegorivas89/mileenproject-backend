@@ -73,7 +73,7 @@
                   <h2><i class="fa fa-newspaper-o"></i> Nueva Publicación</h2>
               </div>
           </div>
-        <form>
+        {{ Form::open(array('url' => 'foo/bar')) }}
         <div class="row">
     <div class="large-12 columns">
       <label>Tipo de Publicación
@@ -215,7 +215,7 @@
       <a href="" class="button secondary">Cancelar</a>
     </div>
   </div>
-</form>
+{{ Form::close() }}
         </div>
         </div>
         <footer class="row">
