@@ -1,4 +1,6 @@
 <?php
+App::bind('\Mileen\Properties\PropertyRepositoryInterface', '\Mileen\Properties\PropertyRepository');
+
 
 App::singleton('mileen-api', function(){
 	$api = new \Mileen\Api\MileenApi();
