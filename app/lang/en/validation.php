@@ -53,10 +53,11 @@ return array(
 		"string"  => "The :attribute must be at least :min characters.",
 		"array"   => "The :attribute must have at least :min items.",
 	),
-	"not_in"               => "The selected :attribute is invalid.",
-	"numeric"              => "The :attribute must be a number.",
-	"regex"                => "The :attribute format is invalid.",
-	"required"             => "The :attribute field is required.",
+	
+	"not_in"               => "El campo :attribute seleccionado es inválido.",
+	"numeric"              => "El campo :attribute debe ser numerico.",
+	"regex"                => "El formato del campo campo :attribute es inválido.",
+	"required"             => "El campo :attribute es requerido.",
 	"required_if"          => "The :attribute field is required when :other is :value.",
 	"required_with"        => "The :attribute field is required when :values is present.",
 	"required_with_all"    => "The :attribute field is required when :values is present.",
@@ -101,6 +102,12 @@ return array(
 	|
 	*/
 
-	'attributes' => array(),
+	'attributes' => array(
+		'address' => 'dirección'),
+	    'title' => 'titulo',
+	    'description' => 'descripción',
+	    'age' => 'años',
+	    'price' => 'precio',
+	    'expenses' => 'Expensas'
 
 );

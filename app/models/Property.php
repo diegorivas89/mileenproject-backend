@@ -5,6 +5,25 @@
 */
 class Property extends MileenModel
 {
+
+	protected $fillable = array(
+		"title",
+		"description",
+		"age",
+		"user_id",
+		"property_type_id",
+		"environment_id",
+		"title",
+		"description",
+		"address",
+		"latitude",
+		"longitude",
+		"currency",
+		"price",
+		"expenses",
+		"age"
+	);
+
 	public function getSchema()
 	{
 		return Array(
@@ -20,7 +39,7 @@ class Property extends MileenModel
 		);
 	}
 
-	
+
 }
 
 ?>

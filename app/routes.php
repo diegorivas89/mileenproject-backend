@@ -15,8 +15,10 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+Route::resource('/properties', 	"PropertyController");
 
 Route::group(['before' => '', 'prefix' => 'api'], function(){
 	Route::get('/property-search', 'ApiController@propertySearch');
 });
 
+App::bind('\Mileen\Properties\PropertyRepositoryInterface', '\Mileen\Properties\PropertyRepository');
