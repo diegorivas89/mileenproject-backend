@@ -60,18 +60,9 @@ class Property extends MileenModel
 		return Neighborhood::find($this->neighborhood_id);
 	}
 
-	public function getMainPicture()
+	public function getImages()
 	{
-		$image = Image::where("property_id", "=", $this->id)->orderBy('id', 'asc')->first();
-
-		if ($image){
-			/**
-			 * Aca deberia retornar la url, que se arma con el nombre
-			 */
-			return $image->name;
-		}else{
-			return '';
-		}
+		return Image::select('id', 'name')->where("property_id", "=", $this->id)->orderBy('id', 'asc')->get();
 	}
 
 	}

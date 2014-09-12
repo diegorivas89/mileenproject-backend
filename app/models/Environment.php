@@ -12,6 +12,16 @@ class Environment extends MileenModel
 			'name' => 'string',
 		);
 	}
+
+	public function toArray()
+	{
+		$array = Array(
+			'id' => $this->id,
+			'name' => $this->name,
+		);
+
+		return $array;
+	}
 }
 
 ?>

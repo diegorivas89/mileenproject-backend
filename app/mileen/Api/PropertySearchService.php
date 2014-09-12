@@ -5,6 +5,8 @@ use \Mileen\Api\Exceptions\MissingParamentersException;
 use \Mileen\Support\Exceptions\IllegalArgumentException;
 use \Mileen\Properties\PropertyRepositoryInterface;
 use \Mileen\Environments\EnvironmentRepositoryInterface;
+use \Mileen\Images\ImageRepositoryInterface;
+use \Mileen\Support\YoutubeUrl;
 
 /**
 * Servicio para buscar una propiedad por id
@@ -17,17 +19,14 @@ class PropertySearchService extends MileenApi
 	 */
 	protected $repository;
 
-	protected $environmentRepository;
-
 	/**
 	 * Constructor de clase
 	 *
 	 * @param MileenPropertiesPropertyRepositoryInterface $repository
 	 */
-	function __construct(PropertyRepositoryInterface $repository, EnvironmentRepositoryInterface $environmentRepository)
+	function __construct(PropertyRepositoryInterface $repository)
 	{
 		$this->repository = $repository;
-		$this->environmentRepository = $environmentRepository;
 	}
 
 	/**
@@ -63,14 +62,28 @@ class PropertySearchService extends MileenApi
 		 * y levanto el environment
 		 */
 		$properties->each(function($property){
-			$environment = $this->environmentRepository->find($property->environment_id);
-			$property->environment = $environment;
+			$property->environment = $property->getEnvironment();
 			unset($property->environment_id);
 
 			$property->priority = $property->publication_type_id;
 			unset($property->publication_type_id);
 
-			$property->mainPicture = $property->getMainPicture();
+			$pictures = Array();
+
+			foreach ($property->getImages() as $image) {
+				$pictures[] = $image->getUrl();
+			}
+
+			$property->pictures = $pictures;
+
+			$youtube = YoutubeUrl::create($property->video_url);
+			$video = Array(
+				'url' => $youtube->getUrl(),
+				'embed_url' => $youtube->getEmbedUrl(),
+				'thumbnail' => $youtube->getThumbnailUrl()
+			);
+			$property->video = $video;
+			unset($property->video_url);
 		});
 
 		return $this->buildResponse($properties);

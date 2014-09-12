@@ -113,7 +113,8 @@ class PropertyRepository implements PropertyRepositoryInterface
 			'size',
 			'covered_size',
 			'environment_id',
-			'publication_type_id'
+			'publication_type_id',
+			'video_url'
 		);
 
 		return $this->model->select($fields)->get();
