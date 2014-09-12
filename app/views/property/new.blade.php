@@ -19,6 +19,29 @@
 				$("ol#img-container").append('<li><input type="file" name="images[' + i + ']"/></li>');
 			}
 		}
+
+		$("input#url-video").change(function(){
+			var url = $(this).val();
+
+			var myId = getId($(this).val());
+			if (myId != 'error'){
+				var myCode = '<div class="flex-vide"><iframe width="420" height="315" src="//www.youtube.com/embed/' 
+					+ myId + '" frameborder="0" allowfullscreen></iframe></div>';
+
+				$("div#youtube-video-container").html(myCode);
+			}
+		});
+
+		function getId(url) {
+			var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+			var match = url.match(regExp);
+
+			if (match && match[2].length == 11) {
+				return match[2];
+			} else {
+				return 'error';
+			}
+		}
 	});
 </script>
 @endsection
@@ -333,6 +356,27 @@ function addMarkerAtCenter() {
 		<div class="row">
 			<div class="large-12 columns">
 				<ol id="img-container"></ol>
+			</div>
+		</div>
+		<div class="row" id="video-container">
+			<div class="large-12 columns">
+				<div class="row">
+					<div class="large-12 columns">
+						<h5>Video</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-12 columns">
+						<div class="row collapse">
+							<div class="small-12 columns">
+								<input type="text" name="video_url" placeholder="Pega aqui la url de tu video de youtube" id="url-video"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-12 columns" id="youtube-video-container"></div>
+				</div>
 			</div>
 		</div>
 		<div class="row">
