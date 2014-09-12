@@ -3,6 +3,9 @@
 @section('scripts')
 <script>
 	$(document).ready(function(){
+		/**
+		 * Cambio la cantidad de inputs para imagenes dependiendo del tipo de publicacion
+		 */
 		$('select#publication_type').change(function(){
 				var imagesPerPublication = {{json_encode($publicationTypes->lists("images", "id"))}}
 				var index = $(this).val();
@@ -20,6 +23,30 @@
 			}
 		}
 
+		/**
+		 * Muestro o escondo la carga de video dependiendo si acepta o no el tipo de publicacion
+		 */
+		$('select#publication_type').change(function(){
+				var acceptVideo = {{json_encode($publicationTypes->lists("video", "id"))}}
+				var index = $(this).val();
+				if (acceptVideo[index] == "1"){
+					$("div#video-container").show();
+				}else{
+					$("div#video-container").hide();
+				}
+		});
+
+		var acceptVideo = {{json_encode($publicationTypes->lists("video", "id"))}}
+		var index = $('select#publication_type').val();
+		if (acceptVideo[index] == 1){
+			$("div#video-container").show();
+		}else{
+			$("div#video-container").hide();
+		}
+
+		/**
+		 * Video de youtube
+		 */
 		$("input#url-video").change(function(){
 			var url = $(this).val();
 
@@ -253,7 +280,7 @@ function addMarkerAtCenter() {
 			<div class="large-4 columns @if ($errors->has('barrio')) error @endif">
 				<label>Barrio
 					<select>
-						@foreach ($amenitieTypes as $neighborhood)
+						@foreach ($neighborhoods as $neighborhood)
 						    <option value='{{$neighborhood->id}}'>{{$neighborhood->name}}</option>
 						@endforeach
 					</select>
@@ -358,7 +385,7 @@ function addMarkerAtCenter() {
 				<ol id="img-container"></ol>
 			</div>
 		</div>
-		<div class="row" id="video-container">
+		<div class="row hide" id="video-container">
 			<div class="large-12 columns">
 				<div class="row">
 					<div class="large-12 columns">
