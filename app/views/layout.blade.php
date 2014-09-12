@@ -103,5 +103,6 @@
       initialize();
     });
     </script>
+    @yield('scripts')
 		</body>
 	</html>
