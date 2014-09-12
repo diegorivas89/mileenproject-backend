@@ -40,9 +40,13 @@ class Property extends MileenModel
 	}
 
 
-	public function getEnvironment()
+	public function getEnvironment($fields = Array())
 	{
-		return Environment::find($this->environment_id);
+		if ($fields){
+			return Environment::select($fields)->where("id", $this->environment_id)->first();
+		}else{
+			return Environment::find($this->environment_id);
+		}
 	}
 
 	public function getPropertyType()

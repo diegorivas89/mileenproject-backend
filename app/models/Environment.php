@@ -13,14 +13,9 @@ class Environment extends MileenModel
 		);
 	}
 
-	public function toArray()
+	public function getIdAttribute($value = '')
 	{
-		$array = Array(
-			'id' => $this->id,
-			'name' => $this->name,
-		);
-
-		return $array;
+		return intval($value);
 	}
 }
 

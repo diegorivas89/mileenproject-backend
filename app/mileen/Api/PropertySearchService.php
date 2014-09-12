@@ -58,14 +58,14 @@ class PropertySearchService extends MileenApi
 
 
 		/**
-		 * Itero cada modelo y cambio los nombres de los atributos 
+		 * Itero cada modelo y cambio los nombres de los atributos
 		 * y levanto el environment
 		 */
 		$properties->each(function($property){
-			$property->environment = $property->getEnvironment();
+			$property->environment = $property->getEnvironment(['id', 'name']);
 			unset($property->environment_id);
 
-			$property->priority = $property->publication_type_id;
+			$property->priority = intval($property->publication_type_id);
 			unset($property->publication_type_id);
 
 			$pictures = Array();
