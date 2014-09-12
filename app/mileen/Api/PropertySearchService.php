@@ -69,6 +69,8 @@ class PropertySearchService extends MileenApi
 
 			$property->priority = $property->publication_type_id;
 			unset($property->publication_type_id);
+
+			$property->mainPicture = $property->getMainPicture();
 		});
 
 		return $this->buildResponse($properties);
