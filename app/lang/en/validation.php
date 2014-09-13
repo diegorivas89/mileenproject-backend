@@ -41,16 +41,16 @@ return array(
 	"integer"              => "The :attribute must be an integer.",
 	"ip"                   => "The :attribute must be a valid IP address.",
 	"max"                  => array(
-		"numeric" => "The :attribute may not be greater than :max.",
+		"numeric" => "El campo :attribute no debe ser mayor a :max.",
 		"file"    => "The :attribute may not be greater than :max kilobytes.",
-		"string"  => "The :attribute may not be greater than :max characters.",
+		"string"  => "El campo :attribute no debe ser mas largo que :max caracteres.",
 		"array"   => "The :attribute may not have more than :max items.",
 	),
 	"mimes"                => "The :attribute must be a file of type: :values.",
 	"min"                  => array(
-		"numeric" => "The :attribute must be at least :min.",
+		"numeric" => "El campo :attribute debe ser mayor a :min.",
 		"file"    => "The :attribute must be at least :min kilobytes.",
-		"string"  => "The :attribute must be at least :min characters.",
+		"string"  => "El campo :attribute debe tener como mínimo :min caracteres.",
 		"array"   => "The :attribute must have at least :min items.",
 	),
 	
@@ -108,6 +108,7 @@ return array(
 	    'description' => 'descripción',
 	    'age' => 'años',
 	    'price' => 'precio',
-	    'expenses' => 'Expensas')
+	    'expenses' => 'expensas',
+	    'size' => 'tamaño')
 
 );

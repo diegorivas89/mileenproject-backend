@@ -32,7 +32,7 @@ class Property extends MileenModel
 
 	public static function getValidationRules(){
 		return array(
-			'title' => array('required', 'min:5'),
+			'title' => array('required', 'min:5','max:128'),
 			'description' => array('required', 'min:5'),
 			'user_id' => array('required','numeric'),
 			'property_type_id' => array('required','numeric'),
@@ -42,10 +42,10 @@ class Property extends MileenModel
 			'latitude' => array('required','numeric' ),
 			'longitude' => array('required','numeric' ),
 			'currency' => array('required'),
-			'price' => array('required','numeric' ),
+			'price' => array('required','numeric','min:1','max:99999999' ),
 			'expenses' => array('required','numeric' ),
-			'age' => array('required','numeric' ,'min:5'),
-			'size' => array('required','numeric' ,'min:2')
+			'age' => array('required','numeric' ,'min:0'),
+			'size' => array('required','numeric' ,'min:0')
 		);
 	}
 

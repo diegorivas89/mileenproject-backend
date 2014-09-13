@@ -250,7 +250,7 @@ function addMarkerAtCenter() {
 		<div class="row">
 			<div class="large-12 columns @if ($errors->has('title')) error @endif">
 				<label>Titulo
-					<input name="title" type="text" placeholder="" value="{{Input::old("title", "")}}" class="form-control" />
+					<input name="title" type="text" maxlength="128" placeholder="" value="{{Input::old("title", "")}}" class="form-control" />
 					@if ($errors->has('title'))<small class="error">  {{ $errors->first('title') }} </small> @endif
 				</label>
 			</div>
