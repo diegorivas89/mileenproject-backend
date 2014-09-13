@@ -306,7 +306,7 @@ function addMarkerAtCenter() {
 		<div class="row">
 			<div class="large-3 columns">
 				<div class="row collapse  @if ($errors->has('size')) error @endif">
-					<label>Tamaño Cubierto</label>
+					<label>Tamaño Total</label>
 					<div class="small-9 columns">
 						<input type="text" name="size" placeholder="" value="{{Input::old('size', '')}}"/>
 					</div>
@@ -317,15 +317,15 @@ function addMarkerAtCenter() {
 				</div>
 			</div>
 			<div class="large-3 columns">
-				<div class="row collapse  @if ($errors->has('size_discovered')) error @endif">
+				<div class="row collapse  @if ($errors->has('covered_size')) error @endif">
 					<label>Tamaño Descubierto</label>
 					<div class="small-9 columns">
-						<input type="text" name="size_discovered" placeholder="" value="{{Input::old('size_discovered', '')}}"/>
+						<input type="text" name="covered_size" placeholder="" value="{{Input::old('covered_size', '')}}"/>
 					</div>
 					<div class="small-3 columns">
 						<span class="postfix">m<sup>2</sup></span>
 					</div>
-					@if ($errors->has('size_discovered'))<small class="error">  {{ $errors->first('size_discovered') }} </small> @endif
+					@if ($errors->has('covered_size'))<small class="error">  {{ $errors->first('covered_size') }} </small> @endif
 				</div>
 			</div>
 			

@@ -109,7 +109,7 @@ return array(
 	    'age' => 'años',
 	    'price' => 'precio',
 	    'expenses' => 'expensas',
-	    'size' => 'tamaño cubierto',
-	    "size_discovered" => 'tamaño descubierto')
+	    'size' => 'tamaño total',
+	    "covered_size" => 'tamaño cubierto')
 
 );
