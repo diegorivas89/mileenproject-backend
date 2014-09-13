@@ -94,6 +94,15 @@ class Property extends MileenModel
 		return Image::select('id', 'name')->where("property_id", "=", $this->id)->orderBy('id', 'asc')->get();
 	}
 
+	public function getMainImageUrl($default = '')
+	{
+		$image = Image::select('id', 'name')->where("property_id", "=", $this->id)->orderBy('id', 'asc')->first();
+		if (isset($image)){
+			return $image->getUrl();
+		}else{
+			return $default;
+		}
 	}
+}
 
-	?>
+?>

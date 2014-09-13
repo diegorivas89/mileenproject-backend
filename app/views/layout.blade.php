@@ -62,11 +62,7 @@
 									<li><a href="#"><i class="fa fa-sign-out"></i> Salir</a></li>
 								</ul>
 							</div>
-							<a href="#">
-								<div class="panel callout radius">
-									<h6>99 Publicaciones activas</h6>
-								</div>
-							</a>
+							@yield('property-count')
 						</div>
 						@yield('content')
 					</div>
