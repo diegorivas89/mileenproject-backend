@@ -61,47 +61,17 @@ class PropertyRepository implements PropertyRepositoryInterface
 	 * @return \Illuminate\Support\Collection
 	 */
 	public function search($parameters){
-		if (ParameterValidator::_list('neighborhoods', $parameters)){
-			$this->model = $this->model->whereIn("neighborhood_id", explode(",", $parameters['neighborhoods']));
-		}
-
-		if (ParameterValidator::_list('propertyTypes', $parameters)){
-			$this->model = $this->model->whereIn("property_type_id", explode(",",$parameters['propertyTypes']));
-		}
-
-		if (ParameterValidator::_list('operationTypes', $parameters)){
-			$this->model = $this->model->whereIn("operation_type_id", explode(",", $parameters['operationTypes']));
-		}
-
-		if (ParameterValidator::_list('environments', $parameters)){
-			$this->model = $this->model->whereIn("environment_id", explode(",", $parameters['environments']));
-		}
-
-		if (ParameterValidator::integer('minPrice', $parameters) && ParameterValidator::integer('maxPrice', $parameters)){
-			$this->model = $this->model->whereBetween("price", [$parameters['minPrice'], $parameters['maxPrice']]);
-		}
-
-		if (ParameterValidator::integer('minSize', $parameters)){
-			$this->model = $this->model->where("size", ">=", $parameters['minSize']);
-		}
-
-		if (ParameterValidator::integer('minCoveredSize', $parameters)){
-			$this->model = $this->model->where("covered_size", ">=", $parameters['minCoveredSize']);
-		}
-
-		if (ParameterValidator::date('minPublishDate', $parameters)){
-			$this->model = $this->model->where("created_at", ">", $parameters['minPublishDate']);
-		}
+		$query = $this->makeQuery($parameters);
 
 		if (ParameterValidator::integer('amount', $parameters) && ParameterValidator::integer('offset', $parameters)){
-			$this->model = $this->model->take($parameters['amount'])->offset($parameters['offset']);
+			$query = $query->take($parameters['amount'])->offset($parameters['offset']);
 		}
 
 		if (array_key_exists('order', $parameters)){
 			List($field, $criteria) = explode(",", $parameters['order']);
-			$this->model = $this->model->orderBy($field, $criteria);
+			$query = $query->orderBy($field, $criteria);
 		}else{
-			$this->model = $this->model->orderBy("publication_type_id", "asc");
+			$query = $query->orderBy("publication_type_id", "asc");
 		}
 
 		$fields = Array(
@@ -118,7 +88,73 @@ class PropertyRepository implements PropertyRepositoryInterface
 			'video_url'
 		);
 
-		return $this->model->select($fields)->get();
+		return $query->select($fields)->get();
+	}
+
+	/**
+	 * cuenta la cantidad de propiedades que matchean con los filtros
+	 *
+	 * @param  array $parameters
+	 * @return int
+	 */
+	public function count($parameters)
+	{
+		$query = $this->makeQuery($parameters);
+
+		return $query->count();
+	}
+
+	private function makeQuery($parameters)
+	{
+		$query = $this->getCloneOfModel();
+
+		if (ParameterValidator::_list('neighborhoods', $parameters)){
+			$query = $query->whereIn("neighborhood_id", explode(",", $parameters['neighborhoods']));
+		}
+
+		if (ParameterValidator::_list('propertyTypes', $parameters)){
+			$query = $query->whereIn("property_type_id", explode(",",$parameters['propertyTypes']));
+		}
+
+		if (ParameterValidator::_list('operationTypes', $parameters)){
+			$query = $query->whereIn("operation_type_id", explode(",", $parameters['operationTypes']));
+		}
+
+		if (ParameterValidator::_list('environments', $parameters)){
+			$query = $query->whereIn("environment_id", explode(",", $parameters['environments']));
+		}
+
+		if (ParameterValidator::integer('minPrice', $parameters)){
+			$query = $query->where("price", ">=", $parameters['minPrice']);
+		}
+
+		if (ParameterValidator::integer('maxPrice', $parameters)){
+			$query = $query->where("price", "<=", $parameters['maxPrice']);
+		}
+
+		if (ParameterValidator::integer('minSize', $parameters)){
+			$query = $query->where("size", ">=", $parameters['minSize']);
+		}
+
+		if (ParameterValidator::integer('minCoveredSize', $parameters)){
+			$query = $query->where("covered_size", ">=", $parameters['minCoveredSize']);
+		}
+
+		if (ParameterValidator::date('minPublishDate', $parameters)){
+			$query = $query->where("created_at", ">", $parameters['minPublishDate']);
+		}
+
+		return $query;
+	}
+
+	/**
+	 * Retorna una repliac del modelo para uasr en cada query
+	 *
+	 * @return \Property
+	 */
+	private function getCloneOfModel()
+	{
+		return $this->model->replicate();
 	}
 }
 
