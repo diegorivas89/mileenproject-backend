@@ -268,7 +268,7 @@ function addMarkerAtCenter() {
 				<label>Amenities</label>
 				<div class="row">
 					@foreach ($amenitieTypes as $amenitieType)
-					<div class="large-3 columns">
+					<div class="medium-3 large-3 columns">
 						<label for="amenitieType_{{$amenitieType->id}}"><input id="amenitieType_{{$amenitieType->id}}" name="amenitieType[{{$amenitieType->id}}]" value="1" type="checkbox" {{(Input::old('amenitieType.'.$amenitieType->id) ? 'checked': '')}}> {{$amenitieType->name}}</label>
 					</div>
 					@endforeach
@@ -304,9 +304,9 @@ function addMarkerAtCenter() {
 			</div>
 		</div>
 		<div class="row">
-			<div class="large-4 columns">
+			<div class="large-3 columns">
 				<div class="row collapse  @if ($errors->has('size')) error @endif">
-					<label>Tamaño</label>
+					<label>Tamaño Cubierto</label>
 					<div class="small-9 columns">
 						<input type="text" name="size" placeholder="" value="{{Input::old('size', '')}}"/>
 					</div>
@@ -316,7 +316,20 @@ function addMarkerAtCenter() {
 					@if ($errors->has('size'))<small class="error">  {{ $errors->first('size') }} </small> @endif
 				</div>
 			</div>
-			<div class="large-4 columns">
+			<div class="large-3 columns">
+				<div class="row collapse  @if ($errors->has('size_discovered')) error @endif">
+					<label>Tamaño Descubierto</label>
+					<div class="small-9 columns">
+						<input type="text" name="size_discovered" placeholder="" value="{{Input::old('size_discovered', '')}}"/>
+					</div>
+					<div class="small-3 columns">
+						<span class="postfix">m<sup>2</sup></span>
+					</div>
+					@if ($errors->has('size_discovered'))<small class="error">  {{ $errors->first('size_discovered') }} </small> @endif
+				</div>
+			</div>
+			
+			<div class="large-3 columns">
 				<div class="row collapse  @if ($errors->has('environment_id')) error @endif">
 					<label>Ambientes</label>
 					<div class="small-12 columns">
@@ -329,7 +342,7 @@ function addMarkerAtCenter() {
 					</div>
 				</div>
 			</div>
-			<div class="large-4 columns">
+			<div class="large-3 columns">
 				<div class="row collapse  @if ($errors->has('age')) error @endif">
 					<label>Antiguedad</label>
 					<div class="small-9 columns ">

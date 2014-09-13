@@ -17,6 +17,7 @@ class Property extends MileenModel
 		"neighborhood_id",
 		"publication_type_id",
 		"size",
+		"size_discovered",
 		"covered_size",
 		"title",
 		"description",
@@ -45,7 +46,8 @@ class Property extends MileenModel
 			'price' => array('required','numeric','min:1','max:99999999' ),
 			'expenses' => array('required','numeric' ),
 			'age' => array('required','numeric' ,'min:0'),
-			'size' => array('required','numeric' ,'min:0')
+			'size' => array('required','numeric' ,'min:0'),
+			'size_discovered' => array('required','numeric' ,'min:0')
 		);
 	}
 
