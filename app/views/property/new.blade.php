@@ -249,7 +249,7 @@ function addMarkerAtCenter() {
 		</div>
 		<div class="row">
 			<div class="large-12 columns @if ($errors->has('title')) error @endif">
-				<label>Titulo
+				<label>Título
 					<input name="title" type="text" maxlength="128" placeholder="" value="{{Input::old("title", "")}}" class="form-control" />
 					@if ($errors->has('title'))<small class="error">  {{ $errors->first('title') }} </small> @endif
 				</label>
@@ -306,7 +306,7 @@ function addMarkerAtCenter() {
 		<div class="row">
 			<div class="large-3 columns">
 				<div class="row collapse  @if ($errors->has('size')) error @endif">
-					<label>Tamaño Total</label>
+					<label>Superficie Total</label>
 					<div class="small-9 columns">
 						<input type="text" name="size" placeholder="" value="{{Input::old('size', '')}}"/>
 					</div>
@@ -318,7 +318,7 @@ function addMarkerAtCenter() {
 			</div>
 			<div class="large-3 columns">
 				<div class="row collapse  @if ($errors->has('covered_size')) error @endif">
-					<label>Tamaño Cubierto</label>
+					<label>Superficie Cubierta</label>
 					<div class="small-9 columns">
 						<input type="text" name="covered_size" placeholder="" value="{{Input::old('covered_size', '')}}"/>
 					</div>

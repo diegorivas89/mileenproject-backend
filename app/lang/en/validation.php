@@ -104,12 +104,12 @@ return array(
 
 	'attributes' => array(
 		'address' => 'dirección',
-	    'title' => 'titulo',
+	    'title' => 'título',
 	    'description' => 'descripción',
 	    'age' => 'años',
 	    'price' => 'precio',
 	    'expenses' => 'expensas',
-	    'size' => 'tamaño total',
-	    "covered_size" => 'tamaño cubierto')
+	    'size' => 'superficie total',
+	    "covered_size" => 'superficie cubierta')
 
 );
