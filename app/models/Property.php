@@ -13,6 +13,11 @@ class Property extends MileenModel
 		"user_id",
 		"property_type_id",
 		"environment_id",
+		"operation_type_id",
+		"neighborhood_id",
+		"publication_type_id",
+		"size",
+		"covered_size",
 		"title",
 		"description",
 		"address",
@@ -21,8 +26,28 @@ class Property extends MileenModel
 		"currency",
 		"price",
 		"expenses",
-		"age"
+		"age",
+		"video_url"
 	);
+
+	public static function getValidationRules(){
+		return array(
+			'title' => array('required', 'min:5'),
+			'description' => array('required', 'min:5'),
+			'user_id' => array('required','numeric'),
+			'property_type_id' => array('required','numeric'),
+			'publication_type_id' => array('required','numeric'),
+			'environment_id' => array('required','numeric' ),
+			'address' => array('required' ),
+			'latitude' => array('required','numeric' ),
+			'longitude' => array('required','numeric' ),
+			'currency' => array('required'),
+			'price' => array('required','numeric' ),
+			'expenses' => array('required','numeric' ),
+			'age' => array('required','numeric' ,'min:5'),
+			'size' => array('required','numeric' ,'min:2')
+		);
+	}
 
 	public function getSchema()
 	{

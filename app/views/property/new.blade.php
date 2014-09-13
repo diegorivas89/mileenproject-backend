@@ -207,7 +207,7 @@ function addMarkerAtCenter() {
 				<label>Tipo de Publicación
 					<select name="publication_type_id" id="publication_type">
 						@foreach ($publicationTypes as $publicationType)
-						    <option value='{{$publicationType->id}}'>{{$publicationType->name}}</option>
+						    <option value='{{$publicationType->id}}' {{($publicationType->id == Session::getOldInput('publication_type_id', '') ? 'selected' : '')}}>{{$publicationType->name}}</option>
 						@endforeach
 					</select>
 					@if ($errors->has('publication_type_id')) <small class="error"> {{ $errors->first('publication_type_id') }} </small> @endif
@@ -219,9 +219,9 @@ function addMarkerAtCenter() {
 		<div class="row">
 			<div class="large-12 columns  @if ($errors->has('tipodeop')) error @endif">
 				<label>Tipo de Operación
-					<select name="">
+					<select name="operation_type_id">
 						@foreach ($operationTypes as $operationType)
-						    <option value='{{$operationType->id}}'>{{$operationType->name}}</option>
+						    <option value='{{$operationType->id}}' {{($operationType->id == Session::getOldInput('operation_type_id', '') ? 'selected' : '')}}>{{$operationType->name}}</option>
 						@endforeach
 					</select>
 					@if ($errors->has('tipodeop')) <small class="error"> {{ $errors->first('tipodeop') }} </small> @endif
@@ -234,7 +234,7 @@ function addMarkerAtCenter() {
 				<label>Tipo de Propiedad
 					<select name="property_type_id" class="">
 						@foreach ($propertyTypes as $propertyType)
-						    <option value='{{$propertyType->id}}'>{{$propertyType->name}}</option>
+						    <option value='{{$propertyType->id}}' {{($propertyType->id == Session::getOldInput('property_type_id', '') ? 'selected' : '')}}>{{$propertyType->name}}</option>
 						@endforeach
 					</select>
 					@if ($errors->has('property_type_id')) <small class="error"> {{ $errors->first('property_type_id') }} </small> @endif
@@ -247,11 +247,10 @@ function addMarkerAtCenter() {
 				<h5>Propiedad</h5>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="large-12 columns @if ($errors->has('title')) error @endif">
 				<label>Titulo
-					<input name="title" type="text" placeholder="" class="form-control" />
+					<input name="title" type="text" placeholder="" value="{{Session::getOldInput("title", "")}}" class="form-control" />
 					@if ($errors->has('title'))<small class="error">  {{ $errors->first('title') }} </small> @endif
 				</label>
 			</div>
@@ -259,7 +258,7 @@ function addMarkerAtCenter() {
 		<div class="row">
 			<div class="large-12 columns @if ($errors->has('description')) error @endif">
 				<label>Descripción
-					<textarea name="description" placeholder=""></textarea>
+					<textarea name="description" placeholder="">{{Session::getOldInput("description", "")}}</textarea>
 					@if ($errors->has('description'))<small class="error">  {{ $errors->first('description') }} </small> @endif
 				</label>
 			</div>
@@ -270,7 +269,7 @@ function addMarkerAtCenter() {
 				<div class="row">
 					@foreach ($amenitieTypes as $amenitieType)
 					<div class="large-3 columns">
-						<label for="amenitieType_{{$amenitieType->id}}"><input id="amenitieType_{{$amenitieType->id}}" name="amenitieType[]" value="{{$amenitieType->id}}" type="checkbox"> {{$amenitieType->name}}</label>
+						<label for="amenitieType_{{$amenitieType->id}}"><input id="amenitieType_{{$amenitieType->id}}" name="amenitieType[{{$amenitieType->id}}]" value="{{$amenitieType->id}}" type="checkbox" {{(Session::getOldInput('amenitieType.'.$amenitieType->id) ? 'checked': '')}}> {{$amenitieType->name}}</label>
 					</div>
 					@endforeach
 				</div>
@@ -279,9 +278,9 @@ function addMarkerAtCenter() {
 		<div class="row">
 			<div class="large-4 columns @if ($errors->has('barrio')) error @endif">
 				<label>Barrio
-					<select>
+					<select name="neighborhood_id">
 						@foreach ($neighborhoods as $neighborhood)
-						    <option value='{{$neighborhood->id}}'>{{$neighborhood->name}}</option>
+						    <option value='{{$neighborhood->id}}' {{($neighborhood->id == Session::getOldInput('neighborhood_id', '') ? 'selected' : '')}}>{{$neighborhood->name}}</option>
 						@endforeach
 					</select>
 				</label>
@@ -289,9 +288,9 @@ function addMarkerAtCenter() {
 			</div>
 			<div class="large-8 columns  @if ($errors->has('address')) error @endif">
 				<label>Dirección
-					<input type="text"  readonly="readonly" placeholder="" id="formatedAddress" name="address"/>
+					<input type="text" placeholder="" id="formatedAddress" name="address" value="{{Session::getOldInput("address", "")}}"/>
 					<input type="hidden" id="latitude" value="" name="latitude"/>
-					<input type="hidden" id="longitude" value=""name="longitude"/>
+					<input type="hidden" id="longitude" value="" name="longitude"/>
 				</label>
 				@if ($errors->has('address'))<small class="error">  {{ $errors->first('address') }} </small> @endif
 			</div>
@@ -309,7 +308,7 @@ function addMarkerAtCenter() {
 				<div class="row collapse  @if ($errors->has('size')) error @endif">
 					<label>Tamaño</label>
 					<div class="small-9 columns">
-						<input type="text" name="size" placeholder="" />
+						<input type="text" name="size" placeholder="" value="{{Session::getOldInput('size', '')}}"/>
 					</div>
 					<div class="small-3 columns">
 						<span class="postfix">m<sup>2</sup></span>
@@ -323,7 +322,7 @@ function addMarkerAtCenter() {
 					<div class="small-12 columns">
 						<select name="environment_id" id="">
 						@foreach ($environments as $environment)
-						    <option value='{{$environment->id}}'>{{$environment->name}}</option>
+						    <option value='{{$environment->id}}' {{($environment->id == Session::getOldInput('environment_id', '') ? 'selected' : '')}}>{{$environment->name}}</option>
 						@endforeach
 						</select>
 						@if ($errors->has('environment_id'))<small class="error">  {{ $errors->first('environment_id') }} </small> @endif
@@ -334,7 +333,7 @@ function addMarkerAtCenter() {
 				<div class="row collapse  @if ($errors->has('age')) error @endif">
 					<label>Antiguedad</label>
 					<div class="small-9 columns ">
-						<input type="text" name="age" placeholder="" />
+						<input type="text" name="age" placeholder="" value="{{Session::getOldInput('age', '')}}"/>
 						@if ($errors->has('age'))<small class="error">  {{ $errors->first('age') }} </small> @endif
 					</div>
 					<div class="small-3 columns">
@@ -349,8 +348,8 @@ function addMarkerAtCenter() {
 					<label>Moneda</label>
 					<div class="small-12 columns">
 						<select name="currency" id="">
-							<option value="1">$</option>
-							<option value="2">U$S</option>
+							<option value="$">$</option>
+							<option value="U$S" {{('U$S' == Session::getOldInput('currency', '') ? 'selected' : '')}}>U$S</option>
 						</select>
 						@if ($errors->has('currency'))<small class="error">  {{ $errors->first('currency') }} </small> @endif
 					</div>
@@ -360,7 +359,7 @@ function addMarkerAtCenter() {
 				<div class="row collapse  @if ($errors->has('price')) error @endif">
 					<label>Precio</label>
 					<div class="small-12 columns">
-						<input type="text" name="price" placeholder="" />
+						<input type="text" name="price" placeholder="" value="{{Session::getOldInput('price', '')}}"/>
 						@if ($errors->has('price'))<small class="error">  {{ $errors->first('price') }} </small> @endif
 					</div>
 				</div>
@@ -369,7 +368,7 @@ function addMarkerAtCenter() {
 				<div class="row collapse  @if ($errors->has('expenses')) error @endif">
 					<label>Expensas</label>
 					<div class="small-12 columns">
-						<input type="text" name="expenses" placeholder="" />
+						<input type="text" name="expenses" placeholder="" value="{{Session::getOldInput('expenses', '')}}"/>
 						@if ($errors->has('expenses'))<small class="error">  {{ $errors->first('expenses') }} </small> @endif
 					</div>
 				</div>
@@ -396,7 +395,7 @@ function addMarkerAtCenter() {
 					<div class="large-12 columns">
 						<div class="row collapse">
 							<div class="small-12 columns">
-								<input type="text" name="video_url" placeholder="Pega aqui la url de tu video de youtube" id="url-video"/>
+								<input type="text" name="video_url" value="{{Session::getOldInput('video_url', '')}}" placeholder="Pega aqui la url de tu video de youtube" id="url-video"/>
 							</div>
 						</div>
 					</div>
