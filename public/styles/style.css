@@ -115,5 +115,9 @@ div#crosshair {
 
 .logohtml5 {
   display: none;
-text-indent: 
+text-indent:
+}
+
+.parent-width {
+  width: 100%;
 }

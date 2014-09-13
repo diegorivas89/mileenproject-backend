@@ -24,6 +24,18 @@
 				<div class="row">
 					<div class="large-3 medium-3 small-12 columns">
 						<img src="{{$property->getMainImageUrl('/assets/img/nophoto.jpg')}}">
+						<a data-dropdown="drop{{$property->id}}" aria-controls="drop{{$property->id}}" aria-expanded="false" class="button expand radius back long-height" href="first_step.html">
+							<i class="fa fa-cogs"></i>
+							{{Lang::get('strings.actions')}}
+						</a>
+						<ul id="drop{{$property->id}}" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+						  <li>
+						  	<a href="#">
+						  		<i class='fa fa-pencil'></i>
+						  		{{Lang::get('strings.edit')}}
+						  	</a>
+						  </li>
+						</ul>
 					</div>
 					<div class="large-9 medium-9 small-12 columns">
 						<strong>
@@ -34,11 +46,11 @@
 						</strong>
 						<h5 class="subheader">
 							<small>
-								{{$property->getOperationType()->name}} | 
-								{{$property->getPropertyType()->name}}  | 
-								{{$property->getEnvironment()->name}} | 
-								{{$property->getNeighborhood()->name}} | 
-								{{$property->size}} m2 | 
+								{{$property->getOperationType()->name}} |
+								{{$property->getPropertyType()->name}}  |
+								{{$property->getEnvironment()->name}} |
+								{{$property->getNeighborhood()->name}} |
+								{{$property->size}} m2 |
 								{{$property->age}} años
 							</small>
 						</h5>

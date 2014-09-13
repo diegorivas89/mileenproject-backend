@@ -17,7 +17,6 @@
 		<body>
 			<div class="row">
 				<div class="large-12 columns">
-
 					<div class="row">
 						<div class="large-12 columns">
 							<nav class="top-bar" data-topbar>
@@ -30,7 +29,6 @@
 									</li>
 								</ul>
 								<section class="top-bar-section">
-
 									<ul class="right">
 										<li class="divider"></li>
 										<li class="has-dropdown">
