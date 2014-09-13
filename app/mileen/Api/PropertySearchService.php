@@ -7,6 +7,7 @@ use \Mileen\Properties\PropertyRepositoryInterface;
 use \Mileen\Environments\EnvironmentRepositoryInterface;
 use \Mileen\Images\ImageRepositoryInterface;
 use \Mileen\Support\YoutubeUrl;
+use \Mileen\Support\VimeoUrl;
 use Mileen\Support\ParameterValidator;
 
 /**
@@ -78,13 +79,7 @@ class PropertySearchService extends MileenApi
 
 			$property->pictures = $pictures;
 
-			$youtube = YoutubeUrl::create($property->video_url);
-			$video = Array(
-				'url' => $youtube->getUrl(),
-				'embed_url' => $youtube->getEmbedUrl(),
-				'thumbnail' => $youtube->getThumbnailUrl()
-			);
-			$property->video = $video;
+			$property->video = $this->getVideoResponse($property->video_url);
 			unset($property->video_url);
 		});
 
@@ -116,6 +111,39 @@ class PropertySearchService extends MileenApi
 		 * entonces ah llegado a la ultima pagina
 		 */
 		return true;
+	}
+
+	/**
+	 * Genera la respuesta del video para vimeo o youtube
+	 *
+	 * @param  string $url
+	 * @return array
+	 */
+	private function getVideoResponse($url)
+	{
+		if (YoutubeUrl::test($url)){
+			$youtube = YoutubeUrl::create($url);
+			$video = Array(
+				'url' 		=> $youtube->getUrl(),
+				'embed_url' => $youtube->getEmbedUrl(),
+				'thumbnail' => $youtube->getThumbnailUrl()
+			);
+		}elseif (VimeoUrl::test($url)){
+			$vimeo = VimeoUrl::create($url);
+			$video = Array(
+				'url' 		=> $vimeo->getUrl(),
+				'embed_url' => $vimeo->getEmbedUrl(),
+				'thumbnail' => $vimeo->getThumbnailUrl()
+			);
+		}else{
+			$video = Array(
+				'url' 		=> '',
+				'embed_url' => '',
+				'thumbnail' => ''
+			);
+		}
+
+		return $video;
 	}
 }
 

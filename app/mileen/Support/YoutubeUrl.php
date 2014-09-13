@@ -18,6 +18,18 @@ class YoutubeUrl
 		return new YoutubeUrl($videoUrl);
 	}
 
+	public static function test($url = '')
+	{
+		$matches = Array();
+		if (preg_match('/youtube\.com\/watch\?v=([^&]+)/si', $url, $matches)){
+			return true;
+		}elseif (preg_match('/youtu\.be\/([^&]+)/si', $url, $matches)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	public function __construct($videoUrl = '')
 	{
 		$this->videoUrl = $videoUrl;
