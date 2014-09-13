@@ -19,7 +19,7 @@ class Image extends MileenModel
 
 	public function getUrl()
 	{
-		return $this->name;
+		return '/store/images/'.$this->name;
 	}
 }
 
