@@ -26,9 +26,9 @@ class PropertyController extends BaseController
 		$environments = Environment::all();
 		$neighborhoods = Neighborhood::all();
 		$operationTypes = OperationType::all();
-		$propertyTypes = PropertyType::all();
+		$propertyTypes = PropertyType::orderBy('name', 'asc')->get();
 		$publicationTypes = PublicationType::all();
-		$amenitieTypes = AmenitieType::all();
+		$amenitieTypes = AmenitieType::orderBy('name', 'asc')->get();
 
 		return View::make("property.new")
 					->with('environments', $environments)
