@@ -59,7 +59,7 @@ abstract class MileenApi
 		$response = Array(
 			'error' => 0,
 			'message' => "ok",
-			'payload' => \Mileen\Support\ArrayHelper::keysToCamelCase($payload->toArray())
+			'payload' => \Mileen\Support\ArrayHelper::keysToCamelCase($payload)
 		);
 
 		return json_encode($response, JSON_PRETTY_PRINT);
