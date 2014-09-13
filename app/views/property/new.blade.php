@@ -288,7 +288,7 @@ function addMarkerAtCenter() {
 			</div>
 			<div class="large-8 columns  @if ($errors->has('address')) error @endif">
 				<label>Dirección
-					<input type="text" placeholder="" id="formatedAddress" name="address" value="{{Input::old("address", "")}}"/>
+					<input type="text" readonly=true placeholder="" id="formatedAddress" name="address" value="{{Input::old("address", "")}}"/>
 					<input type="hidden" id="latitude" value="" name="latitude"/>
 					<input type="hidden" id="longitude" value="" name="longitude"/>
 				</label>

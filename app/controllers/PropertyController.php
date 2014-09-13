@@ -61,9 +61,8 @@ class PropertyController extends BaseController
 	public function storeImages($property, $images)
 	{
 		foreach ($images as $image) {
-			if (isset($image)){
+			if (isset($image) && exif_imagetype($image->getRealPath())){
 				$name = md5(microtime(true).rand(1,9999));
-
 				$imageModel = new Image();
 				$imageModel->property_id = $property->id;
 				$imageModel->name = $name;
