@@ -27,7 +27,7 @@ class AddSizeDiscoveredFieldToPropertiesTable extends Migration {
 	{
 		Schema::table('properties', function(Blueprint $table)
 		{
-			$table->dropColumn('size');
+			$table->dropColumn('size_discovered');
 		});
 	}
 
