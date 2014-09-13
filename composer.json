@@ -6,7 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"gregwar/image": "dev-master"
+		"gregwar/image": "dev-master",
+		"intervention/image": "dev-master"
 	},
 	"require-dev": {
         "phpunit/phpunit": "4.2.*",

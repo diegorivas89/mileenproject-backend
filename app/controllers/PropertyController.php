@@ -1,7 +1,7 @@
 <?php
 
 use \Mileen\Properties\PropertyRepositoryInterface;
-
+use \Intervention\Image\ImageManagerStatic as ImageManager;
 /**
 *
 */
@@ -43,14 +43,37 @@ class PropertyController extends BaseController
 	{
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
 
-		if ($validator->fails())
+		if ($validator->fails() && false)
 		{
 			return Redirect::route('properties.create')->withInput()->withErrors($validator);
 		}else{
 			//guardar
 			$property = Property::create(Input::all());
 
+			$this->storeImages($property, Input::file('images'));
+
 			return Redirect::route('properties.index')	;
+		}
+	}
+
+	public function storeImages($property, $images)
+	{
+		foreach ($images as $image) {
+			if (isset($image)){
+				$name = md5(microtime(true).rand(1,9999));
+
+				$imageModel = new Image();
+				$imageModel->property_id = $property->id;
+				$imageModel->name = $name;
+				$imageModel->save();
+
+				$destPath = public_path().'/store/images/'.$name;
+
+				// and you are ready to go ...
+				$image = ImageManager::make($image->getRealPath())
+									->widen(600)
+									->save($destPath);
+			}
 		}
 	}
 }
