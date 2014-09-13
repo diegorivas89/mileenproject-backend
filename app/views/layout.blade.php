@@ -34,7 +34,7 @@
 									<ul class="right">
 										<li class="divider"></li>
 										<li class="has-dropdown">
-											<a href="#"><i class="fa fa-user"></i> Alejandro Molinari</a>
+											<a href="#"><i class="fa fa-user"></i> {{App::make('logged-user')->name}}</a>
 											<ul class="dropdown">
 												<li>
 													<a href="#"><i class="fa fa-cog"></i> Mi Perfil</a>
@@ -55,7 +55,7 @@
 						<div class="large-3 small-12 columns">
 							<div class="panel">
 								<ul class="side-nav">
-									<li class="active"><a href="{{ URL::action('properties.index') }}"><i class="fa fa-newspaper-o"></i> Mis Publicaciones</a></li>
+									<li><a href="{{ URL::action('properties.index') }}"><i class="fa fa-newspaper-o"></i> Mis Publicaciones</a></li>
 									<li><a href="{{URL::action('properties.create')}}"><i class="fa fa-home"></i> Nueva Publicación</a></li>
 									<li class="divider"></li>
 									<li><a href="#"><i class="fa fa-cog"></i> Mi Perfil</a></li>

@@ -10,4 +10,11 @@ App::singleton('property-search-service', function(){
 	return new \Mileen\Api\PropertySearchService($propRepository);
 });
 
+App::singleton('logged-user', function(){
+	$fakeUser = new User();
+	$fakeUser->id = 1;
+	$fakeUser->name = 'Ned Stark';
+
+	return $fakeUser;
+});
 ?>
