@@ -318,7 +318,7 @@ function addMarkerAtCenter() {
 			</div>
 			<div class="large-3 columns">
 				<div class="row collapse  @if ($errors->has('covered_size')) error @endif">
-					<label>Tamaño Descubierto</label>
+					<label>Tamaño Cubierto</label>
 					<div class="small-9 columns">
 						<input type="text" name="covered_size" placeholder="" value="{{Input::old('covered_size', '')}}"/>
 					</div>
