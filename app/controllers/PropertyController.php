@@ -43,7 +43,7 @@ class PropertyController extends BaseController
 	{
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
 
-		if ($validator->fails() && false)
+		if ($validator->fails())
 		{
 			return Redirect::route('properties.create')->withInput()->withErrors($validator);
 		}else{
