@@ -269,7 +269,7 @@ function addMarkerAtCenter() {
 				<div class="row">
 					@foreach ($amenitieTypes as $amenitieType)
 					<div class="large-3 columns">
-						<label for="amenitieType_{{$amenitieType->id}}"><input id="amenitieType_{{$amenitieType->id}}" name="amenitieType[{{$amenitieType->id}}]" value="{{$amenitieType->id}}" type="checkbox" {{(Input::old('amenitieType.'.$amenitieType->id) ? 'checked': '')}}> {{$amenitieType->name}}</label>
+						<label for="amenitieType_{{$amenitieType->id}}"><input id="amenitieType_{{$amenitieType->id}}" name="amenitieType[{{$amenitieType->id}}]" value="1" type="checkbox" {{(Input::old('amenitieType.'.$amenitieType->id) ? 'checked': '')}}> {{$amenitieType->name}}</label>
 					</div>
 					@endforeach
 				</div>

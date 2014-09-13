@@ -47,9 +47,11 @@ class PropertyController extends BaseController
 		{
 			return Redirect::route('properties.create')->withInput()->withErrors($validator);
 		}else{
-			//guardar
-			$property = Property::create(Input::all());
-
+			//guardo la propiedad
+			$property = Property::create(Input::except('amenitieType'));
+			//guardo las amenities
+			AmenitieProperty::storeAmenitiesForProperty($property->id, Input::get('amenitieType'));
+			//guardo las imagenes
 			$this->storeImages($property, Input::file('images'));
 
 			return Redirect::route('properties.index')	;
