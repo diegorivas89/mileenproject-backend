@@ -46,7 +46,8 @@ class Property extends MileenModel
 			'expenses' => array('required','numeric' ),
 			'age' => array('required','numeric' ,'min:0'),
 			'size' => array('required','numeric' ,'min:0'),
-			'covered_size' => array('required','numeric' ,'min:0')
+			'covered_size' => array('required','numeric' ,'min:0'),
+			'video_url' => array('url'),
 		);
 	}
 
