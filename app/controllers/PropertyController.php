@@ -69,10 +69,14 @@ class PropertyController extends BaseController
 
 				$destPath = public_path().'/store/images/'.$name;
 
-				// and you are ready to go ...
-				$image = ImageManager::make($image->getRealPath())
-									->widen(600)
-									->save($destPath);
+				foreach (Array(100, 300, 600, 1200) as $width) {
+					// and you are ready to go ...
+					ImageManager::make($image->getRealPath())
+								->widen($width)
+								->save($destPath.'_'.$width);
+				}
+
+				$image->move(public_path().'/store/images/', $name);
 			}
 		}
 	}
