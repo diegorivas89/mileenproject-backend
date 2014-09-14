@@ -14,7 +14,7 @@ require_once 'ioc.php';
 Route::group(['before' => 'encode-input'], function(){
 	Route::get('/', function()
 	{
-		return View::make('hello');
+		return Redirect::route('properties.index');
 	});
 
 	Route::resource('/properties', 'PropertyController');
