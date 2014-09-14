@@ -407,7 +407,10 @@ function addMarkerAtCenter() {
 				<div class="row">
 					<div class="large-12 columns">
 						<div class="row collapse @if ($errors->has('video_url')) error @endif">
-							<div class="small-12 columns">
+							<div class="small-1 columns">
+								<span class="prefix">http://</span>
+							</div>
+							<div class="small-11 columns">
 								<input type="text" name="video_url" value="{{Input::old('video_url', '')}}" placeholder="Pega aqui la url de tu video de youtube" id="url-video"/>
 								@if ($errors->has('video_url'))<small class="error">  {{ $errors->first('video_url') }} </small> @endif
 							</div>

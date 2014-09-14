@@ -45,7 +45,7 @@ class PropertyController extends BaseController
 		if(isset($video_url) && $video_url && !(strstr( $video_url, 'http://') || strstr( $video_url, 'https://'))){
     		Input::merge(array('video_url'=>"http://".$video_url));
 		}
-		
+
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
 
 		if ($validator->fails())
