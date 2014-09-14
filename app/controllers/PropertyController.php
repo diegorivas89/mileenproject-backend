@@ -42,10 +42,10 @@ class PropertyController extends BaseController
 	public function store()
 	{	//si el usuario no le puso http o https se lo agrego.
 		$video_url = Input::get('video_url');
-		if(isset($video_url) && $video_url && !(strstr( $video_url, 'http://') || strstr( $video_url, 'http://'))){
-    		Input::merge(array('video_url'=>"http://".$video_url));	
+		if(isset($video_url) && $video_url && !(strstr( $video_url, 'http://') || strstr( $video_url, 'https://'))){
+    		Input::merge(array('video_url'=>"http://".$video_url));
 		}
-		
+
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
 
 		if ($validator->fails())
@@ -59,7 +59,7 @@ class PropertyController extends BaseController
 			//guardo las imagenes
 			$this->storeImages($property, Input::file('images'));
 
-			return Redirect::route('properties.index')	;
+			return Redirect::route('properties.index');
 		}
 	}
 
