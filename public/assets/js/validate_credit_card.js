@@ -18,7 +18,7 @@ $(document).ready(function(){
 	});
 
 	$('#publication_type').change(function(e) {
-		if(this.options[e.target.selectedIndex].text) {
+		if(this.options[e.target.selectedIndex].text == 'Gratuita') {
 			$('.creditly-wrapper').css('display', 'none')
 		}
 		else {
