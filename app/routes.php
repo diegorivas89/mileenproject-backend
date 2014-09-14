@@ -11,15 +11,18 @@ require_once 'ioc.php';
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::group(['before' => 'encode-input'], function(){
+	Route::get('/', function()
+	{
+		return View::make('hello');
+	});
+
+	Route::resource('/properties', 'PropertyController');
+
+	Route::group(['before' => '', 'prefix' => 'api'], function(){
+		Route::get('/property-search', 'ApiController@propertySearch');
+	});
 });
 
-Route::resource('/properties', 'PropertyController');
-
-Route::group(['before' => '', 'prefix' => 'api'], function(){
-	Route::get('/property-search', 'ApiController@propertySearch');
-});
 
 App::bind('\Mileen\Properties\PropertyRepositoryInterface', '\Mileen\Properties\PropertyRepository');

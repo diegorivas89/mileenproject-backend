@@ -11,7 +11,7 @@ class PropertyTableSeeder extends Seeder {
                                'environment_id' => Environment::all()->first()->id,
                                'operation_type_id' => OperationType::all()->first()->id,
                                'neighborhood_id' => Neighborhood::all()->first()->id,
-                               'covered_size' => 39, 'size' => 23,
+                               'covered_size' => 39, 'size' => 120, 
                                'title' => 'Oficina', 'description' => 'Una descripción',
                                'address' => 'Paseo colon 1000', 'currency' => 'U$S',
                                'price' => 1234, 'expenses' => 500, 'age' => 30));
@@ -22,7 +22,7 @@ class PropertyTableSeeder extends Seeder {
                                'environment_id' => Environment::all()->first()->id,
                                'operation_type_id' => OperationType::all()->first()->id,
                                'neighborhood_id' => Neighborhood::all()->first()->id,
-                               'covered_size' => 39, 'size' => 23,
+                               'covered_size' => 39, 'size' => 55,
                                'title' => 'Departamento inhabitable',
                                'description' => 'Una descripción',
                                'address' => 'Paseo colon 1000', 'currency' => 'U$S',

@@ -26,9 +26,9 @@ class PropertyController extends BaseController
 		$environments = Environment::all();
 		$neighborhoods = Neighborhood::all();
 		$operationTypes = OperationType::all();
-		$propertyTypes = PropertyType::all();
+		$propertyTypes = PropertyType::orderBy('name', 'asc')->get();
 		$publicationTypes = PublicationType::all();
-		$amenitieTypes = AmenitieType::all();
+		$amenitieTypes = AmenitieType::orderBy('name', 'asc')->get();
 
 		return View::make("property.new")
 					->with('environments', $environments)
@@ -40,7 +40,12 @@ class PropertyController extends BaseController
 	}
 
 	public function store()
-	{
+	{	//si el usuario no le puso http o https se lo agrego.
+		$video_url = Input::get('video_url');
+		if(isset($video_url) && $video_url && !(strstr( $video_url, 'http://') || strstr( $video_url, 'http://'))){
+    		Input::merge(array('video_url'=>"http://".$video_url));	
+		}
+		
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
 
 		if ($validator->fails())
@@ -61,9 +66,8 @@ class PropertyController extends BaseController
 	public function storeImages($property, $images)
 	{
 		foreach ($images as $image) {
-			if (isset($image)){
+			if (isset($image) && exif_imagetype($image->getRealPath())){
 				$name = md5(microtime(true).rand(1,9999));
-
 				$imageModel = new Image();
 				$imageModel->property_id = $property->id;
 				$imageModel->name = $name;

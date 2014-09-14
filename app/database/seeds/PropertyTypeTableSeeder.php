@@ -6,7 +6,7 @@ class PropertyTypeTableSeeder extends Seeder {
 		{
 				DB::table('property_types')->delete();
 
-				PropertyType::create(array('name' => 'Oficina'));
+				PropertyType::create(array('name' => 'Oficína'));
 				PropertyType::create(array('name' => 'Cochera'));
 				PropertyType::create(array('name' => 'Departamentos'));
 				PropertyType::create(array('name' => 'Barrio Cerrado / Countries'));

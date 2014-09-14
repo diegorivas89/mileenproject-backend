@@ -14,7 +14,7 @@ return array(
 	*/
 
 	"accepted"             => "The :attribute must be accepted.",
-	"active_url"           => "The :attribute is not a valid URL.",
+	"active_url"           => "El campo :attribute debe ser una url válida.",
 	"after"                => "The :attribute must be a date after :date.",
 	"alpha"                => "The :attribute may only contain letters.",
 	"alpha_dash"           => "The :attribute may only contain letters, numbers, and dashes.",
@@ -104,11 +104,12 @@ return array(
 
 	'attributes' => array(
 		'address' => 'dirección',
-	    'title' => 'titulo',
+	    'title' => 'título',
 	    'description' => 'descripción',
 	    'age' => 'años',
 	    'price' => 'precio',
 	    'expenses' => 'expensas',
-	    'size' => 'tamaño')
+	    'size' => 'superficie total',
+	    "covered_size" => 'superficie cubierta')
 
 );
