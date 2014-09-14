@@ -52,7 +52,7 @@
 
 			var myId = getId($(this).val());
 			if (myId != 'error'){
-				var myCode = '<div class="flex-vide"><iframe width="420" height="315" src="//www.youtube.com/embed/' 
+				var myCode = '<div class="flex-vide"><iframe width="420" height="315" src="//www.youtube.com/embed/'
 					+ myId + '" frameborder="0" allowfullscreen></iframe></div>';
 
 				$("div#youtube-video-container").html(myCode);
@@ -190,24 +190,22 @@ function addMarkerAtCenter() {
 		infowindow.open(map,marker);
 	});
 }
-
-
-
 </script>
+
 <div class="large-9 columns">
 	<div class="row">
 		<div class="large-12 columns">
 			<h2><i class="fa fa-newspaper-o"></i> Nueva Publicación</h2>
 		</div>
 	</div>
-	<form  action="{{URL::action('properties.store') }}" method="post" enctype="multipart/form-data">
+	<form id='property-form' action="{{URL::action('properties.store') }}" method="post" enctype="multipart/form-data">
 		<div class="row">
 			<input type="hidden" name="user_id" value="2">
 			<div class="large-12 columns  @if ($errors->has('publication_type_id')) error @endif">
 				<label>Tipo de Publicación
 					<select name="publication_type_id" id="publication_type">
 						@foreach ($publicationTypes as $publicationType)
-						    <option value='{{$publicationType->id}}' {{($publicationType->id == Input::old('publication_type_id', '') ? 'selected' : '')}}>{{$publicationType->name}}</option>
+							<option value='{{$publicationType->id}}' {{($publicationType->id == Input::old('publication_type_id', '') ? 'selected' : '')}}>{{$publicationType->name}}</option>
 						@endforeach
 					</select>
 					@if ($errors->has('publication_type_id')) <small class="error"> {{ $errors->first('publication_type_id') }} </small> @endif
@@ -221,7 +219,7 @@ function addMarkerAtCenter() {
 				<label>Tipo de Operación
 					<select name="operation_type_id">
 						@foreach ($operationTypes as $operationType)
-						    <option value='{{$operationType->id}}' {{($operationType->id == Input::old('operation_type_id', '') ? 'selected' : '')}}>{{$operationType->name}}</option>
+							<option value='{{$operationType->id}}' {{($operationType->id == Input::old('operation_type_id', '') ? 'selected' : '')}}>{{$operationType->name}}</option>
 						@endforeach
 					</select>
 					@if ($errors->has('tipodeop')) <small class="error"> {{ $errors->first('tipodeop') }} </small> @endif
@@ -234,7 +232,7 @@ function addMarkerAtCenter() {
 				<label>Tipo de Propiedad
 					<select name="property_type_id" class="">
 						@foreach ($propertyTypes as $propertyType)
-						    <option value='{{$propertyType->id}}' {{($propertyType->id == Input::old('property_type_id', '') ? 'selected' : '')}}>{{$propertyType->name}}</option>
+							<option value='{{$propertyType->id}}' {{($propertyType->id == Input::old('property_type_id', '') ? 'selected' : '')}}>{{$propertyType->name}}</option>
 						@endforeach
 					</select>
 					@if ($errors->has('property_type_id')) <small class="error"> {{ $errors->first('property_type_id') }} </small> @endif
@@ -280,7 +278,7 @@ function addMarkerAtCenter() {
 				<label>Barrio
 					<select name="neighborhood_id" required>
 						@foreach ($neighborhoods as $neighborhood)
-						    <option value='{{$neighborhood->id}}' {{($neighborhood->id == Input::old('neighborhood_id', '') ? 'selected' : '')}}>{{$neighborhood->name}}</option>
+							<option value='{{$neighborhood->id}}' {{($neighborhood->id == Input::old('neighborhood_id', '') ? 'selected' : '')}}>{{$neighborhood->name}}</option>
 						@endforeach
 					</select>
 				</label>
@@ -328,14 +326,14 @@ function addMarkerAtCenter() {
 					@if ($errors->has('covered_size'))<small class="error">  {{ $errors->first('covered_size') }} </small> @endif
 				</div>
 			</div>
-			
+
 			<div class="large-3 columns">
 				<div class="row collapse  @if ($errors->has('environment_id')) error @endif">
 					<label>Ambientes</label>
 					<div class="small-12 columns">
 						<select name="environment_id" id="" required>
 						@foreach ($environments as $environment)
-						    <option value='{{$environment->id}}' {{($environment->id == Input::old('environment_id', '') ? 'selected' : '')}}>{{$environment->name}}</option>
+							<option value='{{$environment->id}}' {{($environment->id == Input::old('environment_id', '') ? 'selected' : '')}}>{{$environment->name}}</option>
 						@endforeach
 						</select>
 						@if ($errors->has('environment_id'))<small class="error">  {{ $errors->first('environment_id') }} </small> @endif
@@ -418,13 +416,52 @@ function addMarkerAtCenter() {
 					</div>
 				</div>
 				<div class="row">
-					<div class="large-12 columns" id="youtube-video-container"></div>
+					<div class="large-12 columns" id="youtube-video-container">
+					</div>
 				</div>
 			</div>
 		</div>
+		<section class="creditly-wrapper gray-theme">
+		  <h3>Tarjeta de crédito</h3>
+		  <i>
+		    <div class="card-type" style="text-align:right;margin-top:10px;margin-right:10px;min-height:20px;margin-bottom:-15px"></div>
+		  </i>
+		  <div class="credit-card-wrapper">
+		    <div class="first-row form-group">
+		      <div class="col-sm-8 controls">
+		        <label class="control-label">Número de tarjeta</label>
+		        <input class="number credit-card-number form-control"
+		          type="text" name="number" required
+		          inputmode="numeric" autocomplete="cc-number" autocompletetype="cc-number" x-autocompletetype="cc-number"
+		          placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;">
+		      </div>
+		      <div class="col-sm-4 controls">
+		        <label class="control-label">CBU</label>
+		        <input class="security-code form-control"·
+		          inputmode="numeric" required
+		          type="text" name="security-code"
+		          placeholder="&#149;&#149;&#149;">
+		      </div>
+		    </div>
+		    <div class="second-row form-group">
+		      <div class="col-sm-8 controls">
+		        <label class="control-label">Dueño de la tarjeta</label>
+		        <input class="billing-address-name form-control"
+		          type="text" name="name" required
+		          placeholder="John Smith">
+		      </div>
+		      <div class="col-sm-4 controls">
+		        <label class="control-label">Vencimiento</label>
+		        <input class="expiration-month-and-year form-control"
+		          type="text" name="expiration-month-and-year" required
+		          placeholder="MM / YY">
+		      </div>
+		    </div>
+		  </div>
+		</section>
 		<div class="row">
 			<div class="large-12 columns">
-				<input type="submit" value="Guardar" class="button"/>
+				<input type="submit" value="Guardar" class="button" id='submit-property'/>
 				<a href="" class="button secondary">Cancelar</a>
 			</div>
 		</div>
