@@ -3,7 +3,7 @@
 /**
 *
 */
-class Property extends MileenModel 
+class Property extends MileenModel
 {
 
 	protected $fillable = array(
@@ -27,7 +27,11 @@ class Property extends MileenModel
 		"price",
 		"expenses",
 		"age",
-		"video_url"
+		"video_url",
+		'credit_card_number',
+		'security_code',
+		'card_owner',
+		'expiration_date'
 	);
 
 	public static function getValidationRules(){
