@@ -431,7 +431,7 @@ function addMarkerAtCenter() {
 		      <div class="col-sm-8 controls">
 		        <label class="control-label">Número de tarjeta</label>
 		        <input class="number credit-card-number form-control"
-		          type="text" name="number" required
+		          type="text" name="credit_card_number" required
 		          inputmode="numeric" autocomplete="cc-number" autocompletetype="cc-number" x-autocompletetype="cc-number"
 		          placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;">
 		      </div>
@@ -439,7 +439,7 @@ function addMarkerAtCenter() {
 		        <label class="control-label">CBU</label>
 		        <input class="security-code form-control"·
 		          inputmode="numeric" required
-		          type="text" name="security-code"
+		          type="text" name="security_code"
 		          placeholder="&#149;&#149;&#149;">
 		      </div>
 		    </div>
@@ -447,14 +447,16 @@ function addMarkerAtCenter() {
 		      <div class="col-sm-8 controls">
 		        <label class="control-label">Dueño de la tarjeta</label>
 		        <input class="billing-address-name form-control"
-		          type="text" name="name" required
+		          type="text" name="card_owner" required
 		          placeholder="John Smith">
 		      </div>
 		      <div class="col-sm-4 controls">
 		        <label class="control-label">Vencimiento</label>
 		        <input class="expiration-month-and-year form-control"
-		          type="text" name="expiration-month-and-year" required
-		          placeholder="MM / YY">
+		          type="text" name="expiration_date" required
+		          maxlength="10"
+		          pattern=".{9}"
+		          placeholder="MM / YYYY">
 		      </div>
 		    </div>
 		  </div>
