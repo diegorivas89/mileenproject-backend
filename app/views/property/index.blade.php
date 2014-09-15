@@ -46,6 +46,7 @@
 						</strong>
 						<h5 class="subheader">
 							<small>
+								{{$property->getPublicationType()->name}} |
 								{{$property->getOperationType()->name}} |
 								{{$property->getPropertyType()->name}}  |
 								{{$property->getEnvironment()->name}} |
