@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder {
 		$this->call('UserTableSeeder');
 		$this->call('PropertyTypeTableSeeder');
 		$this->call('NeighborhoodTableSeeder');
-		$this->call('PropertyTableSeeder');
 		$this->call('PublicationTypeTableSeeder');
 		$this->call('AmenitieTypeTableSeeder');
-		
+		$this->call('PropertyTableSeeder');
+
 	}
 
 }
