@@ -80,6 +80,11 @@ class Property extends MileenModel
 		}
 	}
 
+	public function getPublicationType()
+	{
+		return PublicationType::find($this->publication_type_id);
+	}
+
 	public function getPropertyType()
 	{
 		return PropertyType::find($this->property_type_id);
