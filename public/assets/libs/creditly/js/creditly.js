@@ -364,7 +364,7 @@ var Creditly = (function() {
   })();
 
   var ExpirationInput = (function() {
-    var maximumLength = 4;
+    var maximumLength = 6;
 
     var createExpirationInput = function(selector) {
       document.querySelector(selector).addEventListener("keypress", function(e) {
