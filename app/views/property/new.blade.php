@@ -464,7 +464,7 @@ function addMarkerAtCenter() {
 		<div class="row">
 			<div class="large-12 columns">
 				<input type="submit" value="Guardar" class="button" id='submit-property'/>
-				<a href="" class="button secondary">Cancelar</a>
+				<a href="{{URL::action('properties.index') }}" class="button secondary">Cancelar</a>
 			</div>
 		</div>
 	</form>
