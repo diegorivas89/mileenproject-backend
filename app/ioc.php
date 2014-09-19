@@ -10,6 +10,12 @@ App::singleton('property-search-service', function(){
 	return new \Mileen\Api\PropertySearchService($propRepository);
 });
 
+App::singleton('property-service', function(){
+	$propRepository = new \Mileen\Properties\PropertyRepository(new Property());
+
+	return new \Mileen\Api\PropertyService($propRepository);
+});
+
 App::singleton('logged-user', function(){
 	$fakeUser = new User();
 	$fakeUser->id = 1;
