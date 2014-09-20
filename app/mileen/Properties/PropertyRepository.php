@@ -51,7 +51,7 @@ class PropertyRepository implements PropertyRepositoryInterface
 	 */
 	public function find($id)
 	{
-		return $this->model->where("id", "=", $id)->first();
+		return $this->getCloneOfModel()->findOrFail($id);
 	}
 
 	/**
