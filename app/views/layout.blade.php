@@ -43,7 +43,7 @@
 												</li>
 												<li class="divider"></li>
 												<li>
-													<a href="#"><i class="fa fa-sign-out"></i> Salir</a>
+													<a href="{{URL::route('logout')}}"><i class="fa fa-sign-out"></i> Salir</a>
 												</li>
 											</ul>
 										</li>
