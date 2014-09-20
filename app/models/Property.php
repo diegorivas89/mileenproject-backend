@@ -76,28 +76,28 @@ class Property extends MileenModel
 		if ($fields){
 			return Environment::select($fields)->where("id", $this->environment_id)->first();
 		}else{
-			return Environment::find($this->environment_id);
+			return Environment::select('id', 'name')->find($this->environment_id);
 		}
 	}
 
 	public function getPublicationType()
 	{
-		return PublicationType::find($this->publication_type_id);
+		return PublicationType::select('id', 'name')->find($this->publication_type_id);
 	}
 
 	public function getPropertyType()
 	{
-		return PropertyType::find($this->property_type_id);
+		return PropertyType::select('id', 'name')->find($this->property_type_id);
 	}
 
 	public function getOperationType()
 	{
-		return OperationType::find($this->operation_type_id);
+		return OperationType::select('id', 'name')->find($this->operation_type_id);
 	}
 
 	public function getNeighborhood()
 	{
-		return Neighborhood::find($this->neighborhood_id);
+		return Neighborhood::select('id', 'name')->find($this->neighborhood_id);
 	}
 
 	public function getImages()
