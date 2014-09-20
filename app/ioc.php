@@ -21,10 +21,8 @@ App::singleton('definitions-service', function() {
 });
 
 App::singleton('logged-user', function(){
-	$fakeUser = new User();
-	$fakeUser->id = 1;
-	$fakeUser->name = 'Ned Stark';
+	$user = Auth::user();
 
-	return $fakeUser;
+	return $user;
 });
 ?>

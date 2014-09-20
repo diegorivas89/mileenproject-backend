@@ -33,6 +33,12 @@ class LoginController extends BaseController
 
 		return Redirect::route('login.get')->withInput();
 	}
+
+	public function getLogout()
+	{
+		Auth::logout();
+		return Redirect::to('/');
+	}
 }
 
 ?>

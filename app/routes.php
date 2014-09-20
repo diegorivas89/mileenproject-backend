@@ -15,6 +15,7 @@ Route::group(['before' => 'encode-input'], function(){
 
 	Route::get('/login', ['as' => 'login.get', 'uses' =>'LoginController@getLogin']);
 	Route::post('/login', ['as' => 'login.post', 'uses' =>'LoginController@postLogin']);
+	Route::get('/logout', ['as' => 'logout', 'uses' =>'LoginController@getLogout']);
 
 	Route::group(['before' => 'auth'], function (){
 		Route::get('/', function()
