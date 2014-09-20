@@ -43,7 +43,7 @@
 												</li>
 												<li class="divider"></li>
 												<li>
-													<a href="#"><i class="fa fa-sign-out"></i> Salir</a>
+													<a href="{{URL::route('logout')}}"><i class="fa fa-sign-out"></i> Salir</a>
 												</li>
 											</ul>
 										</li>
@@ -61,7 +61,7 @@
 									<li><a href="{{URL::action('properties.create')}}"><i class="fa fa-home"></i> Nueva Publicación</a></li>
 									<li class="divider"></li>
 									<li><a href="#"><i class="fa fa-cog"></i> Mi Perfil</a></li>
-									<li><a href="#"><i class="fa fa-sign-out"></i> Salir</a></li>
+									<li><a href="{{URL::route('logout')}}"><i class="fa fa-sign-out"></i> Salir</a></li>
 								</ul>
 							</div>
 							@yield('property-count')
