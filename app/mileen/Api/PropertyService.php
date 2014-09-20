@@ -1,6 +1,9 @@
 <?php
 namespace Mileen\Api;
 
+use \Mileen\Api\Exceptions\MissingParamentersException;
+use \Mileen\Support\Exceptions\IllegalArgumentException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use \Mileen\Support\YoutubeUrl;
 use \Mileen\Support\VimeoUrl;
 
@@ -28,7 +31,11 @@ class PropertyService extends MileenApi
 		try {
 			$this->assertParameters($parameters);
 			$property = $this->repository->find($parameters['id']);
-		} catch (\Exception $e) {
+		} catch (MissingParamentersException $e) {
+			return $this->buildErrorResponse($e->getMessage());
+		} catch (IllegalArgumentException $e) {
+			return $this->buildErrorResponse($e->getMessage());
+		} catch (ModelNotFoundException $e){
 			return $this->buildErrorResponse($e->getMessage());
 		}
 
@@ -56,9 +63,6 @@ class PropertyService extends MileenApi
 
 		$property->neighborhood = $property->getNeighborhood();
 		unset($property->neighborhood_id);
-
-		//"neighborhoodId": "385",
-        //"publicationTypeId": 22,
 
 		unset($property->credit_card_number);
 		unset($property->security_code);
