@@ -53,11 +53,11 @@ class DefinitionsService extends MileenApi
      * y levanto el environment
      */
 
-    $environments = \Environment::all();
-    $neighborhoods = \Neighborhood::all();
-    $propertyTypes = \PropertyType::all();
-    $operationTypes = \OperationType::all();
-    $dateRanges = \DateRange::all();
+    $environments = \Environment::select("id", "name")->get();
+    $neighborhoods = \Neighborhood::select("id", "name")->get();
+    $propertyTypes = \PropertyType::select("id", "name")->get();
+    $operationTypes = \OperationType::select("id", "name")->get();
+    $dateRanges = \DateRange::select("id", "name")->get();
 
     $response = Array(
       'neighborhoods' => $neighborhoods->toArray(),
