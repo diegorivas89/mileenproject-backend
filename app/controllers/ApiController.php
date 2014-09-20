@@ -15,6 +15,11 @@ class ApiController extends BaseController
 	{
 		return App::make('property-service')->execute(Input::all());
 	}
+
+  public function definitions()
+  {
+    return App::make('definitions-service')->execute(Input::all());
+  }
 }
 
 ?>

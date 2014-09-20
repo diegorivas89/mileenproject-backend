@@ -22,6 +22,7 @@ Route::group(['before' => 'encode-input'], function(){
 	Route::group(['before' => '', 'prefix' => 'api'], function(){
 		Route::get('/property-search', 'ApiController@propertySearch');
 		Route::get('/property', 'ApiController@property');
+    Route::get('/definitions', 'ApiController@definitions');
 	});
 });
 
