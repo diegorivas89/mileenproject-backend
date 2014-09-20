@@ -1,5 +1,7 @@
 <?php 
 
+use Illuminate\Support\MessageBag;
+
 /**
 *
 */
@@ -24,14 +26,17 @@ class LoginController extends BaseController
 			return Redirect::route('login.get')->withInput()->withErrors($validator);
 		}else{
 			$user = User::findByEmail(Input::get('email'));
-			if ($user && $user->password == Input::get('password')){
+			if ($user && $user->checkPassword(Input::get('password')) && $user->isActive()){
 				Auth::login($user);
 
 				return Redirect::route('properties.index');
 			}
 		}
 
-		return Redirect::route('login.get')->withInput();
+		$errors = new MessageBag();
+		$errors->add('password', 'La contraseña es incorrecta');
+
+		return Redirect::route('login.get')->withErrors($errors)->withInput();
 	}
 
 	public function getLogout()

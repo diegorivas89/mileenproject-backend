@@ -36,4 +36,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return User::where("email", $email)->first();
 	}
 
+	public function checkPassword($password)
+	{
+		return $this->password == $password;
+	}
+
+	public function isActive()
+	{
+		return $this->active == 1;
+	}
+
 }

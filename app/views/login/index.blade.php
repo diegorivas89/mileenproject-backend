@@ -22,7 +22,7 @@
 				</style>
 		</head>
 		<body style="background: url('/assets/img/background.jpg'); background-repeat: no-repeat; background-size: 100% 100%;">
-				<div class="row">
+			<div class="row">
 				<div class="large-12 columns">
 					<div class="row" style="margin-bottom: 30px;text-align: center;">
 						<div class="large-3 small-12 columns">&nbsp;</div>
@@ -36,16 +36,22 @@
 								<div class="panel radius" style="-webkit-box-shadow: 8px 6px 20px 4px lightgray;-moz-box-shadow:    8px 6px 20px 4px lightgray;box-shadow:         8px 6px 20px 4px lightgray;">
 									<div class="row">
 										<div class="large-12 columns">
-											<label>Email
-												<input type="text" name="email" placeholder="" />
+											<label class="{{($errors->has('email')) ? "error": ""}}">Email
+												<input type="text" name="email" value="{{Input::old('email')}}" class="{{($errors->has('email')) ? "error": ""}}"/>
 											</label>
+											@if ($errors->has('email'))
+												<small class="error">{{$errors->first('email')}}</small>
+											@endif
 										</div>
 									</div>
 									<div class="row">
 										<div class="large-12 columns">
-											<label>Contraseña
-												<input type="password" name="password" placeholder="" />
+											<label class="{{($errors->has('password')) ? "error": ""}}">Contraseña
+												<input type="password" name="password" class="{{($errors->has('password')) ? "error": ""}}" />
 											</label>
+											@if ($errors->has('password'))
+												<small class="error">{{$errors->first('password')}}</small>
+											@endif
 										</div>
 									</div>
 									<div class="row">
