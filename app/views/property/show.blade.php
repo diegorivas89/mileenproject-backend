@@ -62,7 +62,7 @@
 		</div>
 		<div class="row">
 			<div class="columns large-12">
-				<h4>{{$property->amenities}}</h4>
+				<h4>{{Lang::get('strings.amenities')}}</h4>
 				<div class="row">
 					@foreach($amenities as $amenity)
 						<div class="columns small-4 large-4 end">
@@ -76,7 +76,7 @@
 		<div class="row">
 			<div class="columns large-12">
 				<h4>Ubicación</h4>
-				<img style="width:100%" src="http://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=1200x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Ccolor:red%7Clabel:C%7C40.718217,-73.998284&sensor=false" alt="">
+				<img style="width:100%" src="http://maps.googleapis.com/maps/api/staticmap?center={{$property->latitude}},{{$property->longitude}}&zoom=15&size=1200x300&maptype=roadmap&markers=color:red%7C{{$property->latitude}},{{$property->longitude}}&sensor=false" alt="">
 			</div>
 		</div>
 	</div>
