@@ -30,7 +30,7 @@
 						</a>
 						<ul id="drop{{$property->id}}" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
 						  <li>
-						  	<a href="#">
+						  	<a href="{{URL::action('properties.index')}}/{{$property->id}}" >
 						  		<i class='fa fa-arrow-right'></i>
 						  		{{Lang::get('strings.details')}}
 						  	</a>
