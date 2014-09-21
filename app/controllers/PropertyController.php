@@ -100,6 +100,10 @@ class PropertyController extends BaseController
 
 	public function show($id)
 	{
+		$property = Property::find($id);
+		if((empty($property) || $property->user_id != Auth::user()->id )) {
+			return Redirect::to('properties');
+		}
 		$property = $this->repository->find($id);
 		$amenities = $this->repository->getAmenities($id);
 		$images = $this->repository->getImages($id);
