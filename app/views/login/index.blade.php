@@ -12,16 +12,27 @@
 				<script src="../assets/libs/foundation/js/vendor/modernizr.js"></script>
 				<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 				<style type="text/css">
-					.row footer.row{
-					position:fixed;
-								bottom:0;
-								width: 100%;
-								max-width: 62.5rem;
-								color: white;
-					}
+		        div.row.footer{
+		          position: relative;
+		        }
+		          div.row.footer > div{
+		                position:absolute;
+		                top:0;
+		                width: 100%;
+		                max-width: 62.5rem;
+		                color: white;
+		          }
+		          body{
+		            background: url('/assets/img/background.jpg'); 
+		             background-size: cover;
+
+		              background-repeat: no-repeat;
+		              background-attachment: fixed;
+		              background-position: center; 
+		          }
 				</style>
 		</head>
-		<body style="background: url('/assets/img/background.jpg'); background-repeat: no-repeat; background-size: 100% 100%;">
+		<body >
 			<div class="row">
 				<div class="large-12 columns">
 					<div class="row" style="margin-bottom: 30px;text-align: center;">
@@ -56,7 +67,7 @@
 									</div>
 									<div class="row">
 										<div class="large-6 columns">
-											<a href="#">Crear una Cuenta</a>
+											<a href="{{URL::action('signup.get')}}">Crear una Cuenta</a>
 										</div>
 										<div class="large-6 columns text-right">
 											<button type="submit" class="button">Ingresar</button>
@@ -68,33 +79,37 @@
 						<div class="large-3 small-12 columns">&nbsp;</div>
 					</div>
 				</div>
-				<footer class="row">
-						<div class="large-12 columns">
-								<hr>
-								<div class="row">
-										<div class="large-6 columns">
-												<p>© MiLEEM 2014</p>
-										</div>
-								</div>
-						</div>
-				</footer>
-				</div>
-				</div>
-				<script>
-						document.write('<script src=' +
-						('__proto__' in {} ? '//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.4/zepto.min.js' : 'https://code.jquery.com/jquery-2.1.1.min.js') +
-						'><\/script>')
-				</script>
-				<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-				<script src="/assets/libs/foundation/js/foundation.min.js"></script>
-				<script>
-						$(document).foundation();
-				</script>
-				<script>
-						$(document).foundation();
 
-						var doc = document.documentElement;
-						doc.setAttribute('data-useragent', navigator.userAgent);
-				</script>
-		</body>
+			</div>
+			<div class="row footer">
+	          <div class="large-12">
+	            <div class="large-12 columns">
+	                <hr>
+	                <div class="row">
+	                    <div class="large-6 columns">
+	                        <p>© MiLEEM 2014</p>
+	                    </div>
+	                </div>
+	            </div>
+	          </div>
+	            
+	        </div>
+		</div>
+		<script>
+				document.write('<script src=' +
+				('__proto__' in {} ? '//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.4/zepto.min.js' : 'https://code.jquery.com/jquery-2.1.1.min.js') +
+				'><\/script>')
+		</script>
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="/assets/libs/foundation/js/foundation.min.js"></script>
+		<script>
+				$(document).foundation();
+		</script>
+		<script>
+				$(document).foundation();
+
+				var doc = document.documentElement;
+				doc.setAttribute('data-useragent', navigator.userAgent);
+		</script>
+	</body>
 </html>

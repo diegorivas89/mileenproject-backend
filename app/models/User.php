@@ -8,7 +8,13 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
-
+	protected $fillable = array(
+		'name',
+		'email',
+		'telephone',
+		'password',
+		'key'
+	);
 	/**
 	 * The database table used by the model.
 	 *
@@ -26,8 +32,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public static function getValidationRules()
 	{
 		return [
-			'email' => 'required|email',
+			'email' => 'required|email|max:50',
 			'password' => 'required|min:3',
+		];
+	}
+
+	public static function getValidationRulesSignup()
+	{
+		return [
+			'name' => 'required|max:50',
+			'email' => 'required|email|max:50|unique:users',
+			'telephone' => 'max:25',
+			'password' => 'required|min:3|confirmed',
+			
 		];
 	}
 

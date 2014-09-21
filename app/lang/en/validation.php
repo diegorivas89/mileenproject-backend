@@ -28,7 +28,7 @@ return array(
 		"array"   => "The :attribute must have between :min and :max items.",
 	),
 	"boolean"              => "The :attribute field must be true or false",
-	"confirmed"            => "The :attribute confirmation does not match.",
+	"confirmed"            => "La :attribute no coincide.",
 	"date"                 => "The :attribute is not a valid date.",
 	"date_format"          => "The :attribute does not match the format :format.",
 	"different"            => "The :attribute and :other must be different.",
@@ -70,7 +70,7 @@ return array(
 		"string"  => "The :attribute must be :size characters.",
 		"array"   => "The :attribute must contain :size items.",
 	),
-	"unique"               => "The :attribute has already been taken.",
+	"unique"               => "El :attribute está actualmente en uso.",
 	"url"                  => "The :attribute format is invalid.",
 	"timezone"             => "The :attribute must be a valid zone.",
 
@@ -110,6 +110,8 @@ return array(
 	    'price' => 'precio',
 	    'expenses' => 'expensas',
 	    'size' => 'superficie total',
-	    "covered_size" => 'superficie cubierta')
+	    'covered_size' => 'superficie cubierta',
+	    'password' => 'contraseña',
+	    'telephone' => 'teléfono')
 
 );
