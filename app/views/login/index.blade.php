@@ -15,6 +15,7 @@
 				<style type="text/css">
 		        div.row.footer{
 		          position: relative;
+		          margin-top: 130px;
 		        }
 		          div.row.footer > div{
 		                position:absolute;
