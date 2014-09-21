@@ -37,9 +37,7 @@ class PropertyRepository implements PropertyRepositoryInterface
 		if(!isset($id)) {
 			return NULL;
 		}
-
-		//return $this->model->where("user_id", "=", $id)->get();
-		return $this->model->where("id", ">=", 0)->get(); //traigo todas las propiedades
+		return $this->model->where("user_id", "=", $id)->get();
 	}
 
 

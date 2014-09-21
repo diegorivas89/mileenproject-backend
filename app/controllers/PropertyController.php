@@ -19,7 +19,7 @@ class PropertyController extends BaseController
 
 	public function index()
 	{
-		$properties = $this->repository->userProperties(User::all()->first()->id);
+		$properties = $this->repository->userProperties(Auth::user()->id);
 	    return View::make("property.index")->with('properties', $properties);
 	}
 
@@ -101,7 +101,7 @@ class PropertyController extends BaseController
 	public function show($id)
 	{
 		$property = Property::find($id);
-		if((empty($property) || $property->user_id != Auth::user()->id )) {
+		if((empty($property) || $property->user_id != Auth::user()->id)) {
 			return Redirect::to('properties');
 		}
 		$property = $this->repository->find($id);
