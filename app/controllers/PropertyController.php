@@ -96,11 +96,15 @@ class PropertyController extends BaseController
 		}
 	}
 
-	public function show()
+	public function show($id)
 	{
-		// $properties = $this->repository->userProperties(User::all()->first()->id);
-	  // return View::make("property.show")->with('properties', $properties);
-	  return View::make("property.show");
+		$property = $this->repository->find($id);
+		$amenities = $this->repository->getAmenities($id);
+		$images = $this->repository->getImages($id);
+		var_dump($images[0]->name);
+	  // return View::make("property.show")->with('property', $property)
+	  // 																  ->with('amenities', $amenities)
+	  // 																  ->with('images', $images);
 	}
 
 }

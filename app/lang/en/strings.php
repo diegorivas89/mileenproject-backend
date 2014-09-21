@@ -4,6 +4,8 @@ return array(
 
   'actions' => 'Acciones',
   'edit'    => 'Editar',
-  'details' => 'Detalles'
+  'details' => 'Detalles',
+  'description' => 'Descripción',
+  'amenities' => 'Amenities'
 
 );

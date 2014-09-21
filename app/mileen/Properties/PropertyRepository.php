@@ -55,6 +55,33 @@ class PropertyRepository implements PropertyRepositoryInterface
 	}
 
 	/**
+	 * Retorna los amenities de una propiedad
+	 *
+	 * @param  int $id Identificador de la propiedad
+	 * @return amenities en array ordenadas por nombre
+	 */
+	public function getAmenities($id)
+	{
+		$amenities = \AmenitieProperty::select("amenitie_type_id")->where("property_id", $id)->get();
+		$amenitiesName = array();
+		foreach ($amenities as $index => $value) {
+			$amenitiesName[] = (\AmenitieType::find($value->amenitie_type_id)->name);
+		}
+		return $amenitiesName;
+	}
+
+	/**
+	 * Retorna las imagenes de una propiedad
+	 *
+	 * @param  int $id Identificador de la propiedad
+	 * @return imagenes
+	 */
+	public function getImages($id)
+	{
+		return \Image::select("name")->where("property_id", $id)->get();
+	}
+
+	/**
 	 * Retorna un listado de propiedades que cumplan con los parametros
 	 *
 	 * @param Array $paramenters
