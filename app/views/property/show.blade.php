@@ -40,13 +40,13 @@
 					<ul class="example-orbit" data-orbit>
 						@foreach($images as $image)
 							<li class="">
-								<img src="http://www.myfurnishedapartment.ca/wp-content/uploads/background/1357717580.jpg" alt="slide 2" />
+								<img src="{{$image->getUrl()}}" alt="slide 2" class='parent-width'/>
 							</li>
 						@endforeach
 						@if (!empty($property->video_url))
 							<li>
 								<div class="flex-video">
-									<iframe width="300" src="{{$property->video_url}}" frameborder="0" allowfullscreen></iframe>
+									<iframe width="300" src="{{$video['embed_url']}}" frameborder="0" allowfullscreen></iframe>
 								</div>
 							</li>
 						@endif

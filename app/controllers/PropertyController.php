@@ -2,6 +2,8 @@
 
 use \Mileen\Properties\PropertyRepositoryInterface;
 use \Intervention\Image\ImageManagerStatic as ImageManager;
+use \Mileen\Support\YoutubeUrl;
+use \Mileen\Support\VimeoUrl;
 /**
 *
 */
@@ -101,10 +103,31 @@ class PropertyController extends BaseController
 		$property = $this->repository->find($id);
 		$amenities = $this->repository->getAmenities($id);
 		$images = $this->repository->getImages($id);
-		var_dump($images[0]->name);
-	  // return View::make("property.show")->with('property', $property)
-	  // 																  ->with('amenities', $amenities)
-	  // 																  ->with('images', $images);
+		if (YoutubeUrl::test($property->video_url)) {
+			$youtube = YoutubeUrl::create($property->video_url);
+			$video = Array(
+				'url' 		=> $youtube->getUrl(),
+				'embed_url' => $youtube->getEmbedUrl(),
+				'thumbnail' => $youtube->getThumbnailUrl()
+			);
+		}elseif (VimeoUrl::test($property->video_url)) {
+			$vimeo = VimeoUrl::create($property->video_url);
+			$video = Array(
+				'url' 		=> $vimeo->getUrl(),
+				'embed_url' => $vimeo->getEmbedUrl(),
+				'thumbnail' => $vimeo->getThumbnailUrl()
+			);
+		}else{
+			$video = Array(
+				'url' 		=> '',
+				'embed_url' => '',
+				'thumbnail' => ''
+			);
+		}
+	  return View::make("property.show")->with('property', $property)
+	  																  ->with('amenities', $amenities)
+	  																  ->with('images', $images)
+	  																  ->with('video', $video);
 	}
 
 }
