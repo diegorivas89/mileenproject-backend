@@ -67,7 +67,7 @@
 									</div>
 									<div class="row">
 										<div class="large-6 columns">
-											<a href="#">Crear una Cuenta</a>
+											<a href="{{URL::action('signup.get')}}">Crear una Cuenta</a>
 										</div>
 										<div class="large-6 columns text-right">
 											<button type="submit" class="button">Ingresar</button>
