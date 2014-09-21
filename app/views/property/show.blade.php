@@ -40,7 +40,7 @@
 					<ul class="example-orbit" data-orbit>
 						@foreach($images as $image)
 							<li class="">
-								<img src="{{$image->getUrl()}}" alt="slide 2" class='parent-width'/>
+								<img src="{{$image->getUrl()}}" alt="slide 2" class='parent-width carousel-height'/>
 							</li>
 						@endforeach
 						@if (!empty($property->video_url))
@@ -65,7 +65,7 @@
 				<h4>{{Lang::get('strings.amenities')}}</h4>
 				<div class="row">
 					@foreach($amenities as $amenity)
-						<div class="columns small-4 large-4 end">
+						<div class="columns small-12 medium-6 large-4 end">
 							<i class="fa fa-check"></i>
 							<span> {{$amenity}} </span>
 						</div>
