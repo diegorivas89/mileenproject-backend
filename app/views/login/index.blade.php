@@ -25,7 +25,7 @@
 		                color: white;
 		          }
 		          body{
-		            background: url('/assets/img/background.jpg'); 
+		            background: url('/assets/img/argentina.jpg'); 
 		             background-size: cover;
 
 		              background-repeat: no-repeat;
