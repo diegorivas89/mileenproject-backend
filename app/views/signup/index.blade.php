@@ -49,7 +49,7 @@
 						<div class="panel radius" style="box-shadow: 7px 7px 8px 2px lightgray;">
 							<div class="row">
 								<div class="large-12 columns  @if ($errors->has('name')) error @endif">
-									<label>Nombre
+									<label>* Nombre
 										<input type="text" value="{{Input::old("name", "")}}" name="name" placeholder="" />
 										@if ($errors->has('name')) <small class="error"> {{ $errors->first('name') }} </small> @endif
 									</label>
@@ -57,7 +57,7 @@
 							</div>
 							<div class="row">
 								<div class="large-12 columns  @if ($errors->has('email')) error @endif">
-									<label>Email
+									<label>* Email
 										<input type="text" value="{{Input::old("email", "")}}" name="email" placeholder="" />
 										@if ($errors->has('email')) <small class="error"> {{ $errors->first('email') }} </small> @endif
 									</label>
@@ -73,7 +73,7 @@
 							</div>
 							<div class="row">
 								<div class="large-12 columns  @if ($errors->has('password')) error @endif">
-									<label>Contraseña
+									<label>* Contraseña
 										<input type="password" value="{{Input::old("password", "")}}" name="password" placeholder="" />
 										@if ($errors->has('password')) <small class="error"> {{ $errors->first('password') }} </small> @endif
 									</label>
@@ -85,6 +85,11 @@
 										<input type="password" value="{{Input::old("password_confirmation", "")}}" name="password_confirmation"  placeholder="" />
 										@if ($errors->has('password_confirmation')) <small class="error"> {{ $errors->first('password_confirmation') }} </small> @endif
 									</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="large-12 columns">
+									<h5><small>Los campos marcados con (*) son obligatorios</small></h5>
 								</div>
 							</div>
 							<div class="row">
