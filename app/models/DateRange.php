@@ -3,7 +3,7 @@
 /**
 *
 */
-class DateRange extends Eloquent
+class DateRange extends MileenModel
 {
 }
 

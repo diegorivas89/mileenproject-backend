@@ -64,6 +64,9 @@ class PropertyService extends MileenApi
 		$property->neighborhood = $property->getNeighborhood();
 		unset($property->neighborhood_id);
 
+		$property->user = $property->getUser();
+		unset($property->user_id);
+
 		unset($property->credit_card_number);
 		unset($property->security_code);
 		unset($property->card_owner);

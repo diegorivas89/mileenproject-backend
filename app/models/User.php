@@ -44,7 +44,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			'email' => 'required|email|max:50|unique:users',
 			'telephone' => 'max:25',
 			'password' => 'required|min:3|confirmed',
-			
 		];
 	}
 
@@ -61,6 +60,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function isActive()
 	{
 		return $this->active == 1;
+	}
+
+	public function getSchema()
+	{
+		return Array(
+			'id' => 'int',
+			'name' => 'string',
+			'email' => 'string',
+			'telephone' => 'string',
+		);
 	}
 
 }
