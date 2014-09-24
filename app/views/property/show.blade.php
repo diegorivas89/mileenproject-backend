@@ -48,7 +48,7 @@
 				</ul>
 			</div>
 		</div>
-		
+		@if (count($images) > 0 || !empty($property->video_url))
 			<div class="content active" id="panel1">
 				<div class="row">
 					<div class="large-12 columns">
@@ -69,7 +69,7 @@
 					</div>
 				</div>
 			</div>
-		
+		@endif
 		<div class="row">
 			<div class="columns large-12">
 				<h3>{{Lang::get('strings.description')}}</h3>
