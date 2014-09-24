@@ -1,6 +1,8 @@
-<h1>Bienvenido, {{ $name }}!</h1>
-Para activar tu cuenta haz click 
-{{ HTML::link( $clickUrl , 'aquí')}}. <br /><br />
-Si no puedes hacer click copia la siguiente url en un browser:
- <br /><br />
+Hola, {{ $name }}!<br/>
+Bienvenido a MiLEEM, para que puedas comenzar a usar tu cuenta debes hacer click
+{{ HTML::link( $clickUrl , 'aquí')}}, o bien puedes copiar la siguiente url en tu browser:
+ <br/><br/>
 {{$clickUrl}}
+<br/><br/><br/>
+Saludos!<br/>
+Equipo de MiLEEN

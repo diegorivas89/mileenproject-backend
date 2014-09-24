@@ -54,7 +54,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function checkPassword($password)
 	{
-		return $this->password == $password;
+		return $this->password == self::hashPassword($password, $this->email);
 	}
 
 	public function isActive()
@@ -70,6 +70,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			'email' => 'string',
 			'telephone' => 'string',
 		);
+	}
+
+	public static function hashPassword($password, $email)
+	{
+		return md5($password . $email . "awesome salt string");
+	}
+
+	public static function generateActivationKey($email = '')
+	{
+		return md5(microtime() + $email + rand(0, 999));
 	}
 
 }
