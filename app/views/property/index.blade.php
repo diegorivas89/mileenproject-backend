@@ -23,14 +23,17 @@
 				<div class="panel">
 				<div class="row">
 					<div class="large-3 medium-3 small-12 columns">
-						<img src="{{$property->getMainImageUrl('/assets/img/nophoto.jpg')}}">
+						<a href="{{URL::action('properties.show', $property->id)}}">
+							<img src="{{$property->getMainImageUrl('/assets/img/nophoto.jpg')}}">
+						</a>
+						<!--
 						<a data-dropdown="drop{{$property->id}}" aria-controls="drop{{$property->id}}" aria-expanded="false" class="button expand radius back long-height">
 							<i class="fa fa-cogs"></i>
 							{{Lang::get('strings.actions')}}
 						</a>
 						<ul id="drop{{$property->id}}" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
 						  <li>
-						  	<a href="{{URL::action('properties.index')}}/{{$property->id}}" >
+						  	<a href="{{URL::action('properties.show', $property->id)}}" >
 						  		<i class='fa fa-arrow-right'></i>
 						  		{{Lang::get('strings.details')}}
 						  	</a>
@@ -42,10 +45,11 @@
 						  	</a>
 						  </li>
 						</ul>
+						-->
 					</div>
 					<div class="large-9 medium-9 small-12 columns">
 						<strong>
-							{{$property->title}}
+							<a href="{{URL::action('properties.show', $property->id)}}">{{$property->title}}</a>
 							<span class="label warning" style="float:right;">
 								{{$property->currency}} {{$property->price}}
 							</span>
