@@ -44,7 +44,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			'email' => 'required|email|max:50|unique:users',
 			'telephone' => 'max:25',
 			'password' => 'required|min:3|confirmed',
-			
 		];
 	}
 
@@ -55,12 +54,32 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function checkPassword($password)
 	{
-		return $this->password == $password;
+		return $this->password == self::hashPassword($password, $this->email);
 	}
 
 	public function isActive()
 	{
 		return $this->active == 1;
+	}
+
+	public function getSchema()
+	{
+		return Array(
+			'id' => 'int',
+			'name' => 'string',
+			'email' => 'string',
+			'telephone' => 'string',
+		);
+	}
+
+	public static function hashPassword($password, $email)
+	{
+		return md5($password . $email . "awesome salt string");
+	}
+
+	public static function generateActivationKey($email = '')
+	{
+		return md5(microtime() + $email + rand(0, 999));
 	}
 
 }

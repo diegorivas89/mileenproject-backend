@@ -3,7 +3,7 @@
 /**
 *
 */
-class AmenitieType extends Eloquent
+class AmenitieType extends MileenModel
 {
 }
 

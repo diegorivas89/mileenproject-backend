@@ -37,9 +37,7 @@ class PropertyRepository implements PropertyRepositoryInterface
 		if(!isset($id)) {
 			return NULL;
 		}
-
-		//return $this->model->where("user_id", "=", $id)->get();
-		return $this->model->where("id", ">=", 0)->get(); //traigo todas las propiedades
+		return $this->model->where("user_id", "=", $id)->get();
 	}
 
 
@@ -52,6 +50,33 @@ class PropertyRepository implements PropertyRepositoryInterface
 	public function find($id)
 	{
 		return $this->getCloneOfModel()->findOrFail($id);
+	}
+
+	/**
+	 * Retorna los amenities de una propiedad
+	 *
+	 * @param  int $id Identificador de la propiedad
+	 * @return amenities en array ordenadas por nombre
+	 */
+	public function getAmenities($id)
+	{
+		$amenities = \AmenitieProperty::select("amenitie_type_id")->where("property_id", $id)->get();
+		$amenitiesName = array();
+		foreach ($amenities as $index => $value) {
+			$amenitiesName[] = (\AmenitieType::find($value->amenitie_type_id)->name);
+		}
+		return $amenitiesName;
+	}
+
+	/**
+	 * Retorna las imagenes de una propiedad
+	 *
+	 * @param  int $id Identificador de la propiedad
+	 * @return imagenes
+	 */
+	public function getImages($id)
+	{
+		return \Image::select("name")->where("property_id", $id)->get();
 	}
 
 	/**

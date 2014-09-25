@@ -5,6 +5,7 @@
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>MiLEEM - Ingresar</title>
+	<link href='/assets/img/logo_mileen.ico' rel='shortcut icon' type='image/x-icon'>
 	<meta name="description" content="Documentation and reference library for ZURB Foundation. JavaScript, CSS, components, grid and more."/>
 	<meta name="author" content="ZURB, inc. ZURB network also includes zurb.com"/>
 	<meta name="copyright" content="ZURB, inc. Copyright (c) 2014"/>
@@ -24,7 +25,7 @@
 		color: white;
 	}
 	body{
-		background: url('/assets/img/background.jpg'); 
+		background: url('/assets/img/argentina.jpg'); 
 		background-size: cover;
 
 		background-repeat: no-repeat;
@@ -48,7 +49,7 @@
 						<div class="panel radius" style="box-shadow: 7px 7px 8px 2px lightgray;">
 							<div class="row">
 								<div class="large-12 columns  @if ($errors->has('name')) error @endif">
-									<label>Nombre
+									<label>* Nombre
 										<input type="text" value="{{Input::old("name", "")}}" name="name" placeholder="" />
 										@if ($errors->has('name')) <small class="error"> {{ $errors->first('name') }} </small> @endif
 									</label>
@@ -56,7 +57,7 @@
 							</div>
 							<div class="row">
 								<div class="large-12 columns  @if ($errors->has('email')) error @endif">
-									<label>Email
+									<label>* Email
 										<input type="text" value="{{Input::old("email", "")}}" name="email" placeholder="" />
 										@if ($errors->has('email')) <small class="error"> {{ $errors->first('email') }} </small> @endif
 									</label>
@@ -72,7 +73,7 @@
 							</div>
 							<div class="row">
 								<div class="large-12 columns  @if ($errors->has('password')) error @endif">
-									<label>Contraseña
+									<label>* Contraseña
 										<input type="password" value="{{Input::old("password", "")}}" name="password" placeholder="" />
 										@if ($errors->has('password')) <small class="error"> {{ $errors->first('password') }} </small> @endif
 									</label>
@@ -84,6 +85,11 @@
 										<input type="password" value="{{Input::old("password_confirmation", "")}}" name="password_confirmation"  placeholder="" />
 										@if ($errors->has('password_confirmation')) <small class="error"> {{ $errors->first('password_confirmation') }} </small> @endif
 									</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="large-12 columns">
+									<h5><small>Los campos marcados con (*) son obligatorios</small></h5>
 								</div>
 							</div>
 							<div class="row">

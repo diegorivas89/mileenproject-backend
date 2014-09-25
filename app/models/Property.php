@@ -114,6 +114,15 @@ class Property extends MileenModel
 			return $default;
 		}
 	}
+
+	public function getUser()
+	{
+		try{
+			return User::select('id', 'name', 'email', 'telephone')->findOrFail($this->user_id);
+		}catch (\Exception $e){
+			return new User();
+		}
+	}
 }
 
 ?>

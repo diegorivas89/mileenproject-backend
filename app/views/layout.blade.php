@@ -5,6 +5,8 @@
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>MiLEEM</title>
+			
+			<link href='/assets/img/logo_mileen.ico' rel='shortcut icon' type='image/x-icon'>
 			<meta name="description" content="Documentation and reference library for ZURB Foundation. JavaScript, CSS, components, grid and more."/>
 			<meta name="author" content="ZURB, inc. ZURB network also includes zurb.com"/>
 			<meta name="copyright" content="ZURB, inc. Copyright (c) 2014"/>

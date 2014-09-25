@@ -121,3 +121,7 @@ text-indent:
 .parent-width {
   width: 100%;
 }
+
+.carousel-height {
+  height: 450px;
+}

@@ -13,11 +13,10 @@ class SignupController extends BaseController {
 			$user->active = 1;
 			$user->save();
 			Auth::login( $user );
-			
+
 			return Redirect::route('properties.index');
-		
 		} else {
-			return Redirect::route('login.get');		
+			return Redirect::route('login.get');
 		}
 	}
 
@@ -27,16 +26,18 @@ class SignupController extends BaseController {
 
 	public function postSignup() {
 		$validator = Validator::make(Input::all(), User::getValidationRulesSignup());
+
 		if ($validator->fails()) {
 			return Redirect::route('signup.get')->withInput()->withErrors($validator);
 		}else{
-			$email = Input::get('email');
-			$newcode = md5( time()+ Input::get('email') + rand(48, 57));
-			Input::merge(array('key' => $newcode));
+			Input::merge(array('key' => User::generateActivationKey(Input::get('email'))));
+			Input::merge(array('password' => User::hashPassword(Input::get('password'), Input::get('email'))));
+
 			$newUser = User::create(Input::all());
+
 			$data = array(
-				'email'		=> $email,
-				'clickUrl'	=> URL::route('signup.activation', array('code'=> urlencode($newcode))),
+				'email'		=> Input::get('email'),
+				'clickUrl'	=> URL::route('signup.activation', array('code'=> urlencode($newUser->key))),
 				'name' => Input::get('name')
 			);
 			Mail::send('signup.confirmationEmail', $data, function($message) {
