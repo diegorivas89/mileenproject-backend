@@ -68,7 +68,8 @@ class PropertySearchService extends MileenApi
 			$property->environment = $property->getEnvironment(['id', 'name']);
 			unset($property->environment_id);
 
-			$property->priority = intval($property->publication_type_id);
+			$publicationType = $property->getPublicationType(['value']);
+			$property->priority = intval($publicationType->value);
 			unset($property->publication_type_id);
 
 			$pictures = Array();

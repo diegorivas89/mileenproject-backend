@@ -80,9 +80,13 @@ class Property extends MileenModel
 		}
 	}
 
-	public function getPublicationType()
+	public function getPublicationType($fields = Array())
 	{
-		return PublicationType::select('id', 'name')->find($this->publication_type_id);
+		if ($fields){
+			return PublicationType::select($fields)->find($this->publication_type_id);
+		}else{
+			return PublicationType::select('id', 'name')->find($this->publication_type_id);
+		}
 	}
 
 	public function getPropertyType()
