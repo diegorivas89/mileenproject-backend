@@ -58,6 +58,9 @@ class PropertyService extends MileenApi
 		$property->operationType = $property->getOperationType();
 		unset($property->operation_type_id);
 
+		$publicationType = $property->getPublicationType(['value']);
+		$property->priority = intval($publicationType->value);
+
 		$property->publicationType = $property->getPublicationType();
 		unset($property->publication_type_id);
 
