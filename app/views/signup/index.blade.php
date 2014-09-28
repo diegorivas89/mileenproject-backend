@@ -15,7 +15,7 @@
 	<style type="text/css">
 	div.row.footer{
 		position: relative;
-		margin-top: 130px;
+		margin-top: 60px;
 	}
 	div.row.footer > div{
 		position:absolute;
@@ -25,19 +25,21 @@
 		color: white;
 	}
 	body{
-		background: url('/assets/img/argentina.jpg'); 
+		/*background: url('/assets/img/argentina.jpg'); */
+		background: url('/assets/img/bairescity.jpg');
 		background-size: cover;
 
 		background-repeat: no-repeat;
 		background-attachment: fixed;
-		background-position: center; 
+		background-position-x: 50%;
+		background-position-y: -75px;
 	}
 	</style>
 </head>
 <body style="">
 	<div class="row">
 		<div class="large-12 columns">
-			<div class="row" style="text-align: center;">
+			<div class="row" style="margin-bottom: 30px;text-align: center;">
 				<div class="large-3 small-12 columns">&nbsp;</div>
 				<div class="large-6 small-12 columns"><img src="/assets/img/logo_mileen.png" alt=""></div>
 				<div class="large-3 small-12 columns">&nbsp;</div>

@@ -57,6 +57,8 @@ class PropertyController extends BaseController
 	    	Input::merge(array('expiration_date' => $date->format('Y-m-d')));
 		}
 
+		Input::merge(array('user_id' => Auth::user()->id));
+
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
 
 		if ($validator->fails())

@@ -14,7 +14,11 @@ class LoginController extends BaseController
 
 	public function getLogin()
 	{
-		return View::make('login.index');
+		if (Auth::guest()){
+			return View::make('login.index');
+		}
+
+		return Redirect::route('properties.index');
 	}
 
 	public function postLogin()
