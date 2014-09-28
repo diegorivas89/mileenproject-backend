@@ -25,13 +25,14 @@
 		color: white;
 	}
 	body{
-		background: url('/assets/img/argentina.jpg'); 
+		/*background: url('/assets/img/argentina.jpg'); */
+		background: url('/assets/img/bairescity.jpg');
 		background-size: cover;
 
 		background-repeat: no-repeat;
 		background-attachment: fixed;
 		background-position-x: 50%;
-		background-position-y: 0px;
+		background-position-y: -75px;
 	}
 	</style>
 </head>
