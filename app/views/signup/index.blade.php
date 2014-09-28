@@ -89,6 +89,15 @@
 									</label>
 								</div>
 							</div>
+							@if (Session::has('technical-problems'))
+								<div class="row">
+									<div class="large-12 columns">
+										<div data-alert class="alert-box warning radius">
+										  {{Session::get('technical-problems')}}
+										</div>
+									</div>
+								</div>
+							@endif
 							<div class="row">
 								<div class="large-12 columns">
 									<h5><small>Los campos marcados con (*) son obligatorios</small></h5>

@@ -40,14 +40,20 @@ class SignupController extends BaseController {
 				'clickUrl'	=> URL::route('signup.activation', array('code'=> urlencode($newUser->key))),
 				'name' => Input::get('name')
 			);
-			Mail::send('signup.confirmationEmail', $data, function($message) {
-				$message->to( Input::get('email') )->subject('Bienvenido a MiLEEM!');
-			});
 
-			return Redirect::route('login.get');
+			try {
+				Mail::send('signup.confirmationEmail', $data, function($message) {
+					$message->to( Input::get('email') )->subject('Bienvenido a MiLEEM!');
+				});
+
+				return Redirect::route('login.get')->with('activation-message', 'Se ha enviado un email a su correo electrónico con las instrucciones para activar su cuenta');
+			} catch (Exception $e) {
+				$newUser->delete();
+
+				return Redirect::route('signup.get')->with('technical-problems', 'Lo sentimos, por problemas técnicos no podemos crear su cuenta. Vuelva a intentarlo mas tarde.');
+			}
 		}
 	}
-
 }
 
 ?>
