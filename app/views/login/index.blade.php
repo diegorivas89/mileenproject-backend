@@ -30,7 +30,8 @@
 
 		              background-repeat: no-repeat;
 		              background-attachment: fixed;
-		              background-position: center; 
+		              background-position-x: 50%;
+		              background-position-y: 0px;
 		          }
 				</style>
 		</head>
