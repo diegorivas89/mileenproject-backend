@@ -69,6 +69,15 @@
 											@endif
 										</div>
 									</div>
+									@if (Session::has('activation-message'))
+										<div class="row">
+											<div class="large-12 columns">
+												<div data-alert class="alert-box success radius">
+												  {{Session::get('activation-message')}}
+												</div>
+											</div>
+										</div>
+									@endif
 									<div class="row">
 										<div class="large-6 columns">
 											<a href="{{URL::action('signup.get')}}">Crear una Cuenta</a>
