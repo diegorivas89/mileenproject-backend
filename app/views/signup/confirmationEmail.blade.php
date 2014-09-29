@@ -5,4 +5,4 @@ Bienvenido a MiLEEM, para que puedas comenzar a usar tu cuenta debes hacer click
 {{$clickUrl}}
 <br/><br/><br/>
 Saludos!<br/>
-Equipo de MiLEEN
+Equipo de MiLEEM
