@@ -28,7 +28,7 @@
 							<nav class="top-bar" data-topbar>
 								<ul class="title-area">
 									<li class="name">
-									<h1><a href="/">MiLEEN</a></h1>
+									<h1><a href="/">MiLEEM</a></h1>
 									</li>
 									<li class="toggle-topbar menu-icon">
 										<a href="#"><span>menu</span></a>
@@ -75,7 +75,7 @@
 							<hr>
 							<div class="row">
 								<div class="large-6 columns">
-									<p>© MiLEEN 2014</p>
+									<p>© MiLEEM 2014</p>
 								</div>
 							</div>
 						</div>
