@@ -119,6 +119,16 @@ class Property extends MileenModel
 		}
 	}
 
+	public function getAmenities()
+	{
+		$amenities = AmenitieProperty::select("amenitie_type_id")->where("property_id", $this->id)->get();
+		$amenitiesName = array();
+		foreach ($amenities as $index => $value) {
+			$amenitiesName[] = (AmenitieType::find($value->amenitie_type_id)->name);
+		}
+		return $amenitiesName;
+	}
+
 	public function getUser()
 	{
 		try{
