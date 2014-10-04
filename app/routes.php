@@ -35,6 +35,8 @@ Route::group(['before' => 'encode-input'], function(){
 		Route::get('/property-search', 'ApiController@propertySearch');
 		Route::get('/property', 'ApiController@property');
     	Route::get('/definitions', 'ApiController@definitions');
+    	Route::get('/send-message', 'ApiController@sendMessage');
+    	Route::post('/send-message', 'ApiController@sendMessage');
 	});
 });
 
