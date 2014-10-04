@@ -110,7 +110,8 @@ class PropertyRepository implements PropertyRepositoryInterface
 			'covered_size',
 			'environment_id',
 			'publication_type_id',
-			'video_url'
+			'video_url',
+			'state'
 		);
 
 		return $query->select($fields)->get();
@@ -168,6 +169,8 @@ class PropertyRepository implements PropertyRepositoryInterface
 		if (ParameterValidator::date('minPublishDate', $parameters)){
 			$query = $query->where("created_at", ">", $parameters['minPublishDate']);
 		}
+
+		$query = $query->where("state", $parameters['state']);
 
 		return $query;
 	}
