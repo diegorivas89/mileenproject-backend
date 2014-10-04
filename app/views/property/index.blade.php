@@ -26,7 +26,6 @@
 						<a href="{{URL::action('properties.show', $property->id)}}">
 							<img src="{{$property->getMainImageUrl('/assets/img/nophoto.jpg')}}">
 						</a>
-						<!--
 						<a data-dropdown="drop{{$property->id}}" aria-controls="drop{{$property->id}}" aria-expanded="false" class="button expand radius back long-height">
 							<i class="fa fa-cogs"></i>
 							{{Lang::get('strings.actions')}}
@@ -39,17 +38,38 @@
 						  	</a>
 						  </li>
 						  <li>
-						  	<a href="#">
-						  		<i class='fa fa-pencil'></i>
-						  		{{Lang::get('strings.edit')}}
-						  	</a>
+						  	@if($property->state == Property::active)
+									<form class='property-form' action="{{URL::action('properties.pause', $property->id)}}" method='post'>
+										<button>
+							  			<i class='fa fa-pause'></i>
+											{{Lang::get('strings.pause')}}
+										</button>
+									</form>
+								@else
+									@if($property->state == Property::paused)
+										<form class='property-form' action="{{URL::action('properties.reactivate', $property->id)}}" method='post'>
+											<button>
+								  			<i class='fa fa-play'></i>
+												{{Lang::get('strings.reactivate')}}
+											</button>
+										</form>
+									@endif
+								@endif
 						  </li>
+							<li>
+								<a href="#">
+									<i class='fa fa-pencil'></i>
+									{{Lang::get('strings.edit')}}
+								</a>
+							</li>
 						</ul>
-						-->
 					</div>
 					<div class="large-9 medium-9 small-12 columns">
 						<strong>
 							<a href="{{URL::action('properties.show', $property->id)}}">{{$property->title}}</a>
+							@if($property->state == Property::paused)
+								<small>Pausada</small>
+							@endif
 							<span class="label warning" style="float:right;">
 								{{$property->currency}} {{$property->price}}
 							</span>

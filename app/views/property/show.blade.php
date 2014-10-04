@@ -11,7 +11,9 @@
 			<div class="large-12 columns">
 				<h2 style="background: #f2f2f2;margin-top: 0px;">
 					<i class="fa fa-home"></i> {{$property->title}}
-					<!--
+					@if($property->state == Property::paused)
+						<small>Pausada</small>
+					@endif
 					<button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button  radius back " style="float:right;">
 						<i class="fa fa-cogs"></i>
 						{{Lang::get('strings.actions')}}
@@ -24,10 +26,39 @@
 								{{Lang::get('strings.edit')}}
 							</a>
 						</li>
-					</ul>-->
+							<li>
+						  	@if($property->state == Property::active)
+									<form class='property-form' action="{{URL::action('properties.pause', $property->id)}}" method='post'>
+										<button>
+							  			<i class='fa fa-pause'></i>
+											{{Lang::get('strings.pause')}}
+										</button>
+									</form>
+								@else
+									@if($property->state == Property::paused)
+										<form class='property-form' action="{{URL::action('properties.reactivate', $property->id)}}" method='post'>
+											<button>
+								  			<i class='fa fa-play'></i>
+												{{Lang::get('strings.reactivate')}}
+											</button>
+										</form>
+									@endif
+								@endif
+						  </li>
+					</ul>
 				</h2>
 			</div>
 		</div>
+		@if (Session::has('message'))
+			<div class="row">
+				<div class="large-12 columns">
+					<div data-alert class="alert-box info radius">
+					  {{Session::get('message')}}
+					  <a href="#" class="close">&times;</a>
+					</div>
+				</div>
+			</div>
+		@endif
 		<div class="row">
 			<div class="large-6 medium-6 columns">
 				<ul class="features">

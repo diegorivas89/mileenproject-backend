@@ -136,6 +136,22 @@ class PropertyController extends BaseController
 	  																  ->with('video', $video);
 	}
 
+	public function pause($id)
+	{
+		$property = Property::find($id);
+		$property->state = Property::paused;
+		$property->save();
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad está en pausa');
+	}
+
+	public function reactivate($id)
+	{
+		$property = Property::find($id);
+		$property->state = Property::active;
+		$property->save();
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se reactivó');
+	}
+
 }
 
 ?>
