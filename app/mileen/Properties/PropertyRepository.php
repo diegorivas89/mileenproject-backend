@@ -37,7 +37,22 @@ class PropertyRepository implements PropertyRepositoryInterface
 		if(!isset($id)) {
 			return NULL;
 		}
-		return $this->model->where("user_id", "=", $id)->get();
+		return $this->model->where("user_id", $id)->get();
+	}
+
+	/**
+	 * Retorna un listado de propiedades activas que pertencen a un usuario determinado
+	 *
+	 * @param  int $id Identificador del usuario
+	 * @return Array de propiedades
+	 */
+
+	public function userActiveProperties($id)
+	{
+		if(!isset($id)) {
+			return NULL;
+		}
+		return $this->model->where("user_id", $id)->where('state', \Property::active)->get();
 	}
 
 

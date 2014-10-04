@@ -2,10 +2,10 @@
 
 @section('property-count')
 <div class="panel callout radius">
-	@if ($properties->count() == 1)
-		<h6>{{$properties->count()}} Publicacion activa</h6>
+	@if ($activeProperties->count() == 1)
+		<h6>{{$activeProperties->count()}} Publicacion activa</h6>
 	@else
-		<h6>{{$properties->count()}} Publicaciones activas</h6>
+		<h6>{{$activeProperties->count()}} Publicaciones activas</h6>
 	@endif
 </div>
 @endsection
