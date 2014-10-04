@@ -17,6 +17,16 @@
 			<h2><i class="fa fa-newspaper-o"></i> Mis Publicaciones</h2>
 		</div>
 	</div>
+	@if (Session::has('message'))
+	<div class="row">
+		<div class="large-12 columns">
+			<div data-alert class="alert-box info radius">
+			  {{Session::get('message')}}
+			  <a href="#" class="close">&times;</a>
+			</div>
+		</div>
+	</div>
+@endif
 	@foreach($properties as $property)
 		<div class="row">
 			<div class="large-12 columns">
@@ -61,6 +71,14 @@
 									<i class='fa fa-pencil'></i>
 									{{Lang::get('strings.edit')}}
 								</a>
+							</li>
+							<li>
+								<form class='property-form' action="{{URL::action('properties.delete', $property->id)}}" method='post'>
+									<button id='delete-property'>
+						  			<i class='fa fa-times'></i>
+										{{Lang::get('strings.delete')}}
+									</button>
+								</form>
 							</li>
 						</ul>
 					</div>

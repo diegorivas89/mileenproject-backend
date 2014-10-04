@@ -9,5 +9,6 @@ return array(
   'amenities' => 'Amenities',
   'pause' => 'Pausar',
   'reactivate' => 'Reactivar',
-  'paused' => 'Pausada'
+  'paused' => 'Pausada',
+  'delete' => 'Eliminar'
 );

@@ -37,7 +37,7 @@ class PropertyRepository implements PropertyRepositoryInterface
 		if(!isset($id)) {
 			return NULL;
 		}
-		return $this->model->where("user_id", $id)->get();
+		return $this->model->where("user_id", $id)->where('state', '<>', \Property::deleted)->get();
 	}
 
 	/**

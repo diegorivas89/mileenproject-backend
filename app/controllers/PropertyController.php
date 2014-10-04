@@ -154,6 +154,14 @@ class PropertyController extends BaseController
 		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se reactivó');
 	}
 
+	public function delete($id)
+	{
+		$property = Property::find($id);
+		$property->state = Property::deleted;
+		$property->save();
+		return Redirect::to("properties")->with('message', 'La propiedad se ha borrado exitosamente');
+	}
+
 }
 
 ?>

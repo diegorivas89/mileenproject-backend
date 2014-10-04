@@ -45,6 +45,14 @@
 									@endif
 								@endif
 						  </li>
+							<li>
+								<form class='property-form' action="{{URL::action('properties.delete', $property->id)}}" method='post'>
+									<button id='delete-property'>
+						  			<i class='fa fa-times'></i>
+										{{Lang::get('strings.delete')}}
+									</button>
+								</form>
+							</li>
 					</ul>
 				</h2>
 			</div>

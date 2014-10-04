@@ -8,6 +8,7 @@ class Property extends MileenModel
 
 	const active = 'active';
 	const paused = 'paused';
+	const deleted = 'deleted';
 
 	protected $fillable = array(
 		"title",
@@ -55,7 +56,7 @@ class Property extends MileenModel
 			'size' => array('required','numeric' ,'min:0'),
 			'covered_size' => array('required','numeric' ,'min:0'),
 			'video_url' => array('url'),
-			'state' => 'in:active, paused'
+			'state' => 'in:active, paused, deleted'
 		);
 	}
 
