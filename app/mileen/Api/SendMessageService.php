@@ -16,7 +16,7 @@ class SendMessageService extends MileenApi
 	public function getRequiredParameters()
 	{
 		return Array(
-			'user_id',
+			'property_id',
 			'name',
 			'email',
 			'subject',
@@ -32,15 +32,26 @@ class SendMessageService extends MileenApi
 			$this->sendMessage($parameters);
 		} catch (MissingParamentersException $e) {
 			return $this->buildErrorResponse($e->getMessage());
+		} catch (\Exception $e) {
+			return $this->buildErrorResponse($e->getMessage());
 		}
+
+		return $this->buildResponse(Array());
 	}
 
 	public function sendMessage($parameters = Array())
 	{
-		echo "Name: {$parameters['name']}
-Email: {$parameters['email']}
-Subject: {$parameters['subject']}
-Message: {$parameters['message']}";
+		$property = \Property::find($parameters['property_id']);
+		$user = \User::find($property->user_id);
+
+		$emailData = $parameters;
+		$emailData['_message'] = $parameters['message'];
+		$emailData['user'] = $user;
+		$emailData['property'] = $property;
+
+		\Mail::send('emails.user.message', $emailData, function($message) use ($user) {
+			$message->to($user->email)->subject('Tienes un nuevo mensaje!');
+		});
 	}
 }
 
