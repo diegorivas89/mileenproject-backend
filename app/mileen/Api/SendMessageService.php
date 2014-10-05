@@ -49,8 +49,10 @@ class SendMessageService extends MileenApi
 		$emailData['user'] = $user;
 		$emailData['property'] = $property;
 
-		\Mail::send('emails.user.message', $emailData, function($message) use ($user) {
-			$message->to($user->email)->subject('Tienes un nuevo mensaje!');
+		\Mail::send('emails.user.message', $emailData, function($message) use ($user, $emailData) {
+			$message->to($user->email)
+					->subject('Tienes un nuevo mensaje!')
+					->replyTo($emailData['email'], $emailData['name']);
 		});
 	}
 }

@@ -27,6 +27,8 @@
 					</tr>
 				</tbody>
 			</table>
+			<br><br>
+			<p>Responde este email para responderle a {{$name}}</p>
 		</div>
 	</body>
 </html>
