@@ -16,10 +16,11 @@ class SendMessageService extends MileenApi
 	public function getRequiredParameters()
 	{
 		return Array(
-			'property_id',
+			'propertyId',
 			'name',
 			'email',
-			'subject',
+			'telephone',
+			'callAt',
 			'message'
 		);
 	}
@@ -41,7 +42,7 @@ class SendMessageService extends MileenApi
 
 	public function sendMessage($parameters = Array())
 	{
-		$property = \Property::find($parameters['property_id']);
+		$property = \Property::find($parameters['propertyId']);
 		$user = \User::find($property->user_id);
 
 		$emailData = $parameters;

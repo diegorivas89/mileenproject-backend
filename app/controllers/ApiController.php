@@ -24,7 +24,6 @@ class ApiController extends BaseController
 	public function sendMessage()
 	{
 		return $this->makeResponse(App::make('send-message-service')->execute(Input::all()));
-		//return App::make('send-message-service')->execute(Input::all());
 	}
 
 	private function makeResponse($content)

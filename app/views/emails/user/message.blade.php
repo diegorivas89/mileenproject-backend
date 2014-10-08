@@ -15,11 +15,15 @@
 				<tbody>
 					<tr>
 						<td style="color:gray;text-align: right;">Publicación:</td>
-						<td>{{$property->id}} - {{$property->title}}</td>
+						<td><a href="{{URL::action('properties.show', $property->id)}}">{{$property->id}} - {{$property->title}}</a></td>
 					</tr>
 					<tr>
-						<td style="color:gray;text-align: right;">Asunto:</td>
-						<td>{{$subject}}</td>
+						<td style="color:gray;text-align: right;">Telefono:</td>
+						<td>{{$telephone}}</td>
+					</tr>
+					<tr>
+						<td style="color:gray;text-align: right;">Horario de respuesta:</td>
+						<td>{{$callAt}}</td>
 					</tr>
 					<tr>
 						<td style="color:gray;text-align: right;">Mensaje:</td>
