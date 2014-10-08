@@ -5,7 +5,7 @@
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>MiLEEM</title>
-			
+
 			<link href='/assets/img/logo_mileen.ico' rel='shortcut icon' type='image/x-icon'>
 			<meta name="description" content="Documentation and reference library for ZURB Foundation. JavaScript, CSS, components, grid and more."/>
 			<meta name="author" content="ZURB, inc. ZURB network also includes zurb.com"/>
@@ -15,8 +15,9 @@
 			<link rel="stylesheet" href="../assets/libs/creditly/css/creditly.css"/>
 			<link rel="stylesheet" href="../styles/style.css"/>
 			<script src="../assets/libs/foundation/js/vendor/modernizr.js"></script>
-			<script src="../assets/libs/creditly/js/creditly.js"></script>
 			<script src="../assets/js/validate_credit_card.js"></script>
+			<script src="../assets/js/mileem.js"></script>
+			<script src="../assets/libs/creditly/js/creditly.js"></script>
 			<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 			<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		</head>
@@ -93,15 +94,9 @@
 			</script>
 			<script>
 				$(document).foundation();
-
 				var doc = document.documentElement;
 				doc.setAttribute('data-useragent', navigator.userAgent);
 			</script>
-			        <script>
-    $(document).ready(function(){
-      initialize();
-    });
-    </script>
     @yield('scripts')
 		</body>
 	</html>

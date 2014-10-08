@@ -6,6 +6,10 @@
 class Property extends MileenModel
 {
 
+	const active = 'active';
+	const paused = 'paused';
+	const deleted = 'deleted';
+
 	protected $fillable = array(
 		"title",
 		"description",
@@ -52,6 +56,7 @@ class Property extends MileenModel
 			'size' => array('required','numeric' ,'min:0'),
 			'covered_size' => array('required','numeric' ,'min:0'),
 			'video_url' => array('url'),
+			'state' => 'in:active, paused, deleted'
 		);
 	}
 
@@ -67,6 +72,7 @@ class Property extends MileenModel
 			'covered_size' => 'int',
 			'environment_id' => 'int',
 			'publication_type_id' => 'int',
+			'state' => 'string',
 		);
 	}
 
@@ -137,6 +143,12 @@ class Property extends MileenModel
 			return new User();
 		}
 	}
+
+	public function possiblesStates()
+	{
+		return ['active', 'paused'];
+	}
+
 }
 
 ?>

@@ -14,7 +14,7 @@ class AddStateToPropertiesTable extends Migration {
 	{
 		Schema::table('properties', function(Blueprint $table)
 		{
-			$table->string('state');
+			$table->string('state')->default('active');
 		});
 	}
 

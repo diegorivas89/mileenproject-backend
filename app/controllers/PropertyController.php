@@ -20,7 +20,9 @@ class PropertyController extends BaseController
 	public function index()
 	{
 		$properties = $this->repository->userProperties(Auth::user()->id);
-	    return View::make("property.index")->with('properties', $properties);
+		$activeProperties = $this->repository->userActiveProperties(Auth::user()->id);
+	  return View::make("property.index")->with('properties', $properties)
+	  																	 ->with('activeProperties', $activeProperties);
 	}
 
 	public function create()
@@ -134,6 +136,30 @@ class PropertyController extends BaseController
 	  																  ->with('amenities', $amenities)
 	  																  ->with('images', $images)
 	  																  ->with('video', $video);
+	}
+
+	public function pause($id)
+	{
+		$property = Property::find($id);
+		$property->state = Property::paused;
+		$property->save();
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad está en pausa');
+	}
+
+	public function reactivate($id)
+	{
+		$property = Property::find($id);
+		$property->state = Property::active;
+		$property->save();
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se reactivó');
+	}
+
+	public function delete($id)
+	{
+		$property = Property::find($id);
+		$property->state = Property::deleted;
+		$property->save();
+		return Redirect::to("properties")->with('message', 'La propiedad se ha borrado exitosamente');
 	}
 
 }
