@@ -43,7 +43,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::route('login.get', ['uri' => urlencode(Request::server('REQUEST_URI'))]);
 		}
 	}
 });
