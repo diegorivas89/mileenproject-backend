@@ -200,7 +200,6 @@ function addMarkerAtCenter() {
 	</div>
 	<form id='property-form' action="{{URL::action('properties.store') }}" method="post" enctype="multipart/form-data">
 		<div class="row">
-			<input type="hidden" name="user_id" value="2">
 			<div class="large-12 columns  @if ($errors->has('publication_type_id')) error @endif">
 				<label>Tipo de Publicación
 					<select name="publication_type_id" id="publication_type">
@@ -436,7 +435,7 @@ function addMarkerAtCenter() {
 		          placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;">
 		      </div>
 		      <div class="col-sm-4 controls">
-		        <label class="control-label">CBU</label>
+		        <label class="control-label">CVC</label>
 		        <input class="security-code form-control"·
 		          inputmode="numeric" required
 		          type="text" name="security_code"

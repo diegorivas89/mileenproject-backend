@@ -2,6 +2,8 @@
 
 use \Mileen\Properties\PropertyRepositoryInterface;
 use \Intervention\Image\ImageManagerStatic as ImageManager;
+use \Mileen\Support\YoutubeUrl;
+use \Mileen\Support\VimeoUrl;
 /**
 *
 */
@@ -17,8 +19,10 @@ class PropertyController extends BaseController
 
 	public function index()
 	{
-		$properties = $this->repository->userProperties(User::all()->first()->id);
-	    return View::make("property.index")->with('properties', $properties);
+		$properties = $this->repository->userProperties(Auth::user()->id);
+		$activeProperties = $this->repository->userActiveProperties(Auth::user()->id);
+	  return View::make("property.index")->with('properties', $properties)
+	  																	 ->with('activeProperties', $activeProperties);
 	}
 
 	public function create()
@@ -54,6 +58,8 @@ class PropertyController extends BaseController
 
 	    	Input::merge(array('expiration_date' => $date->format('Y-m-d')));
 		}
+
+		Input::merge(array('user_id' => Auth::user()->id));
 
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
 
@@ -95,6 +101,67 @@ class PropertyController extends BaseController
 			}
 		}
 	}
+
+	public function show($id)
+	{
+		$property = Property::find($id);
+		if((empty($property) || $property->user_id != Auth::user()->id)) {
+			return Redirect::to('properties');
+		}
+		$property = $this->repository->find($id);
+		$amenities = $this->repository->getAmenities($id);
+		$images = $this->repository->getImages($id);
+		if (YoutubeUrl::test($property->video_url)) {
+			$youtube = YoutubeUrl::create($property->video_url);
+			$video = Array(
+				'url' 		=> $youtube->getUrl(),
+				'embed_url' => $youtube->getEmbedUrl(),
+				'thumbnail' => $youtube->getThumbnailUrl()
+			);
+		}elseif (VimeoUrl::test($property->video_url)) {
+			$vimeo = VimeoUrl::create($property->video_url);
+			$video = Array(
+				'url' 		=> $vimeo->getUrl(),
+				'embed_url' => $vimeo->getEmbedUrl(),
+				'thumbnail' => $vimeo->getThumbnailUrl()
+			);
+		}else{
+			$video = Array(
+				'url' 		=> '',
+				'embed_url' => '',
+				'thumbnail' => ''
+			);
+		}
+	  return View::make("property.show")->with('property', $property)
+	  																  ->with('amenities', $amenities)
+	  																  ->with('images', $images)
+	  																  ->with('video', $video);
+	}
+
+	public function pause($id)
+	{
+		$property = Property::find($id);
+		$property->state = Property::paused;
+		$property->save();
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad está en pausa');
+	}
+
+	public function reactivate($id)
+	{
+		$property = Property::find($id);
+		$property->state = Property::active;
+		$property->save();
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se reactivó');
+	}
+
+	public function delete($id)
+	{
+		$property = Property::find($id);
+		$property->state = Property::deleted;
+		$property->save();
+		return Redirect::to("properties")->with('message', 'La propiedad se ha borrado exitosamente');
+	}
+
 }
 
 ?>

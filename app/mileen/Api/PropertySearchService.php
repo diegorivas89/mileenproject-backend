@@ -49,6 +49,8 @@ class PropertySearchService extends MileenApi
 	 */
 	public function execute($parameters)
 	{
+		$parameters['state'] = \Property::active;
+		var_dump($parameters);
 		try {
 			$this->assertParameters($parameters);
 			$properties = $this->repository->search($parameters);
@@ -68,7 +70,8 @@ class PropertySearchService extends MileenApi
 			$property->environment = $property->getEnvironment(['id', 'name']);
 			unset($property->environment_id);
 
-			$property->priority = intval($property->publication_type_id);
+			$publicationType = $property->getPublicationType(['value']);
+			$property->priority = intval($publicationType->value);
 			unset($property->publication_type_id);
 
 			$pictures = Array();

@@ -5,6 +5,8 @@
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>MiLEEM</title>
+
+			<link href='/assets/img/logo_mileen.ico' rel='shortcut icon' type='image/x-icon'>
 			<meta name="description" content="Documentation and reference library for ZURB Foundation. JavaScript, CSS, components, grid and more."/>
 			<meta name="author" content="ZURB, inc. ZURB network also includes zurb.com"/>
 			<meta name="copyright" content="ZURB, inc. Copyright (c) 2014"/>
@@ -13,8 +15,9 @@
 			<link rel="stylesheet" href="../assets/libs/creditly/css/creditly.css"/>
 			<link rel="stylesheet" href="../styles/style.css"/>
 			<script src="../assets/libs/foundation/js/vendor/modernizr.js"></script>
-			<script src="../assets/libs/creditly/js/creditly.js"></script>
 			<script src="../assets/js/validate_credit_card.js"></script>
+			<script src="../assets/js/mileem.js"></script>
+			<script src="../assets/libs/creditly/js/creditly.js"></script>
 			<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 			<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		</head>
@@ -26,7 +29,7 @@
 							<nav class="top-bar" data-topbar>
 								<ul class="title-area">
 									<li class="name">
-									<h1><a href="/">MiLEEN</a></h1>
+									<h1><a href="/">MiLEEM</a></h1>
 									</li>
 									<li class="toggle-topbar menu-icon">
 										<a href="#"><span>menu</span></a>
@@ -43,7 +46,7 @@
 												</li>
 												<li class="divider"></li>
 												<li>
-													<a href="#"><i class="fa fa-sign-out"></i> Salir</a>
+													<a href="{{URL::route('logout')}}"><i class="fa fa-sign-out"></i> Salir</a>
 												</li>
 											</ul>
 										</li>
@@ -61,7 +64,7 @@
 									<li><a href="{{URL::action('properties.create')}}"><i class="fa fa-home"></i> Nueva Publicación</a></li>
 									<li class="divider"></li>
 									<li><a href="#"><i class="fa fa-cog"></i> Mi Perfil</a></li>
-									<li><a href="#"><i class="fa fa-sign-out"></i> Salir</a></li>
+									<li><a href="{{URL::route('logout')}}"><i class="fa fa-sign-out"></i> Salir</a></li>
 								</ul>
 							</div>
 							@yield('property-count')
@@ -73,7 +76,7 @@
 							<hr>
 							<div class="row">
 								<div class="large-6 columns">
-									<p>© MiLEEN 2014</p>
+									<p>© MiLEEM 2014</p>
 								</div>
 							</div>
 						</div>
@@ -91,15 +94,9 @@
 			</script>
 			<script>
 				$(document).foundation();
-
 				var doc = document.documentElement;
 				doc.setAttribute('data-useragent', navigator.userAgent);
 			</script>
-			        <script>
-    $(document).ready(function(){
-      initialize();
-    });
-    </script>
     @yield('scripts')
 		</body>
 	</html>

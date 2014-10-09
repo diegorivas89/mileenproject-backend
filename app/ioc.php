@@ -4,17 +4,29 @@ App::bind('\Mileen\Properties\PropertyRepositoryInterface', '\Mileen\Properties\
 App::bind('\Mileen\Images\ImagesRepositoryInterface', '\Mileen\Images\ImagesRepository');
 App::bind('\Mileen\Environments\EnvironmentRepositoryInterface', '\Mileen\Environments\EnvironmentRepository');
 
-App::singleton('property-search-service', function(){
+App::singleton('property-search-service', function() {
 	$propRepository = new \Mileen\Properties\PropertyRepository(new Property());
 
 	return new \Mileen\Api\PropertySearchService($propRepository);
 });
 
-App::singleton('logged-user', function(){
-	$fakeUser = new User();
-	$fakeUser->id = 1;
-	$fakeUser->name = 'Ned Stark';
+App::singleton('property-service', function() {
+	$propRepository = new \Mileen\Properties\PropertyRepository(new Property());
 
-	return $fakeUser;
+	return new \Mileen\Api\PropertyService($propRepository);
+});
+
+App::singleton('definitions-service', function() {
+  return new \Mileen\Api\DefinitionsService();
+});
+
+App::singleton('send-message-service', function() {
+  return new \Mileen\Api\SendMessageService();
+});
+
+App::singleton('logged-user', function(){
+	$user = Auth::user();
+
+	return $user;
 });
 ?>

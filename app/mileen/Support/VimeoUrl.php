@@ -54,7 +54,7 @@ class VimeoUrl
 
 	public function getThumbnailUrl($number = 0)
 	{
-		return '';
+		return \Config::get('app.url').'/assets/img/vimeo_thumbnail.jpg';
 	}
 }
 

@@ -28,7 +28,7 @@ class RemoveNameFieldFromImagesTable extends Migration {
 	{
 		Schema::table('images', function(Blueprint $table)
 		{
-			$table->interger('name')->after('property_id');
+			$table->integer('name')->after('property_id');
 		});
 	}
 

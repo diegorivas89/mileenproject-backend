@@ -6,6 +6,10 @@
 class Property extends MileenModel
 {
 
+	const active = 'active';
+	const paused = 'paused';
+	const deleted = 'deleted';
+
 	protected $fillable = array(
 		"title",
 		"description",
@@ -52,6 +56,7 @@ class Property extends MileenModel
 			'size' => array('required','numeric' ,'min:0'),
 			'covered_size' => array('required','numeric' ,'min:0'),
 			'video_url' => array('url'),
+			'state' => 'in:active, paused, deleted'
 		);
 	}
 
@@ -67,6 +72,7 @@ class Property extends MileenModel
 			'covered_size' => 'int',
 			'environment_id' => 'int',
 			'publication_type_id' => 'int',
+			'state' => 'string',
 		);
 	}
 
@@ -76,28 +82,32 @@ class Property extends MileenModel
 		if ($fields){
 			return Environment::select($fields)->where("id", $this->environment_id)->first();
 		}else{
-			return Environment::find($this->environment_id);
+			return Environment::select('id', 'name')->find($this->environment_id);
 		}
 	}
 
-	public function getPublicationType()
+	public function getPublicationType($fields = Array())
 	{
-		return PublicationType::find($this->publication_type_id);
+		if ($fields){
+			return PublicationType::select($fields)->find($this->publication_type_id);
+		}else{
+			return PublicationType::select('id', 'name')->find($this->publication_type_id);
+		}
 	}
 
 	public function getPropertyType()
 	{
-		return PropertyType::find($this->property_type_id);
+		return PropertyType::select('id', 'name')->find($this->property_type_id);
 	}
 
 	public function getOperationType()
 	{
-		return OperationType::find($this->operation_type_id);
+		return OperationType::select('id', 'name')->find($this->operation_type_id);
 	}
 
 	public function getNeighborhood()
 	{
-		return Neighborhood::find($this->neighborhood_id);
+		return Neighborhood::select('id', 'name')->find($this->neighborhood_id);
 	}
 
 	public function getImages()
@@ -114,6 +124,31 @@ class Property extends MileenModel
 			return $default;
 		}
 	}
+
+	public function getAmenities()
+	{
+		$amenities = AmenitieProperty::select("amenitie_type_id")->where("property_id", $this->id)->get();
+		$amenitiesName = array();
+		foreach ($amenities as $index => $value) {
+			$amenitiesName[] = (AmenitieType::find($value->amenitie_type_id)->name);
+		}
+		return $amenitiesName;
+	}
+
+	public function getUser()
+	{
+		try{
+			return User::select('id', 'name', 'email', 'telephone')->findOrFail($this->user_id);
+		}catch (\Exception $e){
+			return new User();
+		}
+	}
+
+	public function possiblesStates()
+	{
+		return ['active', 'paused'];
+	}
+
 }
 
 ?>

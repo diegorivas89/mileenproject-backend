@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('PublicationTypeTableSeeder');
 		$this->call('AmenitieTypeTableSeeder');
 		$this->call('PropertyTableSeeder');
-
+		$this->call('DateRangesTableSeeder');
 	}
 
 }

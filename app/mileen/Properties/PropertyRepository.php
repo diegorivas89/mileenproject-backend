@@ -37,9 +37,22 @@ class PropertyRepository implements PropertyRepositoryInterface
 		if(!isset($id)) {
 			return NULL;
 		}
+		return $this->model->where("user_id", $id)->where('state', '<>', \Property::deleted)->get();
+	}
 
-		//return $this->model->where("user_id", "=", $id)->get();
-		return $this->model->where("id", ">=", 0)->get(); //traigo todas las propiedades
+	/**
+	 * Retorna un listado de propiedades activas que pertencen a un usuario determinado
+	 *
+	 * @param  int $id Identificador del usuario
+	 * @return Array de propiedades
+	 */
+
+	public function userActiveProperties($id)
+	{
+		if(!isset($id)) {
+			return NULL;
+		}
+		return $this->model->where("user_id", $id)->where('state', \Property::active)->get();
 	}
 
 
@@ -51,7 +64,34 @@ class PropertyRepository implements PropertyRepositoryInterface
 	 */
 	public function find($id)
 	{
-		return $this->model->where("id", "=", $id)->first();
+		return $this->getCloneOfModel()->findOrFail($id);
+	}
+
+	/**
+	 * Retorna los amenities de una propiedad
+	 *
+	 * @param  int $id Identificador de la propiedad
+	 * @return amenities en array ordenadas por nombre
+	 */
+	public function getAmenities($id)
+	{
+		$amenities = \AmenitieProperty::select("amenitie_type_id")->where("property_id", $id)->get();
+		$amenitiesName = array();
+		foreach ($amenities as $index => $value) {
+			$amenitiesName[] = (\AmenitieType::find($value->amenitie_type_id)->name);
+		}
+		return $amenitiesName;
+	}
+
+	/**
+	 * Retorna las imagenes de una propiedad
+	 *
+	 * @param  int $id Identificador de la propiedad
+	 * @return imagenes
+	 */
+	public function getImages($id)
+	{
+		return \Image::select("name")->where("property_id", $id)->get();
 	}
 
 	/**
@@ -85,7 +125,8 @@ class PropertyRepository implements PropertyRepositoryInterface
 			'covered_size',
 			'environment_id',
 			'publication_type_id',
-			'video_url'
+			'video_url',
+			'state'
 		);
 
 		return $query->select($fields)->get();
@@ -143,6 +184,8 @@ class PropertyRepository implements PropertyRepositoryInterface
 		if (ParameterValidator::date('minPublishDate', $parameters)){
 			$query = $query->where("created_at", ">", $parameters['minPublishDate']);
 		}
+
+		$query = $query->where("state", $parameters['state']);
 
 		return $query;
 	}
