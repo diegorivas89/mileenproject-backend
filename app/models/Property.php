@@ -146,16 +146,16 @@ class Property extends MileenModel
 		}
 	}
 
-	public function isValid()
+	public function hasExpired()
 	{
-		return $this->daysUntilExpiry() > 0;
+		return $this->daysUntilExpiry() <= 0;
 	}
 
 	public function daysUntilExpiry()
 	{
 		$publication = $this->getPublicationType(['validity_period']);
 
-		$days = $this->created_at->addDays($publication->validity_period)->diffInDays(Carbon::now());
+		$days = $this->created_at->addDays($publication->validity_period)->diffInDays(Carbon::now(), false);
 
 		return $days + 1;
 	}

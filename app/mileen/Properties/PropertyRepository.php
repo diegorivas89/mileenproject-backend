@@ -126,10 +126,25 @@ class PropertyRepository implements PropertyRepositoryInterface
 			'environment_id',
 			'publication_type_id',
 			'video_url',
-			'state'
+			'state',
+			'created_at'
 		);
 
-		return $query->select($fields)->get();
+		return $this->filterExpiredPublications($query->select($fields)->get());
+	}
+
+	protected function filterExpiredPublications(\Illuminate\Database\Eloquent\Collection $properties)
+	{
+		$filteredProperties = new \Illuminate\Database\Eloquent\Collection();
+
+		foreach ($properties as $property) {
+			if (!$property->hasExpired()){
+				unset($property->created_at);
+				$filteredProperties->push($property);
+			}
+		}
+
+		return $filteredProperties;
 	}
 
 	/**
