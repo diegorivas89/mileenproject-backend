@@ -4,6 +4,7 @@
 	.row div.row{margin-bottom:12px;}
 	ul.features li{font-size:10pt;}
 	ul.features li .field{font-weight:bold;}
+	p.expiry{font-size: 9pt;font-style: italic;text-align: right;}
 </style>
 <div class="large-9 columns">
 	<div class='panel'>
@@ -142,6 +143,17 @@
 			<div class="columns large-12">
 				<h4>Ubicación</h4>
 				<img style="width:100%" src="http://maps.googleapis.com/maps/api/staticmap?center={{$property->latitude}},{{$property->longitude}}&zoom=15&size=1200x300&maptype=roadmap&markers=color:red%7C{{$property->latitude}},{{$property->longitude}}&sensor=false" alt="">
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns large-12">
+				<p class="expiry">
+					@if ($property->daysUntilExpiry() == 1)
+						Esta publicación caduca en {{$property->daysUntilExpiry()}} dia
+					@else
+						Esta publicación caduca en {{$property->daysUntilExpiry()}} dias
+					@endif
+				</p>
 			</div>
 		</div>
 	</div>

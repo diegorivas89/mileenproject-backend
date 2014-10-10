@@ -11,6 +11,9 @@
 @endsection
 
 @section('content')
+<style>
+	p.expiry{font-size: 9pt;font-style: italic;text-align: right;}
+</style>
 <div class="large-9 columns">
 	<div class="row">
 		<div class="large-12 columns">
@@ -105,6 +108,13 @@
 						</h5>
 						<hr>
 						{{$property->description}}
+						<p class="expiry">
+							@if ($property->daysUntilExpiry() == 1)
+								Esta publicación caduca en {{$property->daysUntilExpiry()}} dia
+							@else
+								Esta publicación caduca en {{$property->daysUntilExpiry()}} dias
+							@endif
+						</p>
 					</div>
 				</div>
 				</div>

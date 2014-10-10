@@ -1,5 +1,7 @@
 <?php
 
+use \Carbon\Carbon;
+
 /**
 *
 */
@@ -142,6 +144,20 @@ class Property extends MileenModel
 		}catch (\Exception $e){
 			return new User();
 		}
+	}
+
+	public function isValid()
+	{
+		return $this->daysUntilExpiry() > 0;
+	}
+
+	public function daysUntilExpiry()
+	{
+		$publication = $this->getPublicationType(['validity_period']);
+
+		$days = $this->created_at->addDays($publication->validity_period)->diffInDays(Carbon::now());
+
+		return $days + 1;
 	}
 
 	public function possiblesStates()
