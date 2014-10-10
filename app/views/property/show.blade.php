@@ -150,8 +150,10 @@
 				<p class="expiry">
 					@if ($property->daysUntilExpiry() == 1)
 						Esta publicación caduca en {{$property->daysUntilExpiry()}} dia
-					@else
+					@elseif ($property->daysUntilExpiry() > 1)
 						Esta publicación caduca en {{$property->daysUntilExpiry()}} dias
+					@else
+						Esta publicación ha caducado
 					@endif
 				</p>
 			</div>
