@@ -1,18 +1,17 @@
 @extends('layout')
 @section('content')
 <style>
-	.row div.row{margin-bottom:12px;}
+	.content .row div.row{margin-bottom:12px;}
 	ul.features li{font-size:10pt;}
 	ul.features li .field{font-weight:bold;}
 	p.expiry{font-size: 9pt;font-style: italic;text-align: right;}
 </style>
-<div class="large-9 columns">
-	<div class='panel'>
-		<div class="row">
-			<div class="large-12 columns">
-				<h2 style="background: #f2f2f2;margin-top: 0px;">
-					<i class="fa fa-home"></i> {{$property->title}}
-					@if($property->state == Property::paused)
+<div class="large-9 columns content">
+	<div class="row">
+		<div class="large-12 columns">
+			<h2>
+				<i class="fa fa-home"></i> {{$property->title}}
+				@if($property->state == Property::paused)
 						<small>Pausada</small>
 					@endif
 					<button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button  radius back " style="float:right;">
@@ -55,9 +54,10 @@
 								</form>
 							</li>
 					</ul>
-				</h2>
-			</div>
+			</h2>
 		</div>
+	</div>
+	<div class='panel'>
 		@if (Session::has('message'))
 			<div class="row">
 				<div class="large-12 columns">
