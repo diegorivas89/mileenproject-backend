@@ -15,22 +15,25 @@
             </div>
             <div class='small-12 medium-6 columns end'>
                 <span>Email</span>
-                <span><a href=""><small>(Cambiar email)</small></a></span>
                 <input type='email' value='{{$user->email}}' disabled>
             </div>
         </div>
         <div class='row'>
             <div class='small-12 medium-6 columns end'>
-                <span>Contraseña</span>
-                <span><a href=""><small>(Cambiar contraseña)</small></a></span>
-                <input type='password' value='xxxxxxxxxx' disabled>
-            </div>
-            <div class='small-12 medium-6 columns end'>
                 <span>Teléfono</span>
-                <span><a href=""><small>(Cambiar teléfono)</small></a></span>
                 <input type='text' value='{{$user->telephone}}' disabled>
             </div>
+            <div class='small-12 medium-6 columns end'>
+                <span>Contraseña</span>
+                <input type='password' value='' disabled>
+            </div>
         </div>
+    </div>
+    <div class="row">
+    	<div class="columns small-12">
+    		<input type="submit" value="Guardar" class="button" id="submit-property">
+			<a href="#" class="button secondary">Cancelar</a>
+    	</div>
     </div>
 </div>
 @stop
