@@ -29,6 +29,9 @@ Route::group(['before' => 'encode-input'], function(){
 		Route::post('/properties/{properties}/reactivate', ['as' => 'properties.reactivate', 'uses' => 'PropertyController@reactivate']);
 		Route::post('/properties/{properties}/delete', ['as' => 'properties.delete', 'uses' => 'PropertyController@delete']);
 		Route::resource('/properties', 'PropertyController');
+
+		Route::get('/profile', 'ProfileController@edit');
+		Route::post('/profile', 'ProfileController@update');
 	});
 
 
