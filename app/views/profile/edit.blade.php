@@ -42,6 +42,11 @@
 	                @endif
 	            </div>
 	        </div>
+	        <div class="row">
+	        	<div class="columns small-12">
+	        		<small>Por razones de seguridad debes ingresar tu contraseña cada vez que desees editar tus datos personales</small>
+	        	</div>
+	        </div>
 	    </div>
 	    <div class="row">
 	    	<div class="columns small-12">

@@ -42,7 +42,7 @@
 											<a href="#"><i class="fa fa-user"></i> {{App::make('logged-user')->name}}</a>
 											<ul class="dropdown">
 												<li>
-													<a href="#"><i class="fa fa-cog"></i> Mi Perfil</a>
+													<a href="{{ URL::action('profile.edit') }}"><i class="fa fa-cog"></i> Mi Perfil</a>
 												</li>
 												<li class="divider"></li>
 												<li>
@@ -63,7 +63,7 @@
 									<li><a href="{{ URL::action('properties.index') }}"><i class="fa fa-newspaper-o"></i> Mis Publicaciones</a></li>
 									<li><a href="{{URL::action('properties.create')}}"><i class="fa fa-home"></i> Nueva Publicación</a></li>
 									<li class="divider"></li>
-									<li><a href="#"><i class="fa fa-cog"></i> Mi Perfil</a></li>
+									<li><a href="{{ URL::action('profile.edit') }}"><i class="fa fa-cog"></i> Mi Perfil</a></li>
 									<li><a href="{{URL::route('logout')}}"><i class="fa fa-sign-out"></i> Salir</a></li>
 								</ul>
 							</div>
