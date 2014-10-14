@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+<?php foreach ($errors as $error) var_dump($error) ?>
 <div class="large-9 columns">
 	<div class="row">
 		<div class="large-12 columns">
@@ -10,23 +11,35 @@
 	<form action="" method="post">
 		<div class='panel'>
 	        <div class='row'>
-	            <div class='small-12 medium-6 columns end'>
+	            <div class='small-12 medium-6 columns end {{($errors->has('name')) ? 'error': ''}}'>
 	                <span>Nombre</span>
-	                <input type='text' value='{{$user->name}}' disabled>
+	                <input type='text' name='name' value='{{Input::old('name', $user->name)}}'>
+	                @if ($errors->has('name'))
+	                	<small class="error">  {{ $errors->first('name') }} </small> 
+	                @endif
 	            </div>
-	            <div class='small-12 medium-6 columns end'>
+	            <div class='small-12 medium-6 columns end  {{($errors->has('email')) ? 'error': ''}}'>
 	                <span>Email</span>
-	                <input type='email' value='{{$user->email}}' disabled>
+	                <input type='email' name='email' value='{{Input::old('email', $user->email)}}'>
+	                @if ($errors->has('email'))
+	                	<small class="error">  {{ $errors->first('email') }} </small> 
+	                @endif
 	            </div>
 	        </div>
 	        <div class='row'>
-	            <div class='small-12 medium-6 columns end'>
+	            <div class='small-12 medium-6 columns end {{($errors->has('telephone')) ? 'error': ''}}'>
 	                <span>Teléfono</span>
-	                <input type='text' value='{{$user->telephone}}' disabled>
+	                <input type='text' name='telephone' value='{{Input::old('telephone', $user->telephone)}}'>
+	                @if ($errors->has('telephone'))
+	                	<small class="error">{{ $errors->first('telephone')}}</small> 
+	                @endif
 	            </div>
-	            <div class='small-12 medium-6 columns end'>
+	            <div class='small-12 medium-6 columns end {{($errors->has('password')) ? 'error': ''}}'>
 	                <span>Contraseña</span>
-	                <input type='password' value='' disabled>
+	                <input type='password' name='password' value=''>
+	                @if ($errors->has('password'))
+	                	<small class="error">{{ $errors->first('password')}}</small> 
+	                @endif
 	            </div>
 	        </div>
 	    </div>

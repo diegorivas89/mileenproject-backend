@@ -9,7 +9,24 @@ class ProfileController extends BaseController{
 
 	public function update()
 	{
+		$validator = Validator::make(Input::all(), User::getValidationRulesEditProfile());
 
+		if ($validator->fails())
+		{
+			return Redirect::route('profile.edit')->withInput()->withErrors($validator);
+		}else{
+			$user = app::make('logged-user');
+
+			$user->name = Input::get('name');
+			$user->email = Input::get('email');
+			$user->telephone = Input::get('telephone');
+			$user->password = User::hashPassword(Input::get('password'), Input::get('email'));
+			$user->save();
+
+			Auth::login($user);
+
+			return Redirect::route('properties.index');
+		}
 	}
 }
 
