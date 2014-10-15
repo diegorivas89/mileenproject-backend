@@ -2,6 +2,11 @@
 
 class ProfileController extends BaseController{
 
+	public function show()
+	{
+		return View::make('profile.show')->with('user', App::make('logged-user'));
+	}
+
 	public function edit()
 	{
 		return View::make('profile.edit')->with('user', App::make('logged-user'));

@@ -8,7 +8,7 @@
 			<h2><i class="fa fa-user"></i> Mi Perfil</h2>
 		</div>
 	</div>
-	<form action="" method="post">
+	<form action="{{URL::action('profile.update')}}" method="post">
 		<div class='panel'>
 	        <div class='row'>
 	            <div class='small-12 medium-6 columns end {{($errors->has('name')) ? 'error': ''}}'>
@@ -51,7 +51,7 @@
 	    <div class="row">
 	    	<div class="columns small-12">
 	    		<input type="submit" value="Guardar" class="button" id="submit-property">
-				<a href="{{URL::action('properties.index')}}" class="button secondary">Cancelar</a>
+				<a href="{{URL::action('profile.show')}}" class="button secondary">Cancelar</a>
 	    	</div>
 	    </div>
 	</form>

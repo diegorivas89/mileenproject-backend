@@ -30,7 +30,8 @@ Route::group(['before' => 'encode-input'], function(){
 		Route::post('/properties/{properties}/delete', ['as' => 'properties.delete', 'uses' => 'PropertyController@delete']);
 		Route::resource('/properties', 'PropertyController');
 
-		Route::get('/profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+		Route::get('/profile', ['as' => 'profile.show', 'uses' => 'ProfileController@show']);
+		Route::get('/profile/edit', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 		Route::post('/profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	});
 
