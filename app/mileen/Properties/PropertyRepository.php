@@ -196,8 +196,11 @@ class PropertyRepository implements PropertyRepositoryInterface
 			$query = $query->where("covered_size", ">=", $parameters['minCoveredSize']);
 		}
 
-		if (ParameterValidator::date('minPublishDate', $parameters)){
-			$query = $query->where("created_at", ">", $parameters['minPublishDate']);
+		if (ParameterValidator::integer('minPublishDate', $parameters)){
+			$range = \DateRange::find($parameters['minPublishDate']);
+			$inf = \Carbon\Carbon::now()->subDays($range->negative_offset);
+			$sup = \Carbon\Carbon::now()->addDays($range->positive_offset);
+			$query = $query->whereBetween("created_at", [$inf, $sup]);
 		}
 
 		$query = $query->where("state", $parameters['state']);
