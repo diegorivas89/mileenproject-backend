@@ -47,6 +47,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		];
 	}
 
+	public static function getValidationRulesEditProfile()
+	{
+		return [
+			'name' => 'required|max:50',
+			'email' => 'required|email|max:50',
+			'telephone' => 'max:25',
+			'password' => 'required|min:3',
+		];
+	}
+
 	public static function findByEmail($email)
 	{
 		return User::where("email", $email)->first();
@@ -70,6 +80,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			'email' => 'string',
 			'telephone' => 'string',
 		);
+	}
+
+	public function getProperties()
+	{
+		return Property::where('user_id', $this->id)->get();
 	}
 
 	public static function hashPassword($password, $email)

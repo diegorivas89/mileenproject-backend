@@ -1,5 +1,7 @@
 <?php
 
+use \Carbon\Carbon;
+
 /**
 *
 */
@@ -144,9 +146,32 @@ class Property extends MileenModel
 		}
 	}
 
+	public function hasExpired()
+	{
+		return $this->daysUntilExpiry() <= 0;
+	}
+
+	public function daysUntilExpiry()
+	{
+		$publication = $this->getPublicationType(['validity_period']);
+
+		$days = $this->created_at->addDays($publication->validity_period)->diffInDays(Carbon::now(), false);
+
+		return $days + 1;
+	}
+
 	public function possiblesStates()
 	{
 		return ['active', 'paused'];
+	}
+
+	public function deleteImages()
+	{
+		$images = Image::where('property_id', $this->id)->get();
+
+		foreach ($images as $image){
+			$image->delete();
+		}
 	}
 
 }
