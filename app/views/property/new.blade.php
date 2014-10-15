@@ -435,7 +435,7 @@ function addMarkerAtCenter() {
 		          placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;">
 		      </div>
 		      <div class="col-sm-4 controls">
-		        <label class="control-label">CBU</label>
+		        <label class="control-label">CVC</label>
 		        <input class="security-code form-control"·
 		          inputmode="numeric" required
 		          type="text" name="security_code"

@@ -6,6 +6,9 @@ return array(
   'edit'    => 'Editar',
   'details' => 'Detalles',
   'description' => 'Descripción',
-  'amenities' => 'Amenities'
-
+  'amenities' => 'Amenities',
+  'pause' => 'Pausar',
+  'reactivate' => 'Reactivar',
+  'paused' => 'Pausada',
+  'delete' => 'Eliminar'
 );

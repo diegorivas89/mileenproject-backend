@@ -1,10 +1,16 @@
 <?php
 
+use \Carbon\Carbon;
+
 /**
 *
 */
 class Property extends MileenModel
 {
+
+	const active = 'active';
+	const paused = 'paused';
+	const deleted = 'deleted';
 
 	protected $fillable = array(
 		"title",
@@ -52,6 +58,7 @@ class Property extends MileenModel
 			'size' => array('required','numeric' ,'min:0'),
 			'covered_size' => array('required','numeric' ,'min:0'),
 			'video_url' => array('url'),
+			'state' => 'in:active, paused, deleted'
 		);
 	}
 
@@ -67,6 +74,7 @@ class Property extends MileenModel
 			'covered_size' => 'int',
 			'environment_id' => 'int',
 			'publication_type_id' => 'int',
+			'state' => 'string',
 		);
 	}
 
@@ -119,6 +127,16 @@ class Property extends MileenModel
 		}
 	}
 
+	public function getAmenities()
+	{
+		$amenities = AmenitieProperty::select("amenitie_type_id")->where("property_id", $this->id)->get();
+		$amenitiesName = array();
+		foreach ($amenities as $index => $value) {
+			$amenitiesName[] = (AmenitieType::find($value->amenitie_type_id)->name);
+		}
+		return $amenitiesName;
+	}
+
 	public function getUser()
 	{
 		try{
@@ -127,6 +145,35 @@ class Property extends MileenModel
 			return new User();
 		}
 	}
+
+	public function hasExpired()
+	{
+		return $this->daysUntilExpiry() <= 0;
+	}
+
+	public function daysUntilExpiry()
+	{
+		$publication = $this->getPublicationType(['validity_period']);
+
+		$days = $this->created_at->addDays($publication->validity_period)->diffInDays(Carbon::now(), false);
+
+		return $days + 1;
+	}
+
+	public function possiblesStates()
+	{
+		return ['active', 'paused'];
+	}
+
+	public function deleteImages()
+	{
+		$images = Image::where('property_id', $this->id)->get();
+
+		foreach ($images as $image){
+			$image->delete();
+		}
+	}
+
 }
 
 ?>

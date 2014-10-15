@@ -37,7 +37,22 @@ class PropertyRepository implements PropertyRepositoryInterface
 		if(!isset($id)) {
 			return NULL;
 		}
-		return $this->model->where("user_id", "=", $id)->get();
+		return $this->model->where("user_id", $id)->where('state', '<>', \Property::deleted)->get();
+	}
+
+	/**
+	 * Retorna un listado de propiedades activas que pertencen a un usuario determinado
+	 *
+	 * @param  int $id Identificador del usuario
+	 * @return Array de propiedades
+	 */
+
+	public function userActiveProperties($id)
+	{
+		if(!isset($id)) {
+			return NULL;
+		}
+		return $this->model->where("user_id", $id)->where('state', \Property::active)->get();
 	}
 
 
@@ -110,10 +125,26 @@ class PropertyRepository implements PropertyRepositoryInterface
 			'covered_size',
 			'environment_id',
 			'publication_type_id',
-			'video_url'
+			'video_url',
+			'state',
+			'created_at'
 		);
 
-		return $query->select($fields)->get();
+		return $this->filterExpiredPublications($query->select($fields)->get());
+	}
+
+	protected function filterExpiredPublications(\Illuminate\Database\Eloquent\Collection $properties)
+	{
+		$filteredProperties = new \Illuminate\Database\Eloquent\Collection();
+
+		foreach ($properties as $property) {
+			if (!$property->hasExpired()){
+				unset($property->created_at);
+				$filteredProperties->push($property);
+			}
+		}
+
+		return $filteredProperties;
 	}
 
 	/**
@@ -168,6 +199,8 @@ class PropertyRepository implements PropertyRepositoryInterface
 		if (ParameterValidator::date('minPublishDate', $parameters)){
 			$query = $query->where("created_at", ">", $parameters['minPublishDate']);
 		}
+
+		$query = $query->where("state", $parameters['state']);
 
 		return $query;
 	}

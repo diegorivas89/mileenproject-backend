@@ -20,8 +20,9 @@ class PropertyTypeTableSeeder extends Seeder {
 				PropertyType::create(array('name' => 'Galpón'));
 				PropertyType::create(array('name' => 'Hotel'));
 				PropertyType::create(array('name' => 'Edificio'));
-				PropertyType::create(array('name' => 'Otro'));
 				PropertyType::create(array('name' => 'Departamento Compartido'));
+				PropertyType::create(array('name' => 'PH'));
+				PropertyType::create(array('name' => 'Otro'));
 		}
 
 }

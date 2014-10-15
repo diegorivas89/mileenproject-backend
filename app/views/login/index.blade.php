@@ -48,6 +48,9 @@
 						<div class="large-3 small-12 columns">&nbsp;</div>
 						<div class="large-6 small-12 columns">
 							<form action="{{URL::route('login.post')}}" method="post">
+								@if (Input::has('uri') || strlen(Input::old('uri')) > 0)
+									<input type="hidden" name="uri" value="{{Input::get('uri',Input::old('uri'))}}">
+								@endif
 								<div class="panel radius" style="-webkit-box-shadow: 8px 6px 20px 4px lightgray;-moz-box-shadow:    8px 6px 20px 4px lightgray;box-shadow:         8px 6px 20px 4px lightgray;">
 									<div class="row">
 										<div class="large-12 columns">

@@ -67,6 +67,14 @@ class PropertyService extends MileenApi
 		$property->neighborhood = $property->getNeighborhood();
 		unset($property->neighborhood_id);
 
+		$amenities = \AmenitieProperty::select("amenitie_type_id")->where("property_id", $property->id)->get();
+		$amenitiesName = Array();
+		foreach ($amenities as $index => $value) {
+			$amenitiesName[] = array('id' => $value->amenitie_type_id, 'name' => (\AmenitieType::find($value->amenitie_type_id)->name));
+		}
+
+		$property['amenitieType'] = $amenitiesName;
+
 		$property->user = $property->getUser();
 		unset($property->user_id);
 

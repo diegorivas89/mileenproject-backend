@@ -33,7 +33,11 @@ class LoginController extends BaseController
 			if ($user && $user->checkPassword(Input::get('password')) && $user->isActive()){
 				Auth::login($user);
 
-				return Redirect::route('properties.index');
+				if (Input::has('uri')){
+					return Redirect::to(urldecode(Input::get('uri')));
+				}else{
+					return Redirect::route('properties.index');
+				}
 			}
 		}
 

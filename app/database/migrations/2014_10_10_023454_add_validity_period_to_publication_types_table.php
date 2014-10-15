@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class RemoveNameFieldFromImagesTable extends Migration {
+class AddValidityPeriodToPublicationTypesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,9 +12,9 @@ class RemoveNameFieldFromImagesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('images', function(Blueprint $table)
+		Schema::table('publication_types', function(Blueprint $table)
 		{
-			$table->dropColumn('name');
+			$table->integer('validity_period')->after('video');
 		});
 	}
 
@@ -26,9 +26,9 @@ class RemoveNameFieldFromImagesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('images', function(Blueprint $table)
+		Schema::table('publication_types', function(Blueprint $table)
 		{
-			$table->integer('name')->after('property_id');
+			$table->dropColumn('validity_period');
 		});
 	}
 

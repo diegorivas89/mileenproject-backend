@@ -20,6 +20,10 @@ App::singleton('definitions-service', function() {
   return new \Mileen\Api\DefinitionsService();
 });
 
+App::singleton('send-message-service', function() {
+  return new \Mileen\Api\SendMessageService();
+});
+
 App::singleton('logged-user', function(){
 	$user = Auth::user();
 

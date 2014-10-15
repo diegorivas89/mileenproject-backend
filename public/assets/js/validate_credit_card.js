@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+	if($('.creditly-wrapper .expiration-month-and-year').size() == 0) {
+		return
+	}
+
 	creditly = Creditly.initialize(
 		'.creditly-wrapper .expiration-month-and-year',
 		'.creditly-wrapper .credit-card-number',

@@ -1,17 +1,19 @@
 @extends('layout')
 @section('content')
 <style>
-	.row div.row{margin-bottom:12px;}
+	.content .row div.row{margin-bottom:12px;}
 	ul.features li{font-size:10pt;}
 	ul.features li .field{font-weight:bold;}
+	p.expiry{font-size: 9pt;font-style: italic;text-align: right;}
 </style>
-<div class="large-9 columns">
-	<div class='panel'>
-		<div class="row">
-			<div class="large-12 columns">
-				<h2 style="background: #f2f2f2;margin-top: 0px;">
-					<i class="fa fa-home"></i> {{$property->title}}
-					<!--
+<div class="large-9 columns content">
+	<div class="row">
+		<div class="large-12 columns">
+			<h2>
+				<i class="fa fa-home"></i> {{$property->title}}
+				@if($property->state == Property::paused)
+						<small>Pausada</small>
+					@endif
 					<button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button  radius back " style="float:right;">
 						<i class="fa fa-cogs"></i>
 						{{Lang::get('strings.actions')}}
@@ -24,10 +26,48 @@
 								{{Lang::get('strings.edit')}}
 							</a>
 						</li>
-					</ul>-->
-				</h2>
-			</div>
+							<li>
+						  	@if($property->state == Property::active)
+									<form class='property-form' action="{{URL::action('properties.pause', $property->id)}}" method='post'>
+										<button>
+							  			<i class='fa fa-pause'></i>
+											{{Lang::get('strings.pause')}}
+										</button>
+									</form>
+								@else
+									@if($property->state == Property::paused)
+										<form class='property-form' action="{{URL::action('properties.reactivate', $property->id)}}" method='post'>
+											<button>
+								  			<i class='fa fa-play'></i>
+												{{Lang::get('strings.reactivate')}}
+											</button>
+										</form>
+									@endif
+								@endif
+						  </li>
+							<li>
+								<form class='property-form' action="{{URL::action('properties.delete', $property->id)}}" method='post'>
+									<button id='delete-property'>
+						  			<i class='fa fa-times'></i>
+										{{Lang::get('strings.delete')}}
+									</button>
+								</form>
+							</li>
+					</ul>
+			</h2>
 		</div>
+	</div>
+	<div class='panel'>
+		@if (Session::has('message'))
+			<div class="row">
+				<div class="large-12 columns">
+					<div data-alert class="alert-box info radius">
+					  {{Session::get('message')}}
+					  <a href="#" class="close">&times;</a>
+					</div>
+				</div>
+			</div>
+		@endif
 		<div class="row">
 			<div class="large-6 medium-6 columns">
 				<ul class="features">
@@ -103,6 +143,19 @@
 			<div class="columns large-12">
 				<h4>Ubicación</h4>
 				<img style="width:100%" src="http://maps.googleapis.com/maps/api/staticmap?center={{$property->latitude}},{{$property->longitude}}&zoom=15&size=1200x300&maptype=roadmap&markers=color:red%7C{{$property->latitude}},{{$property->longitude}}&sensor=false" alt="">
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns large-12">
+				<p class="expiry">
+					@if ($property->daysUntilExpiry() == 1)
+						Esta publicación caduca en {{$property->daysUntilExpiry()}} dia
+					@elseif ($property->daysUntilExpiry() > 1)
+						Esta publicación caduca en {{$property->daysUntilExpiry()}} dias
+					@else
+						Esta publicación ha caducado
+					@endif
+				</p>
 			</div>
 		</div>
 	</div>

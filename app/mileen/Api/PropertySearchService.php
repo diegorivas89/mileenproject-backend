@@ -49,6 +49,7 @@ class PropertySearchService extends MileenApi
 	 */
 	public function execute($parameters)
 	{
+		$parameters['state'] = \Property::active;
 		try {
 			$this->assertParameters($parameters);
 			$properties = $this->repository->search($parameters);

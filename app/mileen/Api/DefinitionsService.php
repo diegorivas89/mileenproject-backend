@@ -57,6 +57,7 @@ class DefinitionsService extends MileenApi
     $neighborhoods = \Neighborhood::select("id", "name")->get();
     $propertyTypes = \PropertyType::select("id", "name")->get();
     $operationTypes = \OperationType::select("id", "name")->get();
+    $amenitieTypes = \AmenitieType::select("id", "name")->get();
     $dateRanges = \DateRange::select("id", "name")->get();
 
     $response = Array(
@@ -64,6 +65,7 @@ class DefinitionsService extends MileenApi
       'environments' => $environments->toArray(),
       'propertyTypes' => $propertyTypes->toArray(),
       'operationTypes' => $operationTypes->toArray(),
+      'amenitieTypes' => $amenitieTypes->toArray(),
       'dateRanges' => $dateRanges->toArray()
     );
 
