@@ -165,6 +165,15 @@ class Property extends MileenModel
 		return ['active', 'paused'];
 	}
 
+	public function deleteImages()
+	{
+		$images = Image::where('property_id', $this->id)->get();
+
+		foreach ($images as $image){
+			$image->delete();
+		}
+	}
+
 }
 
 ?>

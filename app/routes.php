@@ -33,6 +33,7 @@ Route::group(['before' => 'encode-input'], function(){
 		Route::get('/profile', ['as' => 'profile.show', 'uses' => 'ProfileController@show']);
 		Route::get('/profile/edit', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 		Route::post('/profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+		Route::post('/profile/delete', ['as' => 'profile.delete', 'uses' => 'ProfileController@delete']);
 	});
 
 

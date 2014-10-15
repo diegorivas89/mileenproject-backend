@@ -33,6 +33,19 @@ class ProfileController extends BaseController{
 			return Redirect::route('properties.index');
 		}
 	}
+
+	public function delete()
+	{
+		$user = App::make('logged-user');
+		foreach ($user->getProperties() as $property) {
+			$property->deleteImages();
+			$property->delete();
+		}
+
+		$user->delete();
+
+		return Redirect::route('login.get');
+	}
 }
 
 ?>

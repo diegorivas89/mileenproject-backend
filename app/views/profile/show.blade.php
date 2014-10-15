@@ -1,6 +1,15 @@
 @extends('layout')
 
 @section('content')
+<script>
+	$(document).ready(function(){
+		$("button#delete-account").click(function(event){
+			if (!confirm("Esta seguro que desea eliminar la cuenta?")){
+				event.preventDefault();
+			}
+		});
+	});
+</script>
 <?php foreach ($errors as $error) var_dump($error) ?>
 <div class="large-9 columns">
 	<div class="row">
@@ -20,10 +29,9 @@
 						</a>
 					</li>
 					<li>
-						<a href="{{URL::action('profile.edit')}}">
-							<i class='fa fa-trash-o'></i>
-							Borrar cuenta
-						</a>
+						<form class='property-form' action="{{URL::action('profile.delete')}}" method="post">
+							<button type="submit" id="delete-account"><i class='fa fa-trash-o'></i> Borrar cuenta</button>
+						</form>
 					</li>
 				</ul>
 			</h2>

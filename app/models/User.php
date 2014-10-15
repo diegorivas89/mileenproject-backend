@@ -82,6 +82,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		);
 	}
 
+	public function getProperties()
+	{
+		return Property::where('user_id', $this->id)->get();
+	}
+
 	public static function hashPassword($password, $email)
 	{
 		return md5($password . $email . "awesome salt string");
