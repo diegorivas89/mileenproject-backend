@@ -52,7 +52,7 @@
 
 			var myId = getId($(this).val());
 			if (myId != 'error'){
-				var myCode = '<div class="flex-vide"><iframe width="420" height="315" src="//www.youtube.com/embed/'
+				var myCode = '<div class="flex-video"><iframe width="420" height="315" src="//www.youtube.com/embed/'
 					+ myId + '" frameborder="0" allowfullscreen></iframe></div>';
 
 				$("div#youtube-video-container").html(myCode);
@@ -190,6 +190,10 @@ function addMarkerAtCenter() {
 		infowindow.open(map,marker);
 	});
 }
+
+$(document).ready(function(){
+	initialize();
+});
 </script>
 
 <div class="large-9 columns">
