@@ -154,6 +154,16 @@ class PropertyController extends BaseController
 		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se reactivó');
 	}
 
+	public function republish($id)
+	{
+		$property = Property::find($id);
+		$property->state = Property::active;
+		$property->republished = true;
+		$property->created_at = \Carbon\Carbon::now();
+		$property->save();
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó');
+	}
+
 	public function delete($id)
 	{
 		$property = Property::find($id);

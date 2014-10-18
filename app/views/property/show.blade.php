@@ -45,6 +45,16 @@
 									@endif
 								@endif
 						  </li>
+						  @if ($property->daysUntilExpiry() <= 0 && !$property->republished)
+							<li>
+								<form class='property-form' action="{{URL::action('properties.republish', $property->id)}}" method='post'>
+									<button>
+						  			<i class='fa fa-refresh'></i>
+										Republicar
+									</button>
+								</form>
+							</li>
+							@endif
 							<li>
 								<form class='property-form' action="{{URL::action('properties.delete', $property->id)}}" method='post'>
 									<button id='delete-property'>

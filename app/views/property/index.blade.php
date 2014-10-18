@@ -51,6 +51,12 @@
 						  	</a>
 						  </li>
 						  <li>
+								<a href="#">
+									<i class='fa fa-pencil'></i>
+									{{Lang::get('strings.edit')}}
+								</a>
+							</li>
+						  <li>
 						  	@if($property->state == Property::active)
 									<form class='property-form' action="{{URL::action('properties.pause', $property->id)}}" method='post'>
 										<button>
@@ -69,12 +75,17 @@
 									@endif
 								@endif
 						  </li>
+							
+							@if ($property->daysUntilExpiry() <= 0 && !$property->republished)
 							<li>
-								<a href="#">
-									<i class='fa fa-pencil'></i>
-									{{Lang::get('strings.edit')}}
-								</a>
+								<form class='property-form' action="{{URL::action('properties.republish', $property->id)}}" method='post'>
+									<button>
+						  			<i class='fa fa-refresh'></i>
+										Republicar
+									</button>
+								</form>
 							</li>
+							@endif
 							<li>
 								<form class='property-form' action="{{URL::action('properties.delete', $property->id)}}" method='post'>
 									<button id='delete-property'>
@@ -114,7 +125,7 @@
 							@elseif ($property->daysUntilExpiry() > 1)
 								Esta publicación caduca en {{$property->daysUntilExpiry()}} dias
 							@else
-								Esta publicación ha caducado
+								<span class="alert label radius">Esta publicación ha caducado</span>
 							@endif
 						</p>
 					</div>
