@@ -62,9 +62,12 @@ class PropertyController extends BaseController
 		Input::merge(array('user_id' => Auth::user()->id));
 
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
-
-		if ($validator->fails())
+		$invalid_covered_size = Input::get('covered_size') > Input::get('size');
+		if ($validator->fails() || $invalid_covered_size)
 		{
+			if($invalid_covered_size) {
+				$validator->errors()->add('covered_size', Lang::get('validation.covered_size'));
+			}
 			return Redirect::route('properties.create')->withInput()->withErrors($validator);
 		}else{
 			//guardo la propiedad

@@ -13,6 +13,7 @@ return array(
 	|
 	*/
 
+	'covered_size' 				 => 'La superficie cubierta es mayor a la superficie total',
 	"accepted"             => "The :attribute must be accepted.",
 	"active_url"           => "El campo :attribute debe ser una url válida.",
 	"after"                => "The :attribute must be a date after :date.",
@@ -53,7 +54,7 @@ return array(
 		"string"  => "El campo :attribute debe tener como mínimo :min caracteres.",
 		"array"   => "The :attribute must have at least :min items.",
 	),
-	
+
 	"not_in"               => "El campo :attribute seleccionado es inválido.",
 	"numeric"              => "El campo :attribute debe ser numerico.",
 	"regex"                => "El formato del campo campo :attribute es inválido.",
