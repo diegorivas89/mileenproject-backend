@@ -155,9 +155,9 @@ class Property extends MileenModel
 	{
 		$publication = $this->getPublicationType(['validity_period']);
 
-		$days = $this->created_at->addDays($publication->validity_period)->diffInDays(Carbon::now(), false);
+		$days = $this->created_at->diffInDays(Carbon::now(), false);
 
-		return $days + 1;
+		return $publication->validity_period - $days;
 	}
 
 	public function possiblesStates()
