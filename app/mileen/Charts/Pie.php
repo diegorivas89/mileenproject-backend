@@ -18,9 +18,14 @@ class Pie extends Chart
 
 		$graph->title->Set($this->title);
 
-		$pie = new \PiePlot($this->data);
+		$pie = new \PiePlot(array_values($this->data));
 		$graph->Add($pie);
-		$graph->Stroke();
+
+		$filename = $this->generateChartFilename();
+
+		$graph->Stroke(public_path().$filename);
+
+		return $filename;
 	}
 }
 
