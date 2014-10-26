@@ -44,9 +44,25 @@ class PriceByNeighborhoodService extends MileenApi
 			return $this->buildErrorResponse($e->getMessage());
 		}
 
+		$payload = ['url' => $this->createChart($neighborhood)];
+
+		return $this->buildResponse($payload);
+	}
+
+	/**
+	 * Crea el grafico y lo guarda en un archivo, retorna la ruta a este
+	 *
+	 * @param  \Neighborhood $neighborhood
+	 * @return string
+	 */
+	public function createChart($neighborhood)
+	{
 		$data = [];
 		foreach ($neighborhood->getAdjacents() as $adjacentNeighborhood){
-			$data[$adjacentNeighborhood->name] = $adjacentNeighborhood->getPriceByM2();
+			$averagePrice = $adjacentNeighborhood->getPriceByM2();
+			if ($averagePrice > 0){
+				$data[$adjacentNeighborhood->name] = $adjacentNeighborhood->getPriceByM2();
+			}
 		}
 
 		$filename = \App::make('bar-chart')
@@ -54,7 +70,7 @@ class PriceByNeighborhoodService extends MileenApi
 						->setData($data)
 						->plot(600, 400);
 
-		echo $filename;die();
+		return $filename;
 	}
 }
 
