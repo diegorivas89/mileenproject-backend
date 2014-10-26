@@ -3,6 +3,7 @@ namespace Mileen\Charts;
 
 require_once app_path().'/libs/jpgraph/src/jpgraph.php';
 require_once app_path().'/libs/jpgraph/src/jpgraph_bar.php';
+require_once app_path().'/libs/jpgraph/src/jpgraph_pie.php';
 
 /**
 *
