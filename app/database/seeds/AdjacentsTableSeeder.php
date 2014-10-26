@@ -60,6 +60,7 @@ class AdjacentsTableSeeder extends Seeder {
         $i = 1;
         foreach ($index as $value) {
             $aux[$value] = $i;
+            echo $value." - ".$i."\n";
             $i++;
         }
         $index = $aux;

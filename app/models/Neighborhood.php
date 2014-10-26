@@ -20,12 +20,18 @@ class Neighborhood extends MileenModel
 	 */
 	public function getAdjacents()
 	{
-		$adjacents = Adjacents::select('adjacent_neighborhood_id')->where('neighborhood_id', '=', $this->id)->get();
+		$adjacents = Adjacent::select('adjacent_neighborhood_id')
+							->where('neighborhood_id', '=', $this->id)
+							->get();
 
 		$collection = new \Illuminate\Support\Collection();
 
 		foreach ($adjacents as $adjacent) {
-			$collection->add(self::find($adjacent));
+			try {
+				$collection->push(self::findOrFail($adjacent->adjacent_neighborhood_id));
+			} catch (\Exception $e) {
+				continue;
+			}
 		}
 
 		return $collection;
@@ -36,13 +42,17 @@ class Neighborhood extends MileenModel
 	 *
 	 * @return int
 	 */
-	public function priceByM2()
+	public function getPriceByM2()
 	{
 		$properties = Property::where('neighborhood_id', '=', $this->id)->get();
 
 		$acum = 0;
 		foreach ($properties as $property) {
 			$acum += $property->price / $property->size;
+		}
+
+		if ($properties->count() == 0){
+			return 0;
 		}
 
 		return round($acum / $properties->count());
