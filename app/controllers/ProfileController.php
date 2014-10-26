@@ -23,9 +23,9 @@ class ProfileController extends BaseController{
 			$user = app::make('logged-user');
 
 			$user->name = Input::get('name');
-			$user->email = Input::get('email');
+			/*$user->email = Input::get('email');*/
 			$user->telephone = Input::get('telephone');
-			$user->password = User::hashPassword(Input::get('password'), Input::get('email'));
+			/*$user->password = User::hashPassword(Input::get('password'), Input::get('email'));*/
 			$user->save();
 
 			Auth::login($user);
