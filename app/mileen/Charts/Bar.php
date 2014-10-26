@@ -1,45 +1,45 @@
 <?php
 namespace Mileen\Charts;
 
-require_once app_path().'/libs/jpgraph/src/jpgraph.php';
-require_once app_path().'/libs/jpgraph/src/jpgraph_bar.php';
-
 /**
 *
 */
-class Bar
+class Bar extends Chart
 {
-	protected $storePath;
-	protected $title;
 	protected $xTitle;
 	protected $yTitle;
-	protected $data;
 
 	function __construct($title = '')
 	{
-		$this->title = $title;
+		parent::__construct($title);
+
 		$this->xTitle = '';
 		$this->yTitle = '';
-		$this->data = [];
-		$this->storePath = "/store/chart/";
 	}
 
+	/**
+	 * Setea el titulo del grafico, y el de los ejes x e y
+	 *
+	 * @param string $title
+	 * @param string $xTitle
+	 * @param string $yTitle
+	 */
 	public function setTitle($title, $xTitle = '', $yTitle = '')
 	{
-		$this->title = $title;
+		parent::setTitle($title);
 		$this->xTitle = $xTitle;
 		$this->yTitle = $yTitle;
 
 		return $this;
 	}
 
-	public function setData($data)
-	{
-		$this->data = $data;
-
-		return $this;
-	}
-
+	/**
+	 * Genera el grafico7
+	 *
+	 * @param type $width
+	 * @param type $height
+	 * @return type
+	 */
 	public function plot($width, $height)
 	{
 		$datay = array_values($this->data);
@@ -71,7 +71,8 @@ class Bar
 		$graph->yaxis->title->Set($this->yTitle);
 
 		// Store graph
-		$filename = $this->storePath.md5(microtime().rand(1,9999)).".png";
+		$filename = $this->generateChartFilename();
+
 		$graph->Stroke(public_path().$filename);
 
 		return $filename;

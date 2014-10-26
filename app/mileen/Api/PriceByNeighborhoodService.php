@@ -12,7 +12,7 @@ class PriceByNeighborhoodService extends MileenApi
 
 	function __construct()
 	{
-		
+
 	}
 
 	/**
@@ -44,18 +44,34 @@ class PriceByNeighborhoodService extends MileenApi
 			return $this->buildErrorResponse($e->getMessage());
 		}
 
-		$payload = ['url' => $this->createChart($neighborhood)];
+		$chartData = $this->generateChartData($neighborhood);
+
+		if (count($chartData) == 0){
+			return $this->buildErrorResponse('Insufficient data to plot the chart');
+		}
+
+		$filename = $this->createChart($chartData, $parameters['width'], $parameters['height']);
+
+		$payload = [
+			'url' => $filename,
+			'neighborhood' => [
+				'id' => $neighborhood->id,
+				'name' => $neighborhood->name,
+				'priceByM2' => $neighborhood->getPriceByM2()
+			],
+			'data' => $chartData
+		];
 
 		return $this->buildResponse($payload);
 	}
 
 	/**
-	 * Crea el grafico y lo guarda en un archivo, retorna la ruta a este
+	 * Genera la data para poder graficar
 	 *
 	 * @param  \Neighborhood $neighborhood
-	 * @return string
+	 * @return array
 	 */
-	public function createChart($neighborhood)
+	public function generateChartData($neighborhood)
 	{
 		$data = [];
 		foreach ($neighborhood->getAdjacents() as $adjacentNeighborhood){
@@ -65,10 +81,21 @@ class PriceByNeighborhoodService extends MileenApi
 			}
 		}
 
+		return $data;
+	}
+
+	/**
+	 * Crea el grafico y lo guarda en un archivo, retorna la ruta a este
+	 *
+	 * @param  \Neighborhood $neighborhood
+	 * @return string
+	 */
+	public function createChart($data, $width, $height)
+	{
 		$filename = \App::make('bar-chart')
 						->setTitle('Precio promedio por M2', 'Barrios', '$')
 						->setData($data)
-						->plot(600, 400);
+						->plot($width, $height);
 
 		return $filename;
 	}
