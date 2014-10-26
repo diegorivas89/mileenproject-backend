@@ -24,9 +24,21 @@ App::singleton('send-message-service', function() {
   return new \Mileen\Api\SendMessageService();
 });
 
+App::singleton('price-by-neighborhood-service', function() {
+  return new \Mileen\Api\PriceByNeighborhoodService();
+});
+
 App::singleton('logged-user', function(){
 	$user = Auth::user();
 
 	return $user;
+});
+
+App::singleton('bar-chart', function(){
+	return new \Mileen\Charts\Bar();
+});
+
+App::singleton('pie-chart', function(){
+	return new \Mileen\Charts\Pie();
 });
 ?>

@@ -12,6 +12,64 @@ require_once 'ioc.php';
 */
 
 Route::group(['before' => 'encode-input'], function(){
+
+	Route::get('/pie-chart', function(){
+		require_once app_path().'/libs/jpgraph/src/jpgraph.php';
+		require_once app_path().'/libs/jpgraph/src/jpgraph_pie.php';
+
+		$data = array(40,60,21,33);
+
+		$graph = new PieGraph(500, 400);
+		$graph->SetShadow();
+
+		$graph->title->Set("A simple Pie plot");
+
+		$p1 = new PiePlot($data);
+		$graph->Add($p1);
+		$graph->Stroke();
+
+	});
+
+	Route::get('/bar-chart', function(){
+		require_once app_path().'/libs/jpgraph/src/jpgraph.php';
+		require_once app_path().'/libs/jpgraph/src/jpgraph_bar.php';
+
+		$datay=array(12,8,19,3,10,5);
+
+		// Create the graph. These two calls are always required
+		$graph = new Graph(600,400);
+		$graph->SetScale('intlin');
+
+		// Add a drop shadow
+		$graph->SetShadow();
+
+		// Adjust the margin a bit to make more room for titles
+		$graph->SetMargin(40,30,20,40);
+
+		// Create a bar pot
+		$bplot = new BarPlot($datay);
+
+		// Adjust fill color
+		$bplot->SetFillColor('orange');
+		$graph->Add($bplot);
+
+		// Setup the titles
+		$graph->title->Set('A basic bar graph');
+		//$graph->title->SetFont(FF_ARIAL,FS_BOLD,14);
+		$graph->xaxis->title->Set('X-title');
+		$graph->yaxis->title->Set('Y-title');
+
+		//$graph->title->SetFont(FF_FONT1,FS_BOLD);
+		//$graph->yaxis->title->SetFont(FF_FONT1,FS_BOLD);
+		//$graph->xaxis->title->SetFont(FF_FONT1,FS_BOLD);
+
+		// Display the graph
+		//$graph->Stroke();
+		$graph->StrokeStore(public_path()."/store/bar-chart.png");
+
+		return '<img src="/store/bar-chart.png?v='.md5(microtime()).'"/>';
+	});
+
 	Route::get('/signup', ['as' => 'signup.get', 'uses' =>'SignupController@getSignup']);
 	Route::post('/signup', ['as' => 'signup.post', 'uses' =>'SignupController@postSignup']);
 	Route::get('/confirm/{code}', ['as' => 'signup.activation', 'uses' =>'SignupController@activation']);
@@ -45,6 +103,7 @@ Route::group(['before' => 'encode-input'], function(){
     	Route::get('/definitions', 'ApiController@definitions');
     	Route::get('/send-message', 'ApiController@sendMessage');
     	Route::post('/send-message', 'ApiController@sendMessage');
+    	Route::get('/average-price-by-neighborhood', 'ApiController@priceByNeighborhood');
 	});
 });
 
