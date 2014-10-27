@@ -46,7 +46,7 @@ class Bar extends Chart
 		$datax = array_keys($this->data);
 		// Create the graph. These two calls are always required
 		$graph = new \Graph($width, $height);
-		$graph->SetScale('intlin');
+		$graph->SetScale('textlin');
 
 		// Add a drop shadow
 		$graph->SetShadow();
@@ -66,14 +66,15 @@ class Bar extends Chart
 
 		// Setup the titles
 		$graph->title->Set($this->title);
-		//$graph->title->SetFont(FF_ARIAL,FS_BOLD,14);
+		//$graph->title->SetFont(FF_ARIAL, FS_BOLD, 18);
+		$graph->title->SetFont(FF_DEFAULT,FS_NORMAL, 17);
 		$graph->xaxis->title->Set($this->xTitle);
 		$graph->yaxis->title->Set($this->yTitle);
 
 		// Store graph
 		$filename = $this->generateChartFilename();
 
-		$graph->Stroke(public_path().$filename);
+		$graph->Stroke(/*public_path().$filename*/);
 
 		return $filename;
 	}
