@@ -98,6 +98,7 @@ class PropertyService extends MileenApi
 		if (YoutubeUrl::test($url)){
 			$youtube = YoutubeUrl::create($url);
 			$video = Array(
+				'id' 		=> $youtube->getVideoId(),
 				'url' 		=> $youtube->getUrl(),
 				'embed_url' => $youtube->getEmbedUrl(),
 				'thumbnail' => $youtube->getThumbnailUrl()
@@ -105,12 +106,14 @@ class PropertyService extends MileenApi
 		}elseif (VimeoUrl::test($url)){
 			$vimeo = VimeoUrl::create($url);
 			$video = Array(
+				'id' 		=> '',
 				'url' 		=> $vimeo->getUrl(),
 				'embed_url' => $vimeo->getEmbedUrl(),
 				'thumbnail' => $vimeo->getThumbnailUrl()
 			);
 		}else{
 			$video = Array(
+				'id' 		=> '',
 				'url' 		=> '',
 				'embed_url' => '',
 				'thumbnail' => ''
