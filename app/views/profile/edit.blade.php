@@ -18,15 +18,6 @@
 	                	<small class="error">  {{ $errors->first('name') }} </small> 
 	                @endif
 	            </div>
-	            <div class='small-12 medium-6 columns end  {{($errors->has('email')) ? 'error': ''}}'>
-	                <span>Email</span>
-	                <input type='email' name='email' value='{{Input::old('email', $user->email)}}'>
-	                @if ($errors->has('email'))
-	                	<small class="error">  {{ $errors->first('email') }} </small> 
-	                @endif
-	            </div>
-	        </div>
-	        <div class='row'>
 	            <div class='small-12 medium-6 columns end {{($errors->has('telephone')) ? 'error': ''}}'>
 	                <span>Teléfono</span>
 	                <input type='text' name='telephone' value='{{Input::old('telephone', $user->telephone)}}'>
@@ -34,19 +25,30 @@
 	                	<small class="error">{{ $errors->first('telephone')}}</small> 
 	                @endif
 	            </div>
+	        </div>
+	        <div class='row'>
+	            <div class='small-12 medium-6 columns end  {{($errors->has('email')) ? 'error': ''}}'>
+	                <span>Email</span>
+	                <input type='email' name='email' value='{{Input::old('email', $user->email)}}' disabled>
+	                @if ($errors->has('email'))
+	                	<small class="error">  {{ $errors->first('email') }} </small> 
+	                @endif
+	            </div>
 	            <div class='small-12 medium-6 columns end {{($errors->has('password')) ? 'error': ''}}'>
 	                <span>Contraseña</span>
-	                <input type='password' name='password' value=''>
+	                <input type='password' name='password' value='xxxxxxxx' disabled>
 	                @if ($errors->has('password'))
 	                	<small class="error">{{ $errors->first('password')}}</small> 
 	                @endif
 	            </div>
 	        </div>
+	        {{--
 	        <div class="row">
 	        	<div class="columns small-12">
 	        		<small>Por razones de seguridad debes ingresar tu contraseña cada vez que desees editar tus datos personales</small>
 	        	</div>
 	        </div>
+	        --}}
 	    </div>
 	    <div class="row">
 	    	<div class="columns small-12">

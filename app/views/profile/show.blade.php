@@ -44,14 +44,14 @@
                 <input type='text' name='name' value='{{Input::old('name', $user->name)}}' disabled>
             </div>
             <div class='small-12 medium-6 columns end'>
-                <span>Email</span>
-                <input type='email' name='email' value='{{Input::old('email', $user->email)}}' disabled>
+                <span>Teléfono</span>
+                <input type='text' name='telephone' value='{{Input::old('telephone', $user->telephone)}}' disabled>
             </div>
         </div>
         <div class='row'>
             <div class='small-12 medium-6 columns end'>
-                <span>Teléfono</span>
-                <input type='text' name='telephone' value='{{Input::old('telephone', $user->telephone)}}' disabled>
+                <span>Email</span>
+                <input type='email' name='email' value='{{Input::old('email', $user->email)}}' disabled>
             </div>
             <div class='small-12 medium-6 columns end'>
                 <span>Contraseña</span>

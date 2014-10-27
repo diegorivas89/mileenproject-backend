@@ -28,6 +28,10 @@ App::singleton('price-by-neighborhood-service', function() {
   return new \Mileen\Api\PriceByNeighborhoodService();
 });
 
+App::singleton('property-by-environment-service', function() {
+	return new \Mileen\Api\PropertyByEnvironmentService();
+});
+
 App::singleton('logged-user', function(){
 	$user = Auth::user();
 

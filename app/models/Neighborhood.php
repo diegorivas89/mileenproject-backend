@@ -44,7 +44,7 @@ class Neighborhood extends MileenModel
 	 */
 	public function getPriceByM2()
 	{
-		$properties = Property::where('neighborhood_id', '=', $this->id)->get();
+		$properties = $this->getProperties();
 
 		$acum = 0;
 		foreach ($properties as $property) {
@@ -56,6 +56,11 @@ class Neighborhood extends MileenModel
 		}
 
 		return round($acum / $properties->count());
+	}
+
+	public function getProperties()
+	{
+		return Property::where('neighborhood_id', '=', $this->id)->get();
 	}
 }
 
