@@ -22,7 +22,7 @@ class PriceByNeighborhoodService extends MileenApi
 	 */
 	public function getRequiredParameters()
 	{
-		return Array('neighborhood', 'width', 'height');
+		return Array('neighborhood', 'width', 'height', 'currency');
 	}
 
 	/**
@@ -44,7 +44,7 @@ class PriceByNeighborhoodService extends MileenApi
 			return $this->buildErrorResponse($e->getMessage());
 		}
 
-		$chartData = $this->generateChartData($neighborhood);
+		$chartData = $this->generateChartData($neighborhood, $parameters['currency']);
 
 		if (count($chartData) == 0){
 			return $this->buildErrorResponse('Insufficient data to plot the chart');
@@ -71,13 +71,13 @@ class PriceByNeighborhoodService extends MileenApi
 	 * @param  \Neighborhood $neighborhood
 	 * @return array
 	 */
-	public function generateChartData($neighborhood)
+	public function generateChartData($neighborhood, $currency)
 	{
 		$data = [];
 		foreach ($neighborhood->getAdjacents() as $adjacentNeighborhood){
-			$averagePrice = $adjacentNeighborhood->getPriceByM2();
+			$averagePrice = $adjacentNeighborhood->getPriceByM2($currency);
 			if ($averagePrice > 0){
-				$data[$adjacentNeighborhood->name] = $adjacentNeighborhood->getPriceByM2();
+				$data[$adjacentNeighborhood->name] = $adjacentNeighborhood->getPriceByM2($currency);
 			}
 		}
 

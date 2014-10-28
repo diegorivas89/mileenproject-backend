@@ -20,6 +20,7 @@ abstract class MileenApi
 
 	public function run($parameters = [])
 	{
+		return $this->execute($parameters);
 		try {
 			return $this->execute($parameters);
 		} catch (\Exception $e) {

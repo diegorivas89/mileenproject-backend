@@ -42,15 +42,17 @@ class Neighborhood extends MileenModel
 	 *
 	 * @return int
 	 */
-	public function getPriceByM2()
+	public function getPriceByM2($currency = '$')
 	{
 		$properties = $this->getProperties();
 
 		$acum = 0;
 		foreach ($properties as $property) {
-			$acum += $property->price / $property->size;
-		}
+			//echo $property->title." - ".$property->price." - ".$property->currency." - ".$currency." - ".Currency::convert($property->price, $property->currency, $currency)."\n";
+			$acum += Currency::convert($property->price, $property->currency, $currency) / $property->size;
 
+		}
+echo $this->name.": ".$acum." - ".$properties->count()."\n";
 		if ($properties->count() == 0){
 			return 0;
 		}

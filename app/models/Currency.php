@@ -12,11 +12,16 @@ class Currency extends MileenModel
 	 * @param string $from
 	 * @return float
 	 */
-	public static function convert($value, $from = '$')
+	public static function convert($value, $from = '$', $to = 'U$S')
 	{
-		$currency = self::find($from);
+		$currencyFrom = Currency::find($from);
+		$currencyTo = Currency::find($to);
 
-		return round($value * $currency->value, 2);
+		$dollarValue = $value / $currencyFrom->value;
+
+		$toValue = round($dollarValue * $currencyTo->value);
+
+		return $toValue;
 	}
 }
 
