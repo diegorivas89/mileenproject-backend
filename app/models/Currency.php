@@ -5,7 +5,14 @@
 */
 class Currency extends MileenModel
 {
-	public static convert($value, $from = '$')
+	/**
+	 * Convierte el valor pasado por parametro en la moneda indicada a dolares
+	 *
+	 * @param float $value
+	 * @param string $from
+	 * @return float
+	 */
+	public static function convert($value, $from = '$')
 	{
 		$currency = self::find($from);
 
