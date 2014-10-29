@@ -3,16 +3,15 @@ namespace Mileen\Api;
 
 use \Mileen\Api\Exceptions\MissingParamentersException;
 use \Mileen\Support\Exceptions\IllegalArgumentException;
-
 /**
 *
 */
-class PriceByNeighborhoodService extends MileenApi
+class PropertyByEnvironmentService extends MileenApi
 {
 
 	function __construct()
 	{
-
+		parent::__construct();
 	}
 
 	/**
@@ -22,7 +21,7 @@ class PriceByNeighborhoodService extends MileenApi
 	 */
 	public function getRequiredParameters()
 	{
-		return Array('neighborhood', 'width', 'height', 'currency');
+		return Array('neighborhood', 'width', 'height');
 	}
 
 	/**
@@ -44,7 +43,7 @@ class PriceByNeighborhoodService extends MileenApi
 			return $this->buildErrorResponse($e->getMessage());
 		}
 
-		$chartData = $this->generateChartData($neighborhood, $parameters['currency']);
+		$chartData = $this->generateChartData($neighborhood);
 
 		if (count($chartData) == 0){
 			return $this->buildErrorResponse('Insufficient data to plot the chart');
@@ -56,8 +55,7 @@ class PriceByNeighborhoodService extends MileenApi
 			'url' => $filename,
 			'neighborhood' => [
 				'id' => $neighborhood->id,
-				'name' => $neighborhood->name,
-				'priceByM2' => $neighborhood->getPriceByM2()
+				'name' => $neighborhood->name
 			],
 			'data' => $chartData
 		];
@@ -71,14 +69,21 @@ class PriceByNeighborhoodService extends MileenApi
 	 * @param  \Neighborhood $neighborhood
 	 * @return array
 	 */
-	public function generateChartData($neighborhood, $currency)
+	public function generateChartData($neighborhood)
 	{
 		$data = [];
-		foreach ($neighborhood->getAdjacents() as $adjacentNeighborhood){
-			$averagePrice = $adjacentNeighborhood->getPriceByM2($currency);
-			if ($averagePrice > 0){
-				$data[$adjacentNeighborhood->name] = $adjacentNeighborhood->getPriceByM2($currency);
+		foreach ($neighborhood->getProperties() as $property){
+			if (array_key_exists($property->environment_id, $data)){
+				$data[$property->environment_id] += 1;
+			}else{
+				$data[$property->environment_id] = 1;
 			}
+		}
+
+		$total = $neighborhood->getProperties()->count();
+
+		foreach ($data as $key => $value){
+			$data[$key] = ($data[$key] / $total) * 100;
 		}
 
 		return $data;
@@ -92,13 +97,14 @@ class PriceByNeighborhoodService extends MileenApi
 	 */
 	public function createChart($data, $width, $height)
 	{
-		$filename = \App::make('bar-chart')
-						->setTitle('Precio promedio por M2', 'Barrios', '$')
+		$filename = \App::make('pie-chart')
+						->setTitle('Propiedades por ambientes')
 						->setData($data)
 						->plot($width, $height);
 
 		return $filename;
 	}
 }
+
 
 ?>

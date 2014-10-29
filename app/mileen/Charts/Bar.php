@@ -46,7 +46,7 @@ class Bar extends Chart
 		$datax = array_keys($this->data);
 		// Create the graph. These two calls are always required
 		$graph = new \Graph($width, $height);
-		$graph->SetScale('intlin');
+		$graph->SetScale('textlin');
 
 		// Add a drop shadow
 		$graph->SetShadow();

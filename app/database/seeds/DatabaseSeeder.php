@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('PropertyTableSeeder');
 		$this->call('DateRangesTableSeeder');
 		$this->call('AdjacentsTableSeeder');
+		$this->call('CurrencyTableSeeder');
+		$this->call('SizeTableSeeder');
 	}
 
 }

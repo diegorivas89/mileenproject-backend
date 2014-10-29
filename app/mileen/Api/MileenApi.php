@@ -18,6 +18,16 @@ abstract class MileenApi
 		$this->requiredParameters = Array();
 	}
 
+	public function run($parameters = [])
+	{
+		return $this->execute($parameters);
+		try {
+			return $this->execute($parameters);
+		} catch (\Exception $e) {
+			return $this->buildErrorResponse($e->getMessage());
+		}
+	}
+
 	/**
 	 * Ejecuta el servicio y retorna el response correspondiente
 	 *
@@ -79,7 +89,7 @@ abstract class MileenApi
 			'payload' => Array()
 		);
 
-		return json_encode($response);
+		return json_encode($response, JSON_PRETTY_PRINT);
 	}
 }
 

@@ -22,6 +22,7 @@ class PropertyTableSeeder extends Seeder {
 					'currency' => 'U$S',
 					'price' => 1234,
 					'expenses' => 500,
+					'video_url' => 'https://www.youtube.com/watch?v=byZO3dMLtpA',
 					'age' => 30,
 					'state' => 'active'
 				)
@@ -42,6 +43,7 @@ class PropertyTableSeeder extends Seeder {
 					'address' => 'Paseo colon 1000',
 					'currency' => 'U$S',
 					'price' => 1234,
+					'video_url' => 'https://www.youtube.com/watch?v=byZO3dMLtpA',
 					'expenses' => 500,
 					'age' => 30,
 					'state' => 'active'
