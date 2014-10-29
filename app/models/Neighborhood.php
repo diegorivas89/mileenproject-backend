@@ -52,7 +52,7 @@ class Neighborhood extends MileenModel
 			$acum += Currency::convert($property->price, $property->currency, $currency) / $property->size;
 
 		}
-echo $this->name.": ".$acum." - ".$properties->count()."\n";
+
 		if ($properties->count() == 0){
 			return 0;
 		}

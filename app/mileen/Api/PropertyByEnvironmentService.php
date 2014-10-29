@@ -55,8 +55,7 @@ class PropertyByEnvironmentService extends MileenApi
 			'url' => $filename,
 			'neighborhood' => [
 				'id' => $neighborhood->id,
-				'name' => $neighborhood->name,
-				'priceByM2' => $neighborhood->getPriceByM2()
+				'name' => $neighborhood->name
 			],
 			'data' => $chartData
 		];
