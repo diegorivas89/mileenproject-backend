@@ -5,6 +5,13 @@
 */
 class Currency extends MileenModel
 {
+	public function getSchema()
+	{
+		return Array(
+			'id' => 'string',
+		);
+	}
+
 	/**
 	 * Convierte el valor pasado por parametro en la moneda indicada a dolares
 	 *
