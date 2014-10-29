@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('DateRangesTableSeeder');
 		$this->call('AdjacentsTableSeeder');
 		$this->call('CurrencyTableSeeder');
+		$this->call('SizeTableSeeder');
 	}
 
 }

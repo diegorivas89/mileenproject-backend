@@ -60,6 +60,7 @@ class DefinitionsService extends MileenApi
     $amenitieTypes = \AmenitieType::select("id", "name")->get();
     $dateRanges = \DateRange::select("id", "name")->get();
     $currencies = \Currency::select("id")->get();
+    $sizes = \Size::select('id', 'name')->get();
 
     $response = Array(
       'neighborhoods' => $neighborhoods->toArray(),
@@ -68,7 +69,8 @@ class DefinitionsService extends MileenApi
       'operationTypes' => $operationTypes->toArray(),
       'amenitieTypes' => $amenitieTypes->toArray(),
       'dateRanges' => $dateRanges->toArray(),
-      'currencies' => $currencies->toArray()
+      'currencies' => $currencies->toArray(),
+      'sizes' => $sizes->toArray(),
     );
 
     return $this->buildResponse($response);
