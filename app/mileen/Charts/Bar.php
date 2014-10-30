@@ -79,8 +79,8 @@ class Bar extends Chart
 		$graph->yaxis->title->SetFont(FF_DEFAULT, FS_NORMAL, self::AXIS_TITLE_SIZE);
 		// Store graph
 		$filename = $this->generateChartFilename();
-		$graph->Stroke();
-		//$graph->Stroke(public_path().$filename);
+		//$graph->Stroke();
+		$graph->Stroke(public_path().$filename);
 
 		return $filename;
 	}
