@@ -188,8 +188,9 @@ class PropertyRepository implements PropertyRepositoryInterface
 			$query = $query->where("price", "<=", $parameters['maxPrice']);
 		}
 
-		if (ParameterValidator::integer('minSize', $parameters)){
-			$query = $query->where("size", ">=", $parameters['minSize']);
+		if (ParameterValidator::integer('size', $parameters)){
+			$size = \Size::find($parameters['size']);
+			$query = $query->where("size", ">=", $size->min)->where('size', "<=", $size->max);
 		}
 
 		if (ParameterValidator::integer('minCoveredSize', $parameters)){
