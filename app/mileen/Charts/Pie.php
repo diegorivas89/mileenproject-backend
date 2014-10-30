@@ -28,8 +28,8 @@ class Pie extends Chart
 
 		$filename = $this->generateChartFilename();
 
-		$graph->Stroke();
-		//$graph->Stroke(public_path().$filename);
+		//$graph->Stroke();
+		$graph->Stroke(public_path().$filename);
 
 		return $filename;
 	}
