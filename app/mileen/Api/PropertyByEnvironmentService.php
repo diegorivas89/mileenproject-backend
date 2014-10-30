@@ -73,10 +73,12 @@ class PropertyByEnvironmentService extends MileenApi
 	{
 		$data = [];
 		foreach ($neighborhood->getProperties() as $property){
-			if (array_key_exists($property->environment_id, $data)){
-				$data[$property->environment_id] += 1;
+			$environment = $property->getEnvironment();
+
+			if (array_key_exists($environment->name, $data)){
+				$data[$environment->name] += 1;
 			}else{
-				$data[$property->environment_id] = 1;
+				$data[$environment->name] = 1;
 			}
 		}
 

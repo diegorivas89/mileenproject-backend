@@ -6,6 +6,9 @@ namespace Mileen\Charts;
 */
 class Bar extends Chart
 {
+	const TITLE_SIZE = 25;
+	const AXIS_TITLE_SIZE = 20;
+
 	protected $xTitle;
 	protected $yTitle;
 
@@ -52,9 +55,10 @@ class Bar extends Chart
 		$graph->SetShadow();
 
 		// Adjust the margin a bit to make more room for titles
-		$graph->SetMargin(40,30,20,40);
+		$graph->SetMargin(60,30,30,60);
 
 		$graph->xaxis->SetTickLabels($datax);
+		$graph->xaxis->SetTickSize(30);
 		//$graph->xaxis->SetLabelAngle(90);
 
 		// Create a bar pot
@@ -66,14 +70,17 @@ class Bar extends Chart
 
 		// Setup the titles
 		$graph->title->Set($this->title);
-		//$graph->title->SetFont(FF_ARIAL,FS_BOLD,14);
-		$graph->xaxis->title->Set($this->xTitle);
-		$graph->yaxis->title->Set($this->yTitle);
+		$graph->title->SetFont(FF_DEFAULT, FS_NORMAL, self::TITLE_SIZE);
 
+		$graph->xaxis->title->Set($this->xTitle);
+		$graph->xaxis->title->SetFont(FF_DEFAULT, FS_NORMAL, self::AXIS_TITLE_SIZE);
+
+		$graph->yaxis->title->Set($this->yTitle);
+		$graph->yaxis->title->SetFont(FF_DEFAULT, FS_NORMAL, self::AXIS_TITLE_SIZE);
 		// Store graph
 		$filename = $this->generateChartFilename();
-
-		$graph->Stroke(public_path().$filename);
+		$graph->Stroke();
+		//$graph->Stroke(public_path().$filename);
 
 		return $filename;
 	}
