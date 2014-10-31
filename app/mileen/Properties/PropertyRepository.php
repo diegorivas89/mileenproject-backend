@@ -180,12 +180,25 @@ class PropertyRepository implements PropertyRepositoryInterface
 			$query = $query->whereIn("environment_id", explode(",", $parameters['environments']));
 		}
 
-		if (ParameterValidator::integer('minPrice', $parameters)){
-			$query = $query->where("price", ">=", $parameters['minPrice']);
-		}
+		if (isset($parameters['currency']) && ParameterValidator::integer('minPrice', $parameters) && ParameterValidator::integer('maxPrice', $parameters)){
+			$properties = \Property::where('currency', '=', $parameters['currency'])
+									->where("price", ">=", $parameters['minPrice'])
+									->where("price", "<=", $parameters['maxPrice'])
+									->lists('id', 'id');
 
-		if (ParameterValidator::integer('maxPrice', $parameters)){
-			$query = $query->where("price", "<=", $parameters['maxPrice']);
+			$properties[-1] = -1;
+
+			$convertedMinPrice = \Currency::convertTo($parameters['minPrice'], $parameters['currency']);
+			$convertedMaxPrice = \Currency::convertTo($parameters['maxPrice'], $parameters['currency']);
+
+			$properties2 = \Property::where('currency', '=', \Currency::toggle($parameters['currency']))
+									->where("price", ">=", $convertedMinPrice)
+									->where("price", "<=", $convertedMaxPrice)
+									->lists('id', 'id');
+
+			$properties = array_merge($properties, $properties2);
+
+			$query = $query->whereIn('id', $properties);
 		}
 
 		if (ParameterValidator::integer('size', $parameters)){
