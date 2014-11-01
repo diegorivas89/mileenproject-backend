@@ -70,6 +70,7 @@ class Bar extends Chart
 
 		// Setup the titles
 		$graph->title->Set($this->title);
+
 		$graph->title->SetFont(FF_DEFAULT, FS_NORMAL, self::TITLE_SIZE);
 
 		$graph->xaxis->title->Set($this->xTitle);
@@ -79,6 +80,7 @@ class Bar extends Chart
 		$graph->yaxis->title->SetFont(FF_DEFAULT, FS_NORMAL, self::AXIS_TITLE_SIZE);
 		// Store graph
 		$filename = $this->generateChartFilename();
+
 		//$graph->Stroke();
 		$graph->Stroke(public_path().$filename);
 

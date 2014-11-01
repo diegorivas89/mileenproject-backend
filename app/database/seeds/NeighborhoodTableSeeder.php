@@ -43,7 +43,7 @@ class NeighborhoodTableSeeder extends Seeder {
             'Villa del Parque',
             'Villa Santa Rita',
             'Floresta',
-            'Velez Sarsfield',
+            'Velez Sarfield',
             'Villa Luro',
             'Monte Castro',
             'Villa Devoto',
@@ -54,7 +54,8 @@ class NeighborhoodTableSeeder extends Seeder {
             'Villa Lugano',
             'Parque Avellaneda',
             'Villa Lugano',
-            'Villa Riachuelo'
+            'Villa Riachuelo',
+            'Parque Chas'
         ];
         sort($index);
 
