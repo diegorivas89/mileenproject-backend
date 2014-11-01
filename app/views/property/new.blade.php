@@ -82,7 +82,15 @@ var reverseGeocodedLast;
 var currentReverseGeocodeResponse;
 
 function initialize() {
-	var latlng = new google.maps.LatLng(-34.608283394417995,-58.372238874435425);
+	var lat = -34.608283394417995
+	var lng = -58.372238874435425;
+	var uploadAdress = false;
+	if($("#latitude").val()){
+		lat = $("#latitude").val()
+		lng = $("#longitude").val()
+		uploadAdress = true;
+	}
+	var latlng = new google.maps.LatLng(lat,lng);
 	var myOptions = {
 		zoom: 12,
 		center: latlng,
@@ -92,7 +100,14 @@ function initialize() {
 	geocoder = new google.maps.Geocoder();
 	setupEvents();
 	centerChanged();
+	if(uploadAdress){
+		reverseGeocode();
+	}
 }
+
+$(".readonly").keydown(function(e){
+    e.preventDefault();
+});
 
 function setupEvents() {
 	reverseGeocodedLast = new Date();
@@ -289,9 +304,9 @@ $(document).ready(function(){
 			</div>
 			<div class="large-8 columns  @if ($errors->has('address')) error @endif">
 				<label>Dirección
-					<input type="text" readonly=true placeholder="" id="formatedAddress" name="address" value="{{Input::old("address", "")}}"/>
-					<input type="hidden" id="latitude" value="" name="latitude"/>
-					<input type="hidden" id="longitude" value="" name="longitude"/>
+					<input type="text" required readonly placeholder="" id="formatedAddress" name="address" value="{{Input::old("address", "")}}"/>
+					<input type="hidden" id="latitude" value='{{Input::old("latitude", "")}}' name="latitude"/>
+					<input type="hidden" id="longitude" value='{{Input::old("longitude", "")}}' name="longitude"/>
 				</label>
 				@if ($errors->has('address'))<small class="error">  {{ $errors->first('address') }} </small> @endif
 			</div>
