@@ -148,7 +148,6 @@ class PropertyRepository implements PropertyRepositoryInterface
 			$publication->canonicalPrice = \Currency::convert($publication->price, $publication->currency, 'U$S');
 		}
 
-
 		$publications->sort(function($a, $b) use ($criteria){
 			if ($a['canonicalPrice'] == $b['canonicalPrice']) {
 		        return 0;
