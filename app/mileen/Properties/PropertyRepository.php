@@ -109,6 +109,7 @@ class PropertyRepository implements PropertyRepositoryInterface
 
 		if (array_key_exists('order', $parameters)){
 			List($field, $criteria) = explode(",", $parameters['order']);
+
 			$query = $query->orderBy($field, $criteria);
 		}else{
 			$query = $query->orderBy("publication_type_id", "asc");
@@ -130,7 +131,37 @@ class PropertyRepository implements PropertyRepositoryInterface
 			'created_at'
 		);
 
-		return $this->filterExpiredPublications($query->select($fields)->get());
+		return $this->orderPublications($this->filterExpiredPublications($query->select($fields)->get()), $parameters);
+	}
+
+	public function orderPublications($publications, $parameters)
+	{
+		if (!array_key_exists('order', $parameters)){
+			return $publications;
+		}
+
+		List($field, $criteria) = explode(",", $parameters['order']);
+
+		if ($field != 'price') return $publications;
+
+		foreach ($publications as $publication) {
+			$publication->canonicalPrice = \Currency::convert($publication->price, $publication->currency, 'U$S');
+		}
+
+
+		$publications->sort(function($a, $b) use ($criteria){
+			if ($a['canonicalPrice'] == $b['canonicalPrice']) {
+		        return 0;
+		    }
+
+		    if ($a['canonicalPrice'] < $b['canonicalPrice']){
+		    	return ($criteria == 'asc') ? -1 : 1;
+		    }else{
+		    	return ($criteria == 'asc') ? 1 : -1;
+		    }
+		});
+
+		return $publications;
 	}
 
 	protected function filterExpiredPublications(\Illuminate\Database\Eloquent\Collection $properties)
