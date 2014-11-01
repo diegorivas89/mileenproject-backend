@@ -86,7 +86,7 @@ class PropertySearchService extends MileenApi
 		});
 
 		$response = Array(
-			'publications' => $properties->toArray(),
+			'publications' => array_values($properties->toArray()),
 			'count' => $count,
 			'lastPageReached' => $this->lastPageReached($count, $parameters)
 		);
