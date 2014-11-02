@@ -63,11 +63,19 @@ class PropertyController extends BaseController
 
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
 		$invalid_covered_size = Input::get('covered_size') > Input::get('size');
-		if ($validator->fails() || $invalid_covered_size)
+
+		$validVideoUrl = preg_match("/^(http\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/watch\?v\=\w+$/", Input::get('video_url'));
+
+		if ($validator->fails() || $invalid_covered_size || !$validVideoUrl)
 		{
 			if($invalid_covered_size) {
 				$validator->errors()->add('covered_size', Lang::get('validation.covered_size'));
 			}
+
+			if(!$validVideoUrl) {
+				$validator->errors()->add('video_url', Lang::get('validation.video_url'));
+			}
+
 			return Redirect::route('properties.create')->withInput()->withErrors($validator);
 		}else{
 			//guardo la propiedad
