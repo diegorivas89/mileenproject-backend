@@ -11,13 +11,13 @@
 			<meta name="author" content="ZURB, inc. ZURB network also includes zurb.com"/>
 			<meta name="copyright" content="ZURB, inc. Copyright (c) 2014"/>
 			<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-			<link rel="stylesheet" href="../assets/libs/foundation/css/foundation.css"/>
-			<link rel="stylesheet" href="../assets/libs/creditly/css/creditly.css"/>
-			<link rel="stylesheet" href="../styles/style.css"/>
-			<script src="../assets/libs/foundation/js/vendor/modernizr.js"></script>
-			<script src="../assets/js/validate_credit_card.js"></script>
-			<script src="../assets/js/mileem.js"></script>
-			<script src="../assets/libs/creditly/js/creditly.js"></script>
+			<link rel="stylesheet" href="/assets/libs/foundation/css/foundation.css"/>
+			<link rel="stylesheet" href="/assets/libs/creditly/css/creditly.css"/>
+			<link rel="stylesheet" href="/styles/style.css"/>
+			<script src="/assets/libs/foundation/js/vendor/modernizr.js"></script>
+			<script src="/assets/js/validate_credit_card.js"></script>
+			<script src="/assets/js/mileem.js"></script>
+			<script src="/assets/libs/creditly/js/creditly.js"></script>
 			<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 			<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		</head>

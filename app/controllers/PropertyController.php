@@ -154,7 +154,7 @@ class PropertyController extends BaseController
 		$property = Property::find($id);
 		$property->state = Property::paused;
 		$property->save();
-		return Redirect::to("properties/{$id}")->with('message', 'La propiedad está en pausa');
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad está en pausa.');
 	}
 
 	public function reactivate($id)
@@ -162,17 +162,41 @@ class PropertyController extends BaseController
 		$property = Property::find($id);
 		$property->state = Property::active;
 		$property->save();
-		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se reactivó');
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se reactivó.');
+	}
+
+	public function payRepublish($id){
+	  return View::make("property.payrepublish")
+								  ->with('propertyId', $id);
 	}
 
 	public function republish($id)
 	{
 		$property = Property::find($id);
-		$property->state = Property::active;
-		$property->republished = true;
-		$property->created_at = \Carbon\Carbon::now();
-		$property->save();
-		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó');
+		if(	$property->publication_type == PublicationType::$free_value){
+			$property->state = Property::active;
+			$property->republished = true;
+			$property->created_at = \Carbon\Carbon::now();
+			$property->save();
+			return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó.');
+		}
+		return Redirect::to("properties/{$id}/payrepublish");
+ 	}
+
+	public function savePayrepublish($id){
+ 		$property = Property::find($id);
+		if($property->republished){
+			return Redirect::to("properties/{$id}")->with('message', 'Esta publicación no puede ser republicada ya que ya fue republicada anteriormente.');	
+		}
+ 		$property->state = Property::active;
+ 		$property->republished = true;
+ 		$property->created_at = \Carbon\Carbon::now();
+		$property->credit_card_number = Input::get('credit_card_number');
+		$property->security_code = Input::get('security_code');
+		$property->card_owner = Input::get('card_owner');
+		$property->expiration_date = Input::get('expiration_date');
+ 		$property->save();
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó.');
 	}
 
 	public function delete($id)
@@ -180,7 +204,7 @@ class PropertyController extends BaseController
 		$property = Property::find($id);
 		$property->state = Property::deleted;
 		$property->save();
-		return Redirect::to("properties")->with('message', 'La propiedad se ha borrado exitosamente');
+		return Redirect::to("properties")->with('message', 'La propiedad se ha borrado exitosamente.');
 	}
 
 }
