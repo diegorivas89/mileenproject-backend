@@ -13,7 +13,8 @@ return array(
 	|
 	*/
 
-	'covered_size' 				 => 'La superficie cubierta es mayor a la superficie total',
+	'covered_size' 				=> 'La superficie cubierta es mayor a la superficie total',
+	'video_url' 				=> 'Solo se permiten videos de Youtube',
 	"accepted"             => "The :attribute must be accepted.",
 	"active_url"           => "El campo :attribute debe ser una url válida.",
 	"after"                => "The :attribute must be a date after :date.",
