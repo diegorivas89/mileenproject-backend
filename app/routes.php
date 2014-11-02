@@ -87,6 +87,9 @@ Route::group(['before' => 'encode-input'], function(){
 		Route::post('/properties/{properties}/reactivate', ['as' => 'properties.reactivate', 'uses' => 'PropertyController@reactivate']);
 		Route::post('/properties/{properties}/republish', ['as' => 'properties.republish', 'uses' => 'PropertyController@republish']);
 		Route::post('/properties/{properties}/delete', ['as' => 'properties.delete', 'uses' => 'PropertyController@delete']);
+		Route::get('/properties/{properties}/payrepublish', ['as' => 'properties.payrepublish', 'uses' => 'PropertyController@payRepublish']);
+		Route::post('/properties/{properties}/savepayrepublish', ['as' => 'properties.savePayrepublish', 'uses' => 'PropertyController@savePayrepublish']);
+
 		Route::resource('/properties', 'PropertyController');
 
 		Route::get('/profile', ['as' => 'profile.show', 'uses' => 'ProfileController@show']);
