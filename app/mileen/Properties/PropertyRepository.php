@@ -242,8 +242,9 @@ class PropertyRepository implements PropertyRepositoryInterface
 
 		if (ParameterValidator::integer('minPublishDate', $parameters)){
 			$range = \DateRange::find($parameters['minPublishDate']);
-			$inf = \Carbon\Carbon::now()->subDays($range->negative_offset);
-			$sup = \Carbon\Carbon::now()->addDays($range->positive_offset);
+
+			$inf = \Carbon\Carbon::now()->addDay()->subDays($range->negative_offset)->toDateString();
+			$sup = \Carbon\Carbon::now()->addDay()->addDays($range->positive_offset)->toDateString();
 			$query = $query->whereBetween("created_at", [$inf, $sup]);
 		}
 
