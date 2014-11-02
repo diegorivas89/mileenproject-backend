@@ -42,7 +42,7 @@ class LoginController extends BaseController
 		}
 
 		$errors = new MessageBag();
-		$errors->add('password', 'La contraseña es incorrecta');
+		$errors->add('password', 'La contraseña o el usuario es incorrecto');
 
 		return Redirect::route('login.get')->withErrors($errors)->withInput();
 	}
