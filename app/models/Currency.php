@@ -55,6 +55,11 @@ class Currency extends MileenModel
 			return '$';
 		}
 	}
+
+	public static function exist($currency)
+	{
+		return self::where('id', '=', $currency)->count() > 0;
+	}
 }
 
 ?>
