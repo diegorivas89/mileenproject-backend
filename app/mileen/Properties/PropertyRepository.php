@@ -211,22 +211,27 @@ class PropertyRepository implements PropertyRepositoryInterface
 		}
 
 		if (isset($parameters['currency']) && ParameterValidator::integer('minPrice', $parameters) && ParameterValidator::integer('maxPrice', $parameters)){
-			$properties = \Property::where('currency', '=', $parameters['currency'])
+			$properties = Array();
+			if (\Currency::exist($parameters['currency'])){
+				$properties = \Property::where('currency', '=', $parameters['currency'])
 									->where("price", ">=", $parameters['minPrice'])
 									->where("price", "<=", $parameters['maxPrice'])
 									->lists('id', 'id');
+			}
 
 			$properties[-1] = -1;
 
-			$convertedMinPrice = \Currency::convertTo($parameters['minPrice'], $parameters['currency']);
-			$convertedMaxPrice = \Currency::convertTo($parameters['maxPrice'], $parameters['currency']);
+			if (\Currency::exist(\Currency::toggle($parameters['currency']))){
+				$convertedMinPrice = \Currency::convertTo($parameters['minPrice'], $parameters['currency']);
+				$convertedMaxPrice = \Currency::convertTo($parameters['maxPrice'], $parameters['currency']);
 
-			$properties2 = \Property::where('currency', '=', \Currency::toggle($parameters['currency']))
-									->where("price", ">=", $convertedMinPrice)
-									->where("price", "<=", $convertedMaxPrice)
-									->lists('id', 'id');
+				$properties2 = \Property::where('currency', '=', \Currency::toggle($parameters['currency']))
+										->where("price", ">=", $convertedMinPrice)
+										->where("price", "<=", $convertedMaxPrice)
+										->lists('id', 'id');
 
-			$properties = array_merge($properties, $properties2);
+				$properties = array_merge($properties, $properties2);
+			}
 
 			$query = $query->whereIn('id', $properties);
 		}

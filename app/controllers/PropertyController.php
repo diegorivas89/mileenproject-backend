@@ -163,10 +163,17 @@ class PropertyController extends BaseController
 		$property->state = Property::active;
 		$property->save();
 		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se reactivó.');
+
+	}
+
+	public function payRepublish($id){
+	  return View::make("property.payrepublish")
+								  ->with('propertyId', $id);
 	}
 
 	public function savePayrepublish($id){
 		$property = Property::find($id);
+
 		if($property->republished){
 			return Redirect::to("properties/{$id}")->with('message', 'Esta publicación no puede ser republicada ya que ya fue republicada anteriormente.');	
 		}
@@ -181,14 +188,10 @@ class PropertyController extends BaseController
 		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó.');
 	}
 
-	public function payRepublish($id){
-	  return View::make("property.payrepublish")
-								  ->with('propertyId', $id);
-	}
-
 	public function republish($id)
 	{
 		$property = Property::find($id);
+
 		if(	$property->publication_type == PublicationType::$free_value){
 			$property->state = Property::active;
 			$property->republished = true;
@@ -197,7 +200,8 @@ class PropertyController extends BaseController
 			return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó.');
 		}
 		return Redirect::to("properties/{$id}/payrepublish");
-	}
+
+ 	}
 
 	public function delete($id)
 	{

@@ -1,6 +1,5 @@
 @extends('layout')
 
-
 @section('content')
 
 <div class="large-9 columns">
