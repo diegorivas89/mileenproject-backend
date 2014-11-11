@@ -10,6 +10,8 @@ use \Mileen\Support\Exceptions\IllegalArgumentException;
 */
 class NeighborhoodPriceService extends MileenApi
 {
+	const USD = 'U$S';
+	const ARG = '$';
 
 	function __construct()
 	{
@@ -55,8 +57,8 @@ class NeighborhoodPriceService extends MileenApi
 				'name' => $neighborhood->name
 			],
 			'prices' => [
-				'$' => $neighborhood->getPriceByM2('$'),
-				'U$S' => $neighborhood->getPriceByM2('U$S')
+				self::ARG => $neighborhood->getPriceByM2(self::ARG),
+				self::USD => $neighborhood->getPriceByM2(self::USD)
 			]
 		];
 
