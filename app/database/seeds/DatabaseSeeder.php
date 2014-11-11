@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AdjacentsTableSeeder');
 		$this->call('CurrencyTableSeeder');
 		$this->call('SizeTableSeeder');
+		$this->call('AdsTableSeeder');
 	}
 
 }
