@@ -47,7 +47,7 @@ class AdService extends MileenApi
 			'ad' => \Ad::orderByRaw("RAND()")->first()
 		];
 
-		var_dump($payload);
+		return $this->buildResponse($payload);
 	}
 }
 
