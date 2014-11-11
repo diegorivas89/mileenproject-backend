@@ -41,6 +41,11 @@ class ApiController extends BaseController
 		return $this->makeResponse(App::make('property-by-environment-service')->run(Input::all()));
 	}
 
+	public function retrieveAd()
+	{
+		return $this->makeResponse(App::make('retrieve-ad-service')->run(Input::all()));
+	}
+
 	private function makeResponse($content)
 	{
 		$response = Response::make($content, 200);
