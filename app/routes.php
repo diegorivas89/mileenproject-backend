@@ -107,6 +107,7 @@ Route::group(['before' => 'encode-input'], function(){
     	Route::get('/send-message', 'ApiController@sendMessage');
     	Route::post('/send-message', 'ApiController@sendMessage');
     	Route::get('/average-price-by-neighborhood', 'ApiController@priceByNeighborhood');
+    	Route::get('/average-neighborhood-price', 'ApiController@neighborhoodPrice');
     	Route::get('/average-property-by-environment', 'ApiController@propertiesByEnvironments');
 	});
 });

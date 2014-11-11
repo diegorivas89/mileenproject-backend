@@ -32,6 +32,10 @@ App::singleton('property-by-environment-service', function() {
 	return new \Mileen\Api\PropertyByEnvironmentService();
 });
 
+App::singleton('neighborhood-price-service', function() {
+	return new \Mileen\Api\NeighborhoodPriceService();
+});
+
 App::singleton('logged-user', function(){
 	$user = Auth::user();
 

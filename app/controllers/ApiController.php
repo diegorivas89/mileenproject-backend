@@ -31,6 +31,11 @@ class ApiController extends BaseController
 		return $this->makeResponse(App::make('price-by-neighborhood-service')->run(Input::all()));
 	}
 
+	public function neighborhoodPrice()
+	{
+		return $this->makeResponse(App::make('neighborhood-price-service')->run(Input::all()));
+	}
+
 	public function propertiesByEnvironments()
 	{
 		return $this->makeResponse(App::make('property-by-environment-service')->run(Input::all()));
