@@ -50,7 +50,7 @@ class PriceByNeighborhoodService extends MileenApi
 			return $this->buildErrorResponse('Insufficient data to plot the chart');
 		}
 
-		$filename = $this->createChart($chartData, $parameters['width'], $parameters['height']);
+		$filename = $this->createChart($chartData, $parameters['currency'], $parameters['width'], $parameters['height']);
 
 		$payload = [
 			'url' => $filename,
@@ -90,10 +90,10 @@ class PriceByNeighborhoodService extends MileenApi
 	 * @param  \Neighborhood $neighborhood
 	 * @return string
 	 */
-	public function createChart($data, $width, $height)
+	public function createChart($data, $currency, $width, $height)
 	{
 		$filename = \App::make('bar-chart')
-						->setTitle('Precio promedio por M2', 'Barrios', '$')
+						->setTitle('Precio promedio por M2', 'Barrios', $currency)
 						->setData($data)
 						->plot($width, $height);
 
