@@ -11,6 +11,7 @@ class AdsTableSeeder extends Seeder
 		DB::table('ads')->delete();
 
             Ad::create(array(
+                  'id' => 1,
             	'title' => 'Ropa Adidas',
             	'description' => 'Ropa Adidas',
             	'target_url' => 'http://www.adidas.com.ar/',
@@ -18,6 +19,7 @@ class AdsTableSeeder extends Seeder
             ));
 
             Ad::create(array(
+                  'id' => 2,
             	'title' => 'Paugeot 307 - Nunca Taxi',
             	'description' => 'Paugeot 307 - Nunca Taxi',
             	'target_url' => 'http://www.volkswagen.com.ar',
@@ -25,6 +27,7 @@ class AdsTableSeeder extends Seeder
             ));
 
             Ad::create(array(
+                  'id' => 3,
             	'title' => 'Cursos a distancia',
             	'description' => 'Cursos a distancia',
             	'target_url' => 'http://www.cui.edu.ar',
@@ -32,6 +35,7 @@ class AdsTableSeeder extends Seeder
             ));
 
             Ad::create(array(
+                  'id' => 4,
             	'title' => 'Todas las marcas de ropa',
             	'description' => 'Todas las marcas de ropa',
             	'target_url' => 'www.falabella.com.ar',
