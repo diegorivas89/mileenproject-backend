@@ -6,9 +6,10 @@
 		<div class="large-12 columns">
 			<h2><i class="fa fa-newspaper-o"></i> Republicar esta propiedad</h2>
 			<p>Dado que esta publicación es premium, para publicar esta propiedad debe completar sus datos de tarjeta de crédito.</p>
+			<p>Precio a abonar: ${{$publicationType->price}} / mes</p>
 		</div>
 	</div>
-	<form id='property-form' action="{{URL::action('properties.savePayrepublish',[$propertyId]) }}" method="post" enctype="multipart/form-data">
+	<form id='property-form' action="{{URL::action('properties.savePayrepublish',[$property->id]) }}" method="post" enctype="multipart/form-data">
 		<section class="creditly-wrapper gray-theme">
 		  <h3>Tarjeta de crédito</h3>
 		  <i>
@@ -52,7 +53,7 @@
 		<div class="row">
 			<div class="large-12 columns">
 				<input type="submit" value="Guardar" class="button" id='submit-property'/>
-				
+
 			</div>
 		</div>
 	</form>

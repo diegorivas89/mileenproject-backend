@@ -57,11 +57,6 @@ class PropertyController extends BaseController
 	    $date = DateTime::createFromFormat('d/m/Y', $date);
 	    Input::merge(array('expiration_date' => $date->format('Y-m-d')));
 		}
-		// var_dump(Input::get('credit_card_number'));
-		// if (Input::has('credit_card_number')) {
-			// $card_number = Input::get('credit_card_number');
-			// $card_last_number = substr($card_number, -1);
-		// }
 
 		Input::merge(array('user_id' => Auth::user()->id));
 
@@ -82,10 +77,6 @@ class PropertyController extends BaseController
 			if(!$validVideoUrl) {
 				$validator->errors()->add('video_url', Lang::get('validation.video_url'));
 			}
-
-			// if($card_last_number == '2') {
-			// 	$validator->errors()->add('credit_card_number', Lang::get('validation.invalid_credit_card'));
-			// }
 
 			return Redirect::route('properties.create')->withInput()->withErrors($validator);
 		}else{
@@ -177,8 +168,11 @@ class PropertyController extends BaseController
 	}
 
 	public function payRepublish($id){
+		$property = Property::find($id);
+		$publicationType = PublicationType::find($property->publication_type_id);
 	  return View::make("property.payrepublish")
-								  ->with('propertyId', $id);
+								  ->with('property', $property)
+								  ->with('publicationType', $publicationType);
 	}
 
 	public function republish($id)
