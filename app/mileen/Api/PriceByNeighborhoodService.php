@@ -57,7 +57,7 @@ class PriceByNeighborhoodService extends MileenApi
 			'neighborhood' => [
 				'id' => $neighborhood->id,
 				'name' => $neighborhood->name,
-				'priceByM2' => $neighborhood->getPriceByM2()
+				'priceByM2' => $neighborhood->getPriceByM2($parameters['currency'])
 			],
 			'data' => $chartData
 		];
