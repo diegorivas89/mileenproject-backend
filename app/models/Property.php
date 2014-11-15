@@ -58,7 +58,8 @@ class Property extends MileenModel
 			'size' => array('required','numeric' ,'min:0'),
 			'covered_size' => array('required','numeric' ,'min:0'),
 			'video_url' => array('url'),
-			'state' => 'in:active, paused, deleted'
+			'state' => 'in:active, paused, deleted',
+			'credit_card_number' => 'regex:/^[0-9 \s]*[^2]$/',
 		);
 	}
 

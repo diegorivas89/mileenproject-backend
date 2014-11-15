@@ -448,6 +448,7 @@ $(document).ready(function(){
 		          type="text" name="credit_card_number" required
 		          inputmode="numeric" autocomplete="cc-number" autocompletetype="cc-number" x-autocompletetype="cc-number"
 		          placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;">
+		          @if ($errors->has('credit_card_number'))<small class="error">  {{ $errors->first('credit_card_number') }} </small> @endif
 		      </div>
 		      <div class="col-sm-4 controls">
 		        <label class="control-label">CVC</label>
