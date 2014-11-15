@@ -52,19 +52,26 @@ class PropertyController extends BaseController
 
 		if (Input::has('expiration_date')){
 			$expiration_date = Input::get('expiration_date');
-	    	$date = preg_replace('/\s+/', '', $expiration_date);
-	    	$date = "31/{$date}";
-	    	$date = DateTime::createFromFormat('d/m/Y', $date);
-
-	    	Input::merge(array('expiration_date' => $date->format('Y-m-d')));
+	    $date = preg_replace('/\s+/', '', $expiration_date);
+	    $date = "31/{$date}";
+	    $date = DateTime::createFromFormat('d/m/Y', $date);
+	    Input::merge(array('expiration_date' => $date->format('Y-m-d')));
 		}
+		// var_dump(Input::get('credit_card_number'));
+		// if (Input::has('credit_card_number')) {
+			// $card_number = Input::get('credit_card_number');
+			// $card_last_number = substr($card_number, -1);
+		// }
 
 		Input::merge(array('user_id' => Auth::user()->id));
 
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
 		$invalid_covered_size = Input::get('covered_size') > Input::get('size');
 
-		$validVideoUrl = preg_match("/^(http\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/watch\?v\=\w+$/", Input::get('video_url'));
+		$validVideoUrl = true;
+		if(Input::has('video_url')) {
+			$validVideoUrl = preg_match("/^(http\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/watch\?v\=\w+$/", Input::get('video_url'));
+		}
 
 		if ($validator->fails() || $invalid_covered_size || !$validVideoUrl)
 		{
@@ -75,6 +82,10 @@ class PropertyController extends BaseController
 			if(!$validVideoUrl) {
 				$validator->errors()->add('video_url', Lang::get('validation.video_url'));
 			}
+
+			// if($card_last_number == '2') {
+			// 	$validator->errors()->add('credit_card_number', Lang::get('validation.invalid_credit_card'));
+			// }
 
 			return Redirect::route('properties.create')->withInput()->withErrors($validator);
 		}else{
@@ -186,7 +197,7 @@ class PropertyController extends BaseController
 	public function savePayrepublish($id){
  		$property = Property::find($id);
 		if($property->republished){
-			return Redirect::to("properties/{$id}")->with('message', 'Esta publicación no puede ser republicada ya que ya fue republicada anteriormente.');	
+			return Redirect::to("properties/{$id}")->with('message', 'Esta publicación no puede ser republicada ya que ya fue republicada anteriormente.');
 		}
  		$property->state = Property::active;
  		$property->republished = true;
