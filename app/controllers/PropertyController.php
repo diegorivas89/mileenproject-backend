@@ -168,8 +168,11 @@ class PropertyController extends BaseController
 	}
 
 	public function payRepublish($id){
+		$property = Property::find($id);
+		$publicationType = PublicationType::find($property->publication_type_id);
 	  return View::make("property.payrepublish")
-								  ->with('propertyId', $id);
+								  ->with('property', $property)
+								  ->with('publicationType', $publicationType);
 	}
 
 	public function republish($id)
