@@ -176,23 +176,6 @@ class PropertyController extends BaseController
 								  ->with('publicationType', $publicationType);
 	}
 
-	public function savePayrepublish($id){
-		$property = Property::find($id);
-
-		if($property->republished){
-			return Redirect::to("properties/{$id}")->with('message', 'Esta publicación no puede ser republicada ya que ya fue republicada anteriormente.');	
-		}
-		$property->state = Property::active;
-		$property->republished = true;
-		$property->created_at = \Carbon\Carbon::now();
-		$property->credit_card_number = Input::get('credit_card_number');
-		$property->security_code = Input::get('security_code');
-		$property->card_owner = Input::get('card_owner');
-		$property->expiration_date = Input::get('expiration_date');
-		$property->save();
-		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó.');
-	}
-
 	public function republish($id)
 	{
 		$property = Property::find($id);
@@ -224,7 +207,6 @@ class PropertyController extends BaseController
  		$property->save();
 		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó.');
 	}
-
 
 	public function delete($id)
 	{
