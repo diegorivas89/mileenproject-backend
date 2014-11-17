@@ -52,11 +52,10 @@ class PropertyController extends BaseController
 
 		if (Input::has('expiration_date')){
 			$expiration_date = Input::get('expiration_date');
-	    	$date = preg_replace('/\s+/', '', $expiration_date);
-	    	$date = "31/{$date}";
-	    	$date = DateTime::createFromFormat('d/m/Y', $date);
-
-	    	Input::merge(array('expiration_date' => $date->format('Y-m-d')));
+	    $date = preg_replace('/\s+/', '', $expiration_date);
+	    $date = "31/{$date}";
+	    $date = DateTime::createFromFormat('d/m/Y', $date);
+	    Input::merge(array('expiration_date' => $date->format('Y-m-d')));
 		}
 
 		Input::merge(array('user_id' => Auth::user()->id));
@@ -64,7 +63,10 @@ class PropertyController extends BaseController
 		$validator = Validator::make(Input::all(), Property::getValidationRules());
 		$invalid_covered_size = Input::get('covered_size') > Input::get('size');
 
-		$validVideoUrl = preg_match("/^(http\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/watch\?v\=\w+$/", Input::get('video_url'));
+		$validVideoUrl = true;
+		if(Input::has('video_url')) {
+			$validVideoUrl = preg_match("/^(http\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/watch\?v\=\w+$/", Input::get('video_url'));
+		}
 
 		if ($validator->fails() || $invalid_covered_size || !$validVideoUrl)
 		{
@@ -167,8 +169,11 @@ class PropertyController extends BaseController
 	}
 
 	public function payRepublish($id){
+		$property = Property::find($id);
+		$publicationType = PublicationType::find($property->publication_type_id);
 	  return View::make("property.payrepublish")
-								  ->with('propertyId', $id);
+								  ->with('property', $property)
+								  ->with('publicationType', $publicationType);
 	}
 
 	public function savePayrepublish($id){
@@ -201,7 +206,25 @@ class PropertyController extends BaseController
 		}
 		return Redirect::to("properties/{$id}/payrepublish");
 
+
  	}
+
+	public function savePayrepublish($id){
+ 		$property = Property::find($id);
+		if($property->republished){
+			return Redirect::to("properties/{$id}")->with('message', 'Esta publicación no puede ser republicada ya que ya fue republicada anteriormente.');
+		}
+ 		$property->state = Property::active;
+ 		$property->republished = true;
+ 		$property->created_at = \Carbon\Carbon::now();
+		$property->credit_card_number = Input::get('credit_card_number');
+		$property->security_code = Input::get('security_code');
+		$property->card_owner = Input::get('card_owner');
+		$property->expiration_date = Input::get('expiration_date');
+ 		$property->save();
+		return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó.');
+	}
+
 
 	public function delete($id)
 	{
