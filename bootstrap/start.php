@@ -25,7 +25,7 @@ $app = new Illuminate\Foundation\Application;
 */
 
 $env = $app->detectEnvironment(function(){
-	if (gethostname() == "domU-12-31-39-09-F9-29"){
+	if (gethostname() == "domU-12-31-39-0A-54-CC"){
 		return 'production';
 	}
 
