@@ -43,10 +43,8 @@ class AdService extends MileenApi
 			return $this->buildErrorResponse($e->getMessage());
 		}
 
-		$fields = ['id', 'title', 'description', 'target_url', 'banner'];
-
 		$payload = [
-			'ad' => \Ad::orderByRaw("RAND()")->select($fields)->first()->toArray()
+			'ad' => \Ad::getAd()->toArray()
 		];
 
 		return $this->buildResponse($payload);
