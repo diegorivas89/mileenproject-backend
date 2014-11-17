@@ -65,7 +65,7 @@ class PropertyController extends BaseController
 
 		$validVideoUrl = true;
 		if(Input::has('video_url')) {
-			$validVideoUrl = preg_match("/^(http\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/watch\?v\=\w+$/", Input::get('video_url'));
+			$validVideoUrl = \Mileen\Support\YoutubeUrl::test(Input::get('video_url'));
 		}
 
 		if ($validator->fails() || $invalid_covered_size || !$validVideoUrl)
