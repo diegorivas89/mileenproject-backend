@@ -1,7 +1,0 @@
-<?php namespace App;
-
-use Eloquent;
-
-class Order extends Eloquent {
-	protected $fillable = [];
-}
