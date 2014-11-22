@@ -33,8 +33,10 @@ class PropertyController extends BaseController
 		$propertyTypes = PropertyType::orderBy('name', 'asc')->get();
 		$publicationTypes = PublicationType::all();
 		$amenitieTypes = AmenitieType::orderBy('name', 'asc')->get();
+		$propertyTypeFree = PublicationType::$free_value;
 
 		return View::make("property.new")
+					->with('propertyTypeFree', $propertyTypeFree)
 					->with('environments', $environments)
 					->with('neighborhoods', $neighborhoods)
 					->with('operationTypes', $operationTypes)

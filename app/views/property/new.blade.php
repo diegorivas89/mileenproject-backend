@@ -2,7 +2,10 @@
 
 @section('scripts')
 <script>
+	var publicationTypes = {{ json_encode($publicationTypes) }};
+	var freePublication = {{$propertyTypeFree}};
 	$(document).ready(function(){
+
 		/**
 		 * Cambio la cantidad de inputs para imagenes dependiendo del tipo de publicacion
 		 */
