@@ -62,7 +62,7 @@ class Neighborhood extends MileenModel
 
 	public function getProperties()
 	{
-		return Property::where('neighborhood_id', '=', $this->id)->get();
+		return Property::whereRaw('neighborhood_id = ? AND state != ? ', array($this->id,\Property::deleted))->get();
 	}
 }
 
