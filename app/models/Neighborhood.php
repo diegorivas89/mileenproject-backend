@@ -42,9 +42,9 @@ class Neighborhood extends MileenModel
 	 *
 	 * @return int
 	 */
-	public function getPriceByM2($currency = '$')
+	public function getPriceByM2($currency = '$', $operation = null)
 	{
-		$properties = $this->getProperties();
+		$properties = $this->getProperties($operation);
 
 		$acum = 0;
 		foreach ($properties as $property) {
@@ -60,8 +60,11 @@ class Neighborhood extends MileenModel
 		return round($acum / $properties->count());
 	}
 
-	public function getProperties()
+	public function getProperties($operation = null)
 	{
+		if (isset($operation)){
+			return Property::whereRaw('neighborhood_id = ? AND state != ? AND operation_type_id = ?', array($this->id,\Property::deleted, $operation))->get();
+		}
 		return Property::whereRaw('neighborhood_id = ? AND state != ? ', array($this->id,\Property::deleted))->get();
 	}
 }
