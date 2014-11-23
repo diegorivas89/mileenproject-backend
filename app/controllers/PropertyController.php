@@ -46,7 +46,9 @@ class PropertyController extends BaseController
 	}
 
 	public function store()
-	{	//si el usuario no le puso http o https se lo agrego.
+	{	
+
+		//si el usuario no le puso http o https se lo agrego.
 		$video_url = Input::get('video_url');
 		if(isset($video_url) && $video_url && !(strstr( $video_url, 'http://') || strstr( $video_url, 'https://'))){
     		Input::merge(array('video_url'=>"http://".$video_url));
@@ -54,10 +56,10 @@ class PropertyController extends BaseController
 
 		if (Input::has('expiration_date')){
 			$expiration_date = Input::get('expiration_date');
-	    $date = preg_replace('/\s+/', '', $expiration_date);
-	    $date = "31/{$date}";
-	    $date = DateTime::createFromFormat('d/m/Y', $date);
-	    Input::merge(array('expiration_date' => $date->format('Y-m-d')));
+		    $date = preg_replace('/\s+/', '', $expiration_date);
+		    $date = "31/{$date}";
+		    $date = DateTime::createFromFormat('d/m/Y', $date);
+		    Input::merge(array('expiration_date' => $date->format('Y-m-d')));
 		}
 
 		Input::merge(array('user_id' => Auth::user()->id));

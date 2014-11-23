@@ -11,6 +11,7 @@ $(document).ready(function(){
 		'.creditly-wrapper .card-type');
 
 	var publicationType = getPublicationTypeBySelectedOptionValue($('#publication_type :selected').val());
+
 	if(publicationType && publicationType.value == freePublication) {
 		$('.creditly-wrapper').css('display', 'none')
 		$('.expiration-month-and-year').attr('required', false)
@@ -21,7 +22,7 @@ $(document).ready(function(){
 
 	$("#property-form").submit(function(e) {
 		var publicationType = getPublicationTypeBySelectedOptionValue($('#publication_type :selected').val());
-		if(publicationType && publicationType.value == freePublication) {
+		if(publicationType && publicationType.value != freePublication) {
 		  var output = creditly.validate();
 		  if (!output) {
 			e.preventDefault();
