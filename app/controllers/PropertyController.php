@@ -33,8 +33,10 @@ class PropertyController extends BaseController
 		$propertyTypes = PropertyType::orderBy('name', 'asc')->get();
 		$publicationTypes = PublicationType::all();
 		$amenitieTypes = AmenitieType::orderBy('name', 'asc')->get();
+		$propertyTypeFree = PublicationType::$free_value;
 
 		return View::make("property.new")
+					->with('propertyTypeFree', $propertyTypeFree)
 					->with('environments', $environments)
 					->with('neighborhoods', $neighborhoods)
 					->with('operationTypes', $operationTypes)
@@ -44,7 +46,9 @@ class PropertyController extends BaseController
 	}
 
 	public function store()
-	{	//si el usuario no le puso http o https se lo agrego.
+	{	
+
+		//si el usuario no le puso http o https se lo agrego.
 		$video_url = Input::get('video_url');
 		if(isset($video_url) && $video_url && !(strstr( $video_url, 'http://') || strstr( $video_url, 'https://'))){
     		Input::merge(array('video_url'=>"http://".$video_url));
@@ -52,10 +56,10 @@ class PropertyController extends BaseController
 
 		if (Input::has('expiration_date')){
 			$expiration_date = Input::get('expiration_date');
-	    $date = preg_replace('/\s+/', '', $expiration_date);
-	    $date = "31/{$date}";
-	    $date = DateTime::createFromFormat('d/m/Y', $date);
-	    Input::merge(array('expiration_date' => $date->format('Y-m-d')));
+		    $date = preg_replace('/\s+/', '', $expiration_date);
+		    $date = "31/{$date}";
+		    $date = DateTime::createFromFormat('d/m/Y', $date);
+		    Input::merge(array('expiration_date' => $date->format('Y-m-d')));
 		}
 
 		Input::merge(array('user_id' => Auth::user()->id));
@@ -214,6 +218,35 @@ class PropertyController extends BaseController
 		$property->state = Property::deleted;
 		$property->save();
 		return Redirect::to("properties")->with('message', 'La propiedad se ha borrado exitosamente.');
+	}
+
+	public function edit($id)
+	{
+		return View::make('property.edit')->with('property', Property::find($id));
+	}
+
+	public function update($id)
+	{
+		$rules = [
+			'price' => Property::getValidationRules('price'),
+			'expenses' => Property::getValidationRules('expenses'),
+			'currency' => Property::getValidationRules('currency')
+		];
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->fails())
+		{
+			return Redirect::route('properties.edit', $id)->withInput()->withErrors($validator);
+		}else{
+			$property = Property::find($id);
+			$property->currency = Input::get('currency');
+			$property->price = Input::get('price');
+			$property->expenses = Input::get('expenses');
+			$property->save();
+
+			return Redirect::route('properties.show', $id);
+		}
 	}
 
 }

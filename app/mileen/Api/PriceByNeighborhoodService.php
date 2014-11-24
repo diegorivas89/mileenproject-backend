@@ -44,7 +44,13 @@ class PriceByNeighborhoodService extends MileenApi
 			return $this->buildErrorResponse($e->getMessage());
 		}
 
-		$chartData = $this->generateChartData($neighborhood, $parameters['currency']);
+		if (array_key_exists('operation', $parameters)){
+			$operation = $parameters['operation'];
+		}else{
+			$operation = null;
+		}
+
+		$chartData = $this->generateChartData($neighborhood, $parameters['currency'], $operation);
 
 		if (count($chartData) == 0){
 			return $this->buildErrorResponse('Insufficient data to plot the chart');
@@ -57,7 +63,7 @@ class PriceByNeighborhoodService extends MileenApi
 			'neighborhood' => [
 				'id' => $neighborhood->id,
 				'name' => $neighborhood->name,
-				'priceByM2' => $neighborhood->getPriceByM2($parameters['currency'])
+				'priceByM2' => $neighborhood->getPriceByM2($parameters['currency'], $operation)
 			],
 			'data' => $chartData
 		];
@@ -71,13 +77,13 @@ class PriceByNeighborhoodService extends MileenApi
 	 * @param  \Neighborhood $neighborhood
 	 * @return array
 	 */
-	public function generateChartData($neighborhood, $currency)
+	public function generateChartData($neighborhood, $currency, $operation = null)
 	{
 		$data = [];
 		foreach ($neighborhood->getAdjacents() as $adjacentNeighborhood){
-			$averagePrice = $adjacentNeighborhood->getPriceByM2($currency);
+			$averagePrice = $adjacentNeighborhood->getPriceByM2($currency, $operation);
 			if ($averagePrice > 0){
-				$data[$adjacentNeighborhood->name] = $adjacentNeighborhood->getPriceByM2($currency);
+				$data[$adjacentNeighborhood->name] = $adjacentNeighborhood->getPriceByM2($currency, $operation);
 			}
 		}
 

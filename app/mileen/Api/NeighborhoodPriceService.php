@@ -47,7 +47,13 @@ class NeighborhoodPriceService extends MileenApi
 			return $this->buildErrorResponse($e->getMessage());
 		}
 
-		if ($neighborhood->getPriceByM2('$') == 0){
+		if (array_key_exists('operation', $parameters)){
+			$operation = $parameters['operation'];
+		}else{
+			$operation = null;
+		}
+
+		if ($neighborhood->getPriceByM2('$', $operation) == 0){
 			return $this->buildErrorResponse('Insufficient data');
 		}
 
@@ -57,8 +63,8 @@ class NeighborhoodPriceService extends MileenApi
 				'name' => $neighborhood->name
 			],
 			'prices' => [
-				self::ARG => $neighborhood->getPriceByM2(self::ARG),
-				self::USD => $neighborhood->getPriceByM2(self::USD)
+				self::ARG => $neighborhood->getPriceByM2(self::ARG, $operation),
+				self::USD => $neighborhood->getPriceByM2(self::USD, $operation)
 			]
 		];
 

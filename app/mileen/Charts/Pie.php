@@ -22,6 +22,9 @@ class Pie extends Chart
 		$graph->title->SetFont(FF_DEFAULT, FS_NORMAL, self::TITLE_SIZE);
 
 		$pie = new \PiePlot(array_values($this->data));
+		$graph->legend->SetFont(FF_DEFAULT,FS_NORMAL,self::AXIS_TITLE_SIZE);
+		$graph->legend->SetMarkAbsSize(self::AXIS_TITLE_SIZE);
+		$pie->value->SetFont(FF_DEFAULT,FS_NORMAL,self::AXIS_TITLE_SIZE); 
 		$pie->SetLegends(array_keys($this->data));
 
 		$graph->Add($pie);

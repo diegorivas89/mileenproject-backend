@@ -8,6 +8,7 @@ class Bar extends Chart
 {
 	const TITLE_SIZE = 25;
 	const AXIS_TITLE_SIZE = 20;
+	const AXIS_ELEMENT_SIZE = 14;
 
 	protected $xTitle;
 	protected $yTitle;
@@ -59,6 +60,7 @@ class Bar extends Chart
 
 		$graph->xaxis->SetTickLabels($datax);
 		$graph->xaxis->SetTickSize(30);
+		$graph->xaxis->SetFont(FF_DEFAULT,FS_NORMAL,self::AXIS_ELEMENT_SIZE); 
 		//$graph->xaxis->SetLabelAngle(90);
 
 		// Create a bar pot
@@ -67,6 +69,7 @@ class Bar extends Chart
 		// Adjust fill color
 		$bplot->SetFillColor('orange');
 		$graph->Add($bplot);
+		$graph->yaxis->SetFont(FF_DEFAULT,FS_NORMAL,self::AXIS_ELEMENT_SIZE); 
 
 		// Setup the titles
 		$graph->title->Set($this->title);

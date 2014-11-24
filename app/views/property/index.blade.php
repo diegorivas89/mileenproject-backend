@@ -51,7 +51,7 @@
 						  	</a>
 						  </li>
 						  <li>
-								<a href="#">
+								<a href="{{URL::action('properties.edit', $property->id)}}">
 									<i class='fa fa-pencil'></i>
 									{{Lang::get('strings.edit')}}
 								</a>

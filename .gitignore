@@ -1,4 +1,5 @@
 bootstrap/compiled.php
 app/config/database.php
+app/config/local/database.php
 public/store/images/*
 Juan-Ignacio-Marchese

@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-<?php foreach ($errors as $error) var_dump($error) ?>
 <div class="large-9 columns">
 	<div class="row">
 		<div class="large-12 columns">
