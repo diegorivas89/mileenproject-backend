@@ -62,7 +62,7 @@ class Property extends MileenModel
 			'credit_card_number' => 'regex:/^[0-9 \s]*[^2]$/',
 		);
 
-		if (isset($rules)){
+		if (isset($key)){
 			return $rules[$key];
 		}
 
