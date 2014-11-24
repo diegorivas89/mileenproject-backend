@@ -220,6 +220,35 @@ class PropertyController extends BaseController
 		return Redirect::to("properties")->with('message', 'La propiedad se ha borrado exitosamente.');
 	}
 
+	public function edit($id)
+	{
+		return View::make('property.edit')->with('property', Property::find($id));
+	}
+
+	public function update($id)
+	{
+		$rules = [
+			'price' => Property::getValidationRules('price'),
+			'expenses' => Property::getValidationRules('expenses'),
+			'currency' => Property::getValidationRules('currency')
+		];
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->fails())
+		{
+			return Redirect::route('properties.edit', $id)->withInput()->withErrors($validator);
+		}else{
+			$property = Property::find($id);
+			$property->currency = Input::get('currency');
+			$property->price = Input::get('price');
+			$property->expenses = Input::get('expenses');
+			$property->save();
+
+			return Redirect::route('properties.show', $id);
+		}
+	}
+
 }
 
 ?>

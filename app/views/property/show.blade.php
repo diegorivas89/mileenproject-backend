@@ -21,7 +21,7 @@
 					<br>
 					<ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
 						<li>
-							<a href="#">
+							<a href="{{URL::action('properties.edit', $property->id)}}">
 								<i class='fa fa-pencil'></i>
 								{{Lang::get('strings.edit')}}
 							</a>

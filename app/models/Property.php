@@ -40,8 +40,8 @@ class Property extends MileenModel
 		'expiration_date'
 	);
 
-	public static function getValidationRules(){
-		return array(
+	public static function getValidationRules($key = null){
+		$rules = array(
 			'title' => array('required', 'min:5','max:128'),
 			'description' => array('required', 'min:5'),
 			'user_id' => array('required','numeric'),
@@ -61,6 +61,12 @@ class Property extends MileenModel
 			'state' => 'in:active, paused, deleted',
 			'credit_card_number' => 'regex:/^[0-9 \s]*[^2]$/',
 		);
+
+		if (isset($rules)){
+			return $rules[$key];
+		}
+
+		return $rules;
 	}
 
 	public function getSchema()
