@@ -46,7 +46,7 @@ class PropertyByEnvironmentService extends MileenApi
 		$chartData = $this->generateChartData($neighborhood);
 
 		if (count($chartData) == 0){
-			return $this->buildErrorResponse('Insufficient data to plot the chart');
+			return $this->buildErrorResponse('No hay suficiente información para generar el gráfico');
 		}
 
 		$filename = $this->createChart($chartData, $parameters['width'], $parameters['height']);

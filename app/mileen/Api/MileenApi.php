@@ -52,7 +52,7 @@ abstract class MileenApi
 	{
 		foreach ($this->getRequiredParameters() as $parameter) {
 			if (!array_key_exists($parameter, $parameters)){
-				throw new MissingParamentersException("required parameter: ".$parameter." missing!", 1);
+				throw new MissingParamentersException("Parametro requerido: ".$parameter." no se ha encontrado!", 1);
 			}
 		}
 	}
