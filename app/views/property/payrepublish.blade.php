@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<h2><i class="fa fa-newspaper-o"></i> Republicar esta propiedad</h2>
-			<p>Dado que esta publicación es premium, para publicar esta propiedad debe completar sus datos de tarjeta de crédito.</p>
+			<p>Dado que esta publicación es {{$publicationType->name}}, para publicar esta propiedad debe completar sus datos de tarjeta de crédito.</p>
 			<p>Precio a abonar: ${{$publicationType->price}} / mes</p>
 		</div>
 	</div>
