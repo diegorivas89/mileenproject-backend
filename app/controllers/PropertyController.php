@@ -210,7 +210,8 @@ class PropertyController extends BaseController
 		}
  		$property->state = Property::active;
  		$property->republished = true;
- 		$property->created_at = $property->created_at->addDays($publicationType->validity_period);
+ 		//$property->created_at = $property->created_at->addDays($publicationType->validity_period);
+ 		$property->created_at = \Carbon\Carbon::now();
 		$property->credit_card_number = Input::get('credit_card_number');
 		$property->security_code = Input::get('security_code');
 		$property->card_owner = Input::get('card_owner');
