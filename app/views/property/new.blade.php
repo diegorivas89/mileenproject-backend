@@ -226,7 +226,7 @@ $(document).ready(function(){
 				<label>Tipo de Publicación
 					<select name="publication_type_id" id="publication_type">
 						@foreach ($publicationTypes as $publicationType)
-							<option value='{{$publicationType->id}}' {{($publicationType->id == Input::old('publication_type_id', '') ? 'selected' : '')}}>{{$publicationType->name}} (${{$publicationType->price}} / mes)</option>
+							<option value='{{$publicationType->id}}' {{($publicationType->id == Input::old('publication_type_id', '') ? 'selected' : '')}}>{{$publicationType->name}} (${{$publicationType->price}})</option>
 						@endforeach
 					</select>
 					@if ($errors->has('publication_type_id')) <small class="error"> {{ $errors->first('publication_type_id') }} </small> @endif

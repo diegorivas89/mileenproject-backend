@@ -75,8 +75,7 @@
 									@endif
 								@endif
 						  </li>
-							
-							@if ($property->daysUntilExpiry() <= 0 && !$property->republished)
+							@if ($property->daysUntilExpiry() <= 30 && !$property->republished)
 							<li>
 								<form class='property-form' action="{{URL::action('properties.republish', $property->id)}}" method='post'>
 									<button>
@@ -128,6 +127,13 @@
 								<span class="alert label radius">Esta publicación ha caducado</span>
 							@endif
 						</p>
+						{{--
+						@if ($property->daysUntilExpiry() <= 30 && $property->daysUntilExpiry() > 0 && $property->getPublicationType(['discount'])->discount > 0)
+							<p class="expiry">
+								<span class="success label radius">Republica ahora y obten un descuento!</span>
+							</p>
+						@endif
+						--}}
 					</div>
 				</div>
 				</div>
