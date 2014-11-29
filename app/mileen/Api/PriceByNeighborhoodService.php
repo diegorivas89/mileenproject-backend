@@ -99,7 +99,7 @@ class PriceByNeighborhoodService extends MileenApi
 	public function createChart($data, $currency, $width, $height)
 	{
 		$filename = \App::make('bar-chart')
-						->setTitle('Precio promedio por M2', 'Barrios', $currency)
+						->setTitle('Precio promedio por M2', 'Barrios', ''/*$currency*/)
 						->setData($data)
 						->plot($width, $height);
 

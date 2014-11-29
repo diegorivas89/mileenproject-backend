@@ -8,7 +8,7 @@ class Bar extends Chart
 {
 	const TITLE_SIZE = 25;
 	const AXIS_TITLE_SIZE = 20;
-	const AXIS_ELEMENT_SIZE = 14;
+	const AXIS_ELEMENT_SIZE = 20;
 
 	protected $xTitle;
 	protected $yTitle;
