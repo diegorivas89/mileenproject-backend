@@ -46,7 +46,7 @@ class PropertyController extends BaseController
 	}
 
 	public function store()
-	{	
+	{
 
 		//si el usuario no le puso http o https se lo agrego.
 		$video_url = Input::get('video_url');
@@ -175,19 +175,24 @@ class PropertyController extends BaseController
 	public function payRepublish($id){
 		$property = Property::find($id);
 		$publicationType = PublicationType::find($property->publication_type_id);
+		$price = $property->daysUntilExpiry() <= 30 ? floatval(1 - $publicationType->discount) : 1;
+		$price *= $publicationType->price;
+		$price = round($price, 0, PHP_ROUND_HALF_UP);
+		$action = (empty($_POST['action'])) ? 'default' : $_POST['action'];
 	  return View::make("property.payrepublish")
 								  ->with('property', $property)
+								  ->with('price', $price)
 								  ->with('publicationType', $publicationType);
 	}
 
 	public function republish($id)
 	{
 		$property = Property::find($id);
-
-		if(	$property->publication_type == PublicationType::$free_value){
+		$publicationType = PublicationType::find($property->publication_type_id);
+		if(	$publicationType->value == PublicationType::$free_value){
 			$property->state = Property::active;
 			$property->republished = true;
-			$property->created_at = \Carbon\Carbon::now();
+			$property->created_at = $property->created_at->addDays(30);
 			$property->save();
 			return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó.');
 		}
@@ -198,12 +203,13 @@ class PropertyController extends BaseController
 
 	public function savePayrepublish($id){
  		$property = Property::find($id);
+ 		$publicationType = PublicationType::find($property->publication_type_id);
 		if($property->republished){
 			return Redirect::to("properties/{$id}")->with('message', 'Esta publicación no puede ser republicada ya que ya fue republicada anteriormente.');
 		}
  		$property->state = Property::active;
  		$property->republished = true;
- 		$property->created_at = \Carbon\Carbon::now();
+ 		$property->created_at = $property->created_at->addDays($publicationType->validity_period);
 		$property->credit_card_number = Input::get('credit_card_number');
 		$property->security_code = Input::get('security_code');
 		$property->card_owner = Input::get('card_owner');

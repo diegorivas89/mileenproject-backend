@@ -75,8 +75,7 @@
 									@endif
 								@endif
 						  </li>
-							
-							@if ($property->daysUntilExpiry() <= 0 && !$property->republished)
+							@if ($property->daysUntilExpiry() <= 30 && !$property->republished)
 							<li>
 								<form class='property-form' action="{{URL::action('properties.republish', $property->id)}}" method='post'>
 									<button>
