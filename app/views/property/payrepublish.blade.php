@@ -7,7 +7,12 @@
 		<div class="large-12 columns">
 			<h2><i class="fa fa-newspaper-o"></i> Republicar esta propiedad</h2>
 			<p>Dado que esta publicación es {{$publicationType->name}}, para publicar esta propiedad debe completar sus datos de tarjeta de crédito.</p>
-			<p>Precio a abonar: ${{$price}} / mes</p>
+			@if ($price == $regularPrice)
+				<p>Precio a abonar: ${{$price}}</p>
+			@else
+				<p>Precio a abonar: <span style="text-decoration:line-through;">${{$regularPrice}}</span> ${{$price}}</p>
+			@endif
+			
 		</div>
 	</div>
 	<form id='property-form' action="{{URL::action('properties.savePayrepublish',[$property->id]) }}" method="post" enctype="multipart/form-data">

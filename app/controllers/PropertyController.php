@@ -175,13 +175,14 @@ class PropertyController extends BaseController
 	public function payRepublish($id){
 		$property = Property::find($id);
 		$publicationType = PublicationType::find($property->publication_type_id);
-		$price = $property->daysUntilExpiry() <= 30 ? floatval(1 - $publicationType->discount) : 1;
+		$price = ($property->daysUntilExpiry() <= 30 && $property->daysUntilExpiry() > 0) ? floatval(1 - $publicationType->discount) : 1;
 		$price *= $publicationType->price;
 		$price = round($price, 0, PHP_ROUND_HALF_UP);
 		$action = (empty($_POST['action'])) ? 'default' : $_POST['action'];
-	  return View::make("property.payrepublish")
+	  	return View::make("property.payrepublish")
 								  ->with('property', $property)
 								  ->with('price', $price)
+								  ->with('regularPrice', $publicationType->price)
 								  ->with('publicationType', $publicationType);
 	}
 
@@ -192,13 +193,13 @@ class PropertyController extends BaseController
 		if(	$publicationType->value == PublicationType::$free_value){
 			$property->state = Property::active;
 			$property->republished = true;
-			$property->created_at = $property->created_at->addDays(30);
+			//$property->created_at = $property->created_at->addDays($publicationType->validity_period);
+			$property->created_at = \Carbon\Carbon::now();
 			$property->save();
 			return Redirect::to("properties/{$id}")->with('message', 'La propiedad se republicó.');
 		}
+
 		return Redirect::to("properties/{$id}/payrepublish");
-
-
  	}
 
 	public function savePayrepublish($id){
